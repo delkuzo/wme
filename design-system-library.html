@@ -395,6 +395,21 @@
         .switch-32.on .switch__circle-32 {
           left: 22px;
         }
+        /* Switch 40px */
+        .switch.switch-40 {
+          width: 56px;
+          height: 40px;
+          border-radius: 40px;
+        }
+        .switch-40 .switch__circle-40 {
+          width: 36px;
+          height: 36px;
+          top: 2px;
+          left: 2px;
+        }
+        .switch-40.on .switch__circle-40 {
+          left: 18px;
+        }
     </style>
 </head>
 <body class="font-sans m-0 p-10 bg-bg-background text-text-foreground">
@@ -919,7 +934,6 @@
                 </div>
                 <div class="toggle-icon">+</div>
             </div>
-            
             <div class="toggle-content" id="buttonsContent">
                 <!-- 40px Buttons -->
                 <div class="mb-l">
@@ -929,29 +943,24 @@
                         <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-text">
                             Action
                         </button>
-                        
                         <!-- Fill Button -->
                         <button class="figma-btn figma-btn-40 figma-btn-fill figma-btn-text">
                             Fill
                         </button>
-                        
                         <!-- Outline Button -->
                         <button class="figma-btn figma-btn-40 figma-btn-outline figma-btn-text">
                             Outline
                         </button>
-                        
                         <!-- Blank Button -->
                         <button class="figma-btn figma-btn-40 figma-btn-blank figma-btn-text">
                             Blank
                         </button>
-                        
                         <!-- Disabled Button -->
                         <button class="figma-btn figma-btn-40 figma-btn-disabled figma-btn-text" disabled>
                             Disabled
                         </button>
                     </div>
                 </div>
-                
                 <!-- 32px Buttons -->
                 <div class="mb-l">
                     <h3 class="text-lg font-medium mb-m text-text-foreground">32px</h3>
@@ -960,29 +969,24 @@
                         <button class="figma-btn figma-btn-32 figma-btn-action figma-btn-text">
                             Action
                         </button>
-                        
                         <!-- Fill Button -->
                         <button class="figma-btn figma-btn-32 figma-btn-fill figma-btn-text">
                             Fill
                         </button>
-                        
                         <!-- Outline Button -->
                         <button class="figma-btn figma-btn-32 figma-btn-outline figma-btn-text">
                             Outline
                         </button>
-                        
                         <!-- Blank Button -->
                         <button class="figma-btn figma-btn-32 figma-btn-blank figma-btn-text">
                             Blank
                         </button>
-                        
                         <!-- Disabled Button -->
                         <button class="figma-btn figma-btn-32 figma-btn-disabled figma-btn-text" disabled>
                             Disabled
                         </button>
                     </div>
                 </div>
-                
                 <!-- Buttons with Icons -->
                 <div class="mb-l">
                     <h3 class="text-lg font-medium mb-m text-text-foreground">С иконками</h3>
@@ -990,31 +994,31 @@
                         <!-- Icon Start -->
                         <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-icon-start">
                             <svg class="figma-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="currentColor"/>
-                                <path d="M8 4C8.41421 4 8.75 4.33579 8.75 4.75V7.25H11.25C11.6642 7.25 12 7.58579 12 8C12 8.41421 11.6642 8.75 11.25 8.75H8.75V11.25C8.75 11.6642 8.41421 12 8 12C7.58579 12 7.25 11.6642 7.25 11.25V8.75H4.75C4.33579 8.75 4 8.41421 4 8C4 7.58579 4.33579 7.25 4.75 7.25H7.25V4.75C7.25 4.33579 7.58579 4 8 4Z" fill="currentColor"/>
+                                <circle cx="8" cy="8" r="7" stroke="white" stroke-width="2"/>
+                                <path d="M8 5V11" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M5 8H11" stroke="white" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                             Icon Start
                         </button>
-                        
                         <!-- Icon End -->
-                        <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-icon-end">
+                        <button class="figma-btn figma-btn-40 figma-btn-action flex items-center" style="padding-left:16px; padding-right:12px; gap:6px;">
                             Icon End
                             <svg class="figma-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="currentColor"/>
-                                <path d="M8 4C8.41421 4 8.75 4.33579 8.75 4.75V7.25H11.25C11.6642 7.25 12 7.58579 12 8C12 8.41421 11.6642 8.75 11.25 8.75H8.75V11.25C8.75 11.6642 8.41421 12 8 12C7.58579 12 7.25 11.6642 7.25 11.25V8.75H4.75C4.33579 8.75 4 8.41421 4 8C4 7.58579 4.33579 7.25 4.75 7.25H7.25V4.75C7.25 4.33579 7.58579 4 8 4Z" fill="currentColor"/>
+                                <circle cx="8" cy="8" r="7" stroke="white" stroke-width="2"/>
+                                <path d="M8 5V11" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M5 8H11" stroke="white" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </button>
-                        
                         <!-- Icon Only -->
                         <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-icon-only">
                             <svg class="figma-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="currentColor"/>
-                                <path d="M8 4C8.41421 4 8.75 4.33579 8.75 4.75V7.25H11.25C11.6642 7.25 12 7.58579 12 8C12 8.41421 11.6642 8.75 11.25 8.75H8.75V11.25C8.75 11.6642 8.41421 12 8 12C7.58579 12 7.25 11.6642 7.25 11.25V8.75H4.75C4.33579 8.75 4 8.41421 4 8C4 7.58579 4.33579 7.25 4.75 7.25H7.25V4.75C7.25 4.33579 7.58579 4 8 4Z" fill="currentColor"/>
+                                <circle cx="8" cy="8" r="7" stroke="white" stroke-width="2"/>
+                                <path d="M8 5V11" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M5 8H11" stroke="white" stroke-width="2" stroke-linecap="round"/>
                             </svg>
                         </button>
                     </div>
                 </div>
-                
                 <!-- CSS Classes -->
                 <div class="code-example">
 /* Базовый класс */
@@ -1036,134 +1040,6 @@
 .figma-btn-icon-start { padding: 0 20px 0 16px; gap: 6px; }
 .figma-btn-icon-end { padding: 0 16px 0 20px; gap: 6px; flex-direction: row-reverse; }
 .figma-btn-icon-only { padding: 12px; width: 40px; }
-                </div>
-            </div>
-        </div>
-
-        <!-- Switches Section -->
-        <div class="toggle-section" id="switchesSection">
-            <div class="toggle-header" onclick="toggleSection('switches')">
-                <div class="toggle-header-content">
-                    <div class="toggle-number">07</div>
-                    <div class="toggle-title">
-                        <h2 class="text-lg font-medium text-text-foreground">Переключатели</h2>
-                    </div>
-                </div>
-                <div class="toggle-icon">+</div>
-            </div>
-            
-            <div class="toggle-content" id="switchesContent">
-                <!-- 32px Switches -->
-                <div class="mb-l">
-                    <h3 class="text-lg font-medium mb-m text-text-foreground">32px</h3>
-                    <div class="flex flex-wrap gap-m">
-                        <!-- Off State -->
-                        <button class="switch">
-                            <div class="switch__circle"></div>
-                        </button>
-                        
-                        <!-- On State -->
-                        <button class="switch on">
-                            <div class="switch__circle"></div>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- 20px Switches -->
-                <div class="mb-l">
-                    <h3 class="text-lg font-medium mb-m text-text-foreground">20px</h3>
-                    <div class="flex flex-wrap gap-m">
-                        <!-- Off State -->
-                        <button class="switch switch-32">
-                            <div class="switch__circle-32"></div>
-                        </button>
-                        
-                        <!-- On State -->
-                        <button class="switch switch-32 on">
-                            <div class="switch__circle-32"></div>
-                        </button>
-                    </div>
-                </div>
-                
-                <!-- CSS Classes -->
-                <div class="code-example">
-/* Базовые стили */
-.switch {
-    width: 56px;
-    height: 32px;
-    border-radius: 32px;
-    background: var(--color-submerged);
-    position: relative;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-/* Состояния */
-.switch.on { background: var(--color-red); }
-
-/* Переключатель */
-.switch__circle {
-    width: 28px;
-    height: 28px;
-    background: white;
-    border-radius: 50%;
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    transition: left 0.2s;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
-}
-.switch.on .switch__circle { left: 26px; }
-
-/* 20px размер */
-.switch.switch-32 {
-    width: 40px;
-    height: 20px;
-    border-radius: 20px;
-}
-.switch-32 .switch__circle-32 {
-    width: 16px;
-    height: 16px;
-    top: 2px;
-    left: 2px;
-}
-        .switch-32.on .switch__circle-32 { left: 22px; }
-
-        /* Логотипы */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: var(--spacing-m);
-            background: var(--color-background);
-            border-radius: 12px;
-            border: 1px solid var(--color-border-light);
-            margin-bottom: var(--spacing-m);
-        }
-        
-        .logo-dark {
-            filter: invert(1);
-        }
-        
-        .logo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-m);
-            margin-bottom: var(--spacing-l);
-        }
-        
-        .logo-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--spacing-s);
-        }
-        
-        .logo-label {
-            font-size: 12px;
-            color: var(--color-hint);
-            text-align: center;
-        }
                 </div>
             </div>
         </div>
