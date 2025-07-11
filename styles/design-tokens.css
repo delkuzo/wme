@@ -1,0 +1,182 @@
+/* Design Tokens - Typography & Colors */
+
+:root {
+  /* Typography Scale */
+  --font-size-display-2: 32px;
+  --font-size-display-1: 26px;
+  --font-size-header-2: 22px;
+  --font-size-header-1: 18px;
+  --font-size-subheader-1: 14px;
+  --font-size-body-1: 16px;
+  --font-size-caption-2: 14px;
+  --font-size-caption-1: 12px;
+
+  /* Line Heights (рекомендуемые соотношения) */
+  --line-height-display-2: 1.25; /* 40px */
+  --line-height-display-1: 1.3;  /* 34px */
+  --line-height-header-2: 1.27;  /* 28px */
+  --line-height-header-1: 1.33;  /* 24px */
+  --line-height-subheader-1: 1.43; /* 20px */
+  --line-height-body-1: 1.5;     /* 24px */
+  --line-height-caption-2: 1.43; /* 20px */
+  --line-height-caption-1: 1.33; /* 16px */
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  
+  /* Font Family */
+  --font-family-base: 'YS Text', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Spacing Scale (для отступов margin/padding) */
+  --spacing-0: 0px;
+  --spacing-xxxs: 2px;
+  --spacing-xxs: 4px;
+  --spacing-xs: 6px;
+  --spacing-s: 8px;
+  --spacing-s-spec: 12px;
+  --spacing-m: 16px;
+  --spacing-m-spec: 20px;
+  --spacing-l: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 40px;
+
+  /* Light Theme Colors */
+  --color-background: #FFFFFF;
+  --color-foreground: rgba(0, 0, 0, 0.9);
+  --color-submerged: #F2F2F2;
+  --color-control: rgba(0, 0, 0, 0.05);
+  --color-hover: rgba(0, 0, 0, 0.08);
+  --color-border: rgba(0, 0, 0, 0.15);
+  --color-border-light: rgba(0, 0, 0, 0.1);
+  --color-hint: rgba(0, 0, 0, 0.4);
+  --color-fade: rgba(0, 0, 0, 0.5);
+  
+  /* Brand Colors - Light */
+  --color-link: #004DA6;
+  --color-red: #F8604A;
+  --color-light-red: rgba(248, 96, 74, 0.1);
+  --color-red-hover: #E45844;
+  --color-blue: #324CF0;
+  --color-green: #55A867;
+  --color-purple: #8822D0;
+  --color-yellow: #FFBF1A;
+  
+  /* Base Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-grey: #F2F2F2;
+  
+  /* Shadows - Light Theme */
+  --shadow-s: 0px 12px 24px 0px rgba(34, 34, 34, 0.3);
+  --shadow-m: 0px 12px 24px 0px rgba(114, 110, 110, 0.24);
+  --shadow-l: 0px 20px 40px 0px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme="dark"] {
+  /* Dark Theme Colors */
+  --color-background: #252525;
+  --color-foreground: rgba(255, 255, 255, 0.9);
+  --color-submerged: #181818;
+  --color-control: rgba(255, 255, 255, 0.15);
+  --color-hover: rgba(255, 255, 255, 0.18);
+  --color-border: rgba(255, 255, 255, 0.2);
+  --color-border-light: rgba(255, 255, 255, 0.1);
+  --color-hint: rgba(255, 255, 255, 0.5);
+  --color-fade: rgba(0, 0, 0, 0.7);
+  
+  /* Brand Colors - Dark */
+  --color-link: #3884DB;
+  --color-red: #F8604A;
+  --color-light-red: rgba(248, 96, 74, 0.2);
+  --color-red-hover: #E45844;
+  --color-blue: #7A82E5;
+  --color-green: #24904F;
+  --color-purple: #8822D0;
+  --color-yellow: #FFDB4D;
+  
+  /* Base Colors */
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+  --color-grey: #1A1A1A;
+  
+  /* Shadows - Dark Theme */
+  --shadow-s: 0px 8px 16px 0px rgba(11, 11, 11, 0.7);
+  --shadow-m: 0px 12px 24px 0px rgba(0, 0, 0, 0.4);
+  --shadow-l: 0px 16px 32px 0px rgba(0, 0, 0, 0.5);
+}
+
+/* Theme Toggle Utility */
+.theme-toggle {
+  cursor: pointer;
+  padding: var(--spacing-s);
+  border: none;
+  background: var(--color-control);
+  border-radius: var(--spacing-xs);
+  color: var(--color-foreground);
+  transition: background-color 0.2s ease;
+}
+
+.theme-toggle:hover {
+  background: var(--color-hover);
+}
+
+/* Typography Utility Classes */
+.text-display-2 {
+  font-size: var(--font-size-display-2);
+  line-height: var(--line-height-display-2);
+  font-weight: var(--font-weight-bold);
+}
+
+.text-display-1 {
+  font-size: var(--font-size-display-1);
+  line-height: var(--line-height-display-1);
+  font-weight: var(--font-weight-bold);
+}
+
+.text-header-2 {
+  font-size: var(--font-size-header-2);
+  line-height: var(--line-height-header-2);
+  font-weight: var(--font-weight-semibold);
+}
+
+.text-header-1 {
+  font-size: var(--font-size-header-1);
+  line-height: var(--line-height-header-1);
+  font-weight: var(--font-weight-semibold);
+}
+
+.text-subheader-1 {
+  font-size: var(--font-size-subheader-1);
+  line-height: var(--line-height-subheader-1);
+  font-weight: var(--font-weight-medium);
+}
+
+.text-body-1 {
+  font-size: var(--font-size-body-1);
+  line-height: var(--line-height-body-1);
+  font-weight: var(--font-weight-regular);
+}
+
+.text-caption-2 {
+  font-size: var(--font-size-caption-2);
+  line-height: var(--line-height-caption-2);
+  font-weight: var(--font-weight-regular);
+}
+
+.text-caption-1 {
+  font-size: var(--font-size-caption-1);
+  line-height: var(--line-height-caption-1);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Base Typography */
+body {
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-body-1);
+  line-height: var(--line-height-body-1);
+  color: var(--color-foreground);
+  background-color: var(--color-background);
+} 

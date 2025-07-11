@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление доступом v2</title>
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/design-tokens.css?v=2">
+    <link rel="stylesheet" href="https://unpkg.com/@gravity-ui/icons/style.css">
+    <style>
+        .page-container {
+            margin: 0 auto;
+            padding: 16px;
+        }
+        
+        .page-header {
+            margin-bottom: var(--spacing-xl);
+        }
+        
+        .page-title {
+            margin: 0 0 var(--spacing-xxs) 0;
+        }
+        
+        .page-subtitle {
+            margin: 0;
+            color: var(--color-hint);
+        }
+        
+        .page-subtitle a {
+            color: var(--color-link);
+            text-decoration: none;
+        }
+        
+        .users-card {
+            background: var(--color-background);
+            border: 1px solid var(--color-border-light);
+            border-radius: 24px;
+            padding: 16px;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 0 0 16px 0;
+        }
+        
+        .card-header h2 {
+            margin: 0;
+        }
+        
+        .add-user-btn {
+            background: var(--color-red);
+            color: var(--color-white);
+            border: none;
+            border-radius: 100px;
+            padding: var(--spacing-s) var(--spacing-m);
+            cursor: pointer;
+            font-size: var(--font-size-subheader-1);
+            font-weight: var(--font-weight-medium);
+            width: 142px;
+        }
+        
+        .users-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+        
+        .table-header th {
+            text-align: left;
+            padding: var(--spacing-s) var(--spacing-s-spec);
+            font-weight: var(--font-weight-medium);
+            border-bottom: 1px solid var(--color-border-light);
+            color: var(--color-foreground);
+            font-size: var(--font-size-subheader-1);
+        }
+        
+        .sortable-header {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xxs);
+            cursor: pointer;
+        }
+        
+        .sort-icon {
+            width: 16px;
+            height: 16px;
+            color: var(--color-hint);
+            flex-shrink: 0;
+        }
+        
+        .table-cell {
+            padding: var(--spacing-s-spec) var(--spacing-s-spec);
+            border-bottom: 1px solid var(--color-border-light);
+            vertical-align: top;
+        }
+        
+        .user-cell {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-s);
+        }
+        
+        .user-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--color-control);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-hint);
+            font-size: var(--font-size-caption-2);
+        }
+        
+        .verification-method {
+            margin-bottom: var(--spacing-xxs);
+            color: var(--color-foreground);
+        }
+        
+        .verification-code {
+            color: var(--color-hint);
+            font-size: var(--font-size-caption-1);
+            font-family: monospace;
+        }
+        
+        .verification-warning {
+            color: var(--color-red);
+        }
+        
+        .delegation-email {
+            color: var(--color-hint);
+            font-size: var(--font-size-caption-2);
+            margin-bottom: var(--spacing-xxs);
+        }
+        
+        .role-select {
+            background: var(--color-control);
+            border: 1px solid var(--color-border-light);
+            border-radius: 100px;
+            padding: var(--spacing-xxs) var(--spacing-s-spec);
+            cursor: pointer;
+            color: var(--color-foreground);
+            font-size: var(--font-size-subheader-1);
+            height: 32px;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 8px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: var(--spacing-l);
+        }
+        
+        .footer-note {
+            margin-top: var(--spacing-m);
+            padding-top: var(--spacing-s-spec);
+            color: var(--color-hint);
+            font-size: var(--font-size-caption-2);
+        }
+        
+        .footer-note a {
+            color: var(--color-link);
+            text-decoration: none;
+        }
+        
+        .back-link {
+            color: var(--color-link);
+            text-decoration: none;
+            margin-bottom: var(--spacing-m);
+            display: inline-block;
+        }
+        
+        .theme-toggle {
+            position: fixed;
+            top: var(--spacing-m);
+            right: var(--spacing-m);
+            background: var(--color-control);
+            border: 1px solid var(--color-border-light);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+    
+    <div class="page-container">
+        <a href="index.html" class="back-link">← Назад к UI-kit</a>
+        
+        <div class="page-header">
+            <h1 class="text-display-1 page-title">Управление доступом</h1>
+            <p class="text-body-1 page-subtitle">для работы с сайтом <a href="https://mysite.ru">https://mysite.ru</a></p>
+        </div>
+        
+        <div class="users-card">
+            <div class="card-header">
+                <h2 class="text-header-1">Список пользователей</h2>
+                <button class="add-user-btn">Добавить</button>
+            </div>
+            
+            <table class="users-table">
+                <thead>
+                    <tr class="table-header">
+                        <th style="width: 224px;">Логин</th>
+                        <th style="width: 288px;">Метод проверки и код</th>
+                        <th style="width: 177px;">
+                            <div class="sortable-header">
+                                <span>Роль</span>
+                                <svg class="sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 3L5.5 6H10.5L8 3Z" fill="currentColor"/>
+                                    <path d="M8 13L10.5 10H5.5L8 13Z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </th>
+                        <th style="width: 142px;">
+                            <div class="sortable-header">
+                                <span>Дата добавления</span>
+                                <svg class="sort-icon" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M8 3L5.5 6H10.5L8 3Z" fill="currentColor"/>
+                                    <path d="M8 13L10.5 10H5.5L8 13Z" fill="currentColor"/>
+                                </svg>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="table-cell">
+                            <div class="user-cell">
+                                <div class="user-avatar">
+                                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=32&h=32&fit=crop&crop=face" alt="Avatar" style="width: 24px; height: 24px; border-radius: 50%; object-fit: cover;">
+                                </div>
+                                <span>yourmail</span>
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="verification-method">Файл в корневом каталоге</div>
+                            <div class="verification-code">f7e2dff07ad2f4cb</div>
+                        </td>
+                        <td class="table-cell">
+                            <select class="role-select">
+                                <option selected>владелец</option>
+                            </select>
+                        </td>
+                        <td class="table-cell">21 декабря 2023</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="table-cell">
+                            <div class="user-cell">
+                                <span>friendlongnameemailrexample</span>
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="verification-method">Файл в корневом каталоге</div>
+                            <div class="verification-code">5735f2f0f5ebf6e6</div>
+                        </td>
+                        <td class="table-cell">
+                            <select class="role-select">
+                                <option selected>владелец</option>
+                            </select>
+                        </td>
+                        <td class="table-cell">11 февраля 2024</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="table-cell">
+                            <div class="user-cell">
+                                <span>mymail</span>
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="verification-method">Мета-тег</div>
+                            <div class="verification-code">ad2f4cbf7e2dff07</div>
+                        </td>
+                        <td class="table-cell">
+                            <select class="role-select">
+                                <option selected>редактирование</option>
+                            </select>
+                        </td>
+                        <td class="table-cell">1 августа 2024</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="table-cell">
+                            <div class="user-cell">
+                                <span>secondmail</span>
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="verification-warning">Проверяем наличие кода на сайте и отзываем права</div>
+                        </td>
+                        <td class="table-cell">
+                        </td>
+                        <td class="table-cell">—</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="table-cell">
+                            <div class="user-cell">
+                                <span>simplemail</span>
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="verification-method">Права делегированы пользователем</div>
+                            <div class="delegation-email">firstmail@mail.ru</div>
+                            <div class="verification-code">f07ad011f7e2dfcb</div>
+                        </td>
+                        <td class="table-cell">
+                            <select class="role-select">
+                                <option selected>частичный доступ</option>
+                            </select>
+                        </td>
+                        <td class="table-cell">12 августа 2024</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="table-cell">
+                            <div class="user-cell">
+                                <span>secondmail</span>
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="verification-method">Права делегированы пользователем</div>
+                            <div class="delegation-email">firstmail@mail.ru</div>
+                            <div class="verification-code">9202d2f4f7e2dfcb</div>
+                        </td>
+                        <td class="table-cell">
+                            <select class="role-select">
+                                <option selected>просмотр</option>
+                            </select>
+                        </td>
+                        <td class="table-cell">17 ноября 2024</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="table-cell">
+                            <div class="user-cell">
+                                <span>simplemail</span>
+                            </div>
+                        </td>
+                        <td class="table-cell">
+                            <div class="verification-method">Права делегированы пользователем</div>
+                            <div class="delegation-email">firstmail@mail.ru</div>
+                            <div class="verification-code">32j3f-2f4f7e2dfcb</div>
+                        </td>
+                        <td class="table-cell">
+                            <select class="role-select">
+                                <option selected>частичный доступ</option>
+                            </select>
+                        </td>
+                        <td class="table-cell">21 января 2025</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="footer-note">
+                Чтобы получить роль «Владелец» пользователь должен подтвердить права на сайт. <a href="#">Как это сделать?</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Переключение темы
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const emoji = newTheme === 'dark' ? '☀️' : '🌙';
+            
+            body.setAttribute('data-theme', newTheme);
+            this.textContent = emoji;
+        });
+
+        // Устанавливаем тему по умолчанию
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('themeToggle').textContent = '☀️';
+        }
+    </script>
+</body>
+</html> 

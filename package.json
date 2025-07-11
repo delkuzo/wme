@@ -1,0 +1,17 @@
+{
+  "name": "ui-design-accelerator",
+  "version": "1.0.0",
+  "description": "Система ускорения создания UI дизайнов для новых фичей",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "lucide": "^0.263.1"
+  }
+} 

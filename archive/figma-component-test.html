@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тестовая верстка компонента из Figma</title>
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/design-tokens.css?v=2">
+    <style>
+        body {
+            font-family: 'YS Text', sans-serif;
+            margin: 0;
+            padding: 40px;
+            background: var(--color-background);
+            color: var(--color-foreground);
+        }
+
+        .page-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            margin: 0 0 var(--spacing-xl) 0;
+            color: var(--color-foreground);
+        }
+
+        .component-section {
+            margin-bottom: var(--spacing-xl);
+            padding: var(--spacing-l);
+            background: var(--color-background);
+            border: 1px solid var(--color-border-light);
+            border-radius: 16px;
+        }
+
+        .section-title {
+            margin: 0 0 var(--spacing-m) 0;
+            color: var(--color-foreground);
+            font-size: var(--font-size-header-2);
+            font-weight: var(--font-weight-medium);
+        }
+
+        /* Компонент кнопки-селекта из Figma */
+        .figma-select-button {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 200px;
+            height: 40px;
+            padding: 8px 16px;
+            background: rgba(0, 0, 0, 0.08);
+            border: none;
+            border-radius: 32px;
+            cursor: pointer;
+            font-family: 'YS Text', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 1.4;
+            color: rgba(0, 0, 0, 0.9);
+            transition: background-color 0.2s ease;
+        }
+
+        .figma-select-button:hover {
+            background: rgba(0, 0, 0, 0.14);
+        }
+
+        .figma-select-button:active {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .select-label {
+            flex: 1;
+            text-align: left;
+        }
+
+        .select-icon {
+            width: 16px;
+            height: 16px;
+            margin-left: 6px;
+            flex-shrink: 0;
+        }
+
+        /* Gravity UI иконка */
+        .gravity-icon {
+            width: 16px;
+            height: 16px;
+            color: currentColor;
+        }
+
+        /* Вариации компонента */
+        .select-small {
+            width: 150px;
+            height: 32px;
+            padding: 6px 12px;
+            font-size: 13px;
+        }
+
+        .select-large {
+            width: 250px;
+            height: 48px;
+            padding: 12px 20px;
+            font-size: 16px;
+        }
+
+        .select-primary {
+            background: var(--color-red);
+            color: var(--color-white);
+        }
+
+        .select-primary:hover {
+            background: var(--color-red);
+            opacity: 0.9;
+        }
+
+        .select-outline {
+            background: transparent;
+            border: 1px solid var(--color-border-light);
+            color: var(--color-foreground);
+        }
+
+        .select-outline:hover {
+            background: var(--color-control);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--spacing-m);
+            margin-top: var(--spacing-m);
+        }
+
+        .demo-item {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+        }
+
+        .demo-label {
+            font-size: var(--font-size-caption-1);
+            color: var(--color-hint);
+            margin-bottom: var(--spacing-xxs);
+        }
+
+        .back-link {
+            color: var(--color-link);
+            text-decoration: none;
+            margin-bottom: var(--spacing-m);
+            display: inline-block;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: var(--spacing-m);
+            right: var(--spacing-m);
+            background: var(--color-control);
+            border: 1px solid var(--color-border-light);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <button id="themeToggle" class="theme-toggle">🌙</button>
+    
+    <div class="page-container">
+        <a href="index.html" class="back-link">← Назад к UI-kit</a>
+        
+        <h1 class="text-display-1 page-title">Тестовая верстка компонента из Figma</h1>
+        
+        <div class="component-section">
+            <h2 class="section-title">Оригинальный компонент</h2>
+            <p class="text-body-1" style="margin-bottom: var(--spacing-m); color: var(--color-hint);">
+                Точная копия компонента из Figma
+            </p>
+            
+            <button class="figma-select-button">
+                <span class="select-label">choose label</span>
+                <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+            </button>
+        </div>
+
+        <div class="component-section">
+            <h2 class="section-title">Вариации размеров</h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="demo-label">Маленький</div>
+                    <button class="figma-select-button select-small">
+                        <span class="select-label">Выбрать</span>
+                        <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Обычный</div>
+                    <button class="figma-select-button">
+                        <span class="select-label">choose label</span>
+                        <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Большой</div>
+                    <button class="figma-select-button select-large">
+                        <span class="select-label">Выберите опцию</span>
+                        <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="component-section">
+            <h2 class="section-title">Цветовые вариации</h2>
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="demo-label">По умолчанию</div>
+                    <button class="figma-select-button">
+                        <span class="select-label">choose label</span>
+                        <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Акцентный</div>
+                    <button class="figma-select-button select-primary">
+                        <span class="select-label">Выбрать роль</span>
+                        <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">С рамкой</div>
+                    <button class="figma-select-button select-outline">
+                        <span class="select-label">Тип доступа</span>
+                        <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="component-section">
+            <h2 class="section-title">Интерактивные состояния</h2>
+            <p class="text-body-1" style="margin-bottom: var(--spacing-m); color: var(--color-hint);">
+                Наведите курсор и нажмите для проверки состояний
+            </p>
+            
+            <div style="display: flex; gap: var(--spacing-m); flex-wrap: wrap;">
+                <button class="figma-select-button">
+                    <span class="select-label">Обычное состояние</span>
+                    <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                </button>
+                
+                <button class="figma-select-button" style="background: rgba(0, 0, 0, 0.14);">
+                    <span class="select-label">Состояние hover</span>
+                    <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="component-section">
+            <h2 class="section-title">Варианты с разными иконками Gravity UI</h2>
+            <p class="text-body-1" style="margin-bottom: var(--spacing-m); color: var(--color-hint);">
+                Демонстрация различных иконок из Gravity UI в компоненте
+            </p>
+            
+            <div class="demo-grid">
+                <div class="demo-item">
+                    <div class="demo-label">Стрелка вниз</div>
+                    <button class="figma-select-button">
+                        <span class="select-label">Выпадающий список</span>
+                        <i class="g-icon g-icon_chevron-down gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Настройки</div>
+                    <button class="figma-select-button">
+                        <span class="select-label">Настройки</span>
+                        <i class="g-icon g-icon_gear gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Пользователь</div>
+                    <button class="figma-select-button">
+                        <span class="select-label">Профиль</span>
+                        <i class="g-icon g-icon_person gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Поиск</div>
+                    <button class="figma-select-button">
+                        <span class="select-label">Найти</span>
+                        <i class="g-icon g-icon_magnifier gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Календарь</div>
+                    <button class="figma-select-button">
+                        <span class="select-label">Дата</span>
+                        <i class="g-icon g-icon_calendar gravity-icon"></i>
+                    </button>
+                </div>
+                
+                <div class="demo-item">
+                    <div class="demo-label">Фильтр</div>
+                    <button class="figma-select-button">
+                        <span class="select-label">Фильтры</span>
+                        <i class="g-icon g-icon_funnel gravity-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Переключение темы
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const emoji = newTheme === 'dark' ? '☀️' : '🌙';
+            
+            body.setAttribute('data-theme', newTheme);
+            this.textContent = emoji;
+        });
+
+        // Устанавливаем тему по умолчанию
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('themeToggle').textContent = '☀️';
+        }
+
+        // Добавляем интерактивность к кнопкам
+        document.querySelectorAll('.figma-select-button').forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('Кнопка нажата:', this.querySelector('.select-label').textContent);
+            });
+        });
+    </script>
+</body>
+</html> 

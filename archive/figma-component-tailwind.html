@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figma компонент с Tailwind CSS</title>
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/design-tokens.css?v=2">
+    <link rel="stylesheet" href="https://unpkg.com/@gravity-ui/icons/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'red-primary': 'var(--color-red)',
+                        'gray-bg': 'rgba(0, 0, 0, 0.08)',
+                        'gray-hover': 'rgba(0, 0, 0, 0.14)',
+                        'gray-active': 'rgba(0, 0, 0, 0.2)',
+                        'text-primary': 'rgba(0, 0, 0, 0.9)',
+                        'text-hint': 'var(--color-hint)',
+                        'text-foreground': 'var(--color-foreground)',
+                        'border-light': 'var(--color-border-light)',
+                        'bg-control': 'var(--color-control)',
+                        'bg-background': 'var(--color-background)',
+                        'link': 'var(--color-link)',
+                        'white': 'var(--color-white)'
+                    },
+                    fontFamily: {
+                        'ys': ['YS Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        'sans': ['YS Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+                    },
+                    fontWeight: {
+                        'light': '300',
+                        'normal': '400',
+                        'medium': '500',
+                        'bold': '700'
+                    },
+                    spacing: {
+                        'xs': 'var(--spacing-xs)',
+                        'xxs': 'var(--spacing-xxs)',
+                        's': 'var(--spacing-s)',
+                        's-spec': 'var(--spacing-s-spec)',
+                        'm': 'var(--spacing-m)',
+                        'l': 'var(--spacing-l)',
+                        'xl': 'var(--spacing-xl)',
+                        'xxl': 'var(--spacing-xxl)'
+                    },
+                    borderRadius: {
+                        '32': '32px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Дополнительные стили для переменных CSS */
+        :root {
+            --figma-select-bg: rgba(0, 0, 0, 0.08);
+            --figma-select-hover: rgba(0, 0, 0, 0.14);
+            --figma-select-active: rgba(0, 0, 0, 0.2);
+            --figma-text-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        [data-theme="dark"] {
+            --figma-select-bg: rgba(255, 255, 255, 0.1);
+            --figma-select-hover: rgba(255, 255, 255, 0.15);
+            --figma-select-active: rgba(255, 255, 255, 0.2);
+            --figma-text-color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .figma-select-bg {
+            background-color: var(--figma-select-bg);
+        }
+        
+        .figma-select-hover:hover {
+            background-color: var(--figma-select-hover);
+        }
+        
+        .figma-select-active:active {
+            background-color: var(--figma-select-active);
+        }
+        
+        .figma-text {
+            color: var(--figma-text-color);
+        }
+    </style>
+</head>
+<body class="font-sans m-0 p-10 bg-bg-background text-text-foreground">
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="fixed top-m right-m bg-bg-control border border-border-light rounded-full w-12 h-12 cursor-pointer flex items-center justify-center text-xl z-50 hover:opacity-80 transition-opacity">
+        🌙
+    </button>
+    
+    <!-- Main Container -->
+    <div class="max-w-4xl mx-auto">
+        <!-- Back Link -->
+        <a href="index.html" class="text-link no-underline mb-m inline-block hover:underline">
+            ← Назад к UI-kit
+        </a>
+        
+        <!-- Page Title -->
+        <h1 class="text-4xl font-medium mb-xl text-text-foreground">
+            Figma компонент с Tailwind CSS
+        </h1>
+        
+        <!-- Original Component Section -->
+        <div class="mb-xl p-l bg-bg-background border border-border-light rounded-2xl">
+            <h2 class="text-2xl font-medium mb-m text-text-foreground">
+                Оригинальный компонент из Figma
+            </h2>
+            <p class="text-base mb-m text-text-hint">
+                Точная копия компонента из Figma, теперь с Tailwind CSS
+            </p>
+            
+            <!-- Original Figma Button -->
+            <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal leading-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                <span class="flex-1 text-left">choose label</span>
+                <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+            </button>
+        </div>
+
+        <!-- Size Variations -->
+        <div class="mb-xl p-l bg-bg-background border border-border-light rounded-2xl">
+            <h2 class="text-2xl font-medium mb-m text-text-foreground">
+                Вариации размеров
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-m mt-m">
+                <!-- Small -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Маленький</div>
+                    <button class="inline-flex items-center justify-between w-38 h-8 px-3 py-1.5 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-xs font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">Выбрать</span>
+                        <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Normal -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Обычный</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">choose label</span>
+                        <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Large -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Большой</div>
+                    <button class="inline-flex items-center justify-between w-64 h-12 px-5 py-3 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-base font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">Выберите опцию</span>
+                        <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Color Variations -->
+        <div class="mb-xl p-l bg-bg-background border border-border-light rounded-2xl">
+            <h2 class="text-2xl font-medium mb-m text-text-foreground">
+                Цветовые вариации
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-m mt-m">
+                <!-- Default -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">По умолчанию</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">choose label</span>
+                        <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Primary -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Акцентный</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 bg-red-primary border-0 rounded-32 cursor-pointer font-ys text-sm font-normal text-white hover:opacity-90 active:opacity-80 transition-opacity duration-200">
+                        <span class="flex-1 text-left">Выбрать роль</span>
+                        <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Outline -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">С рамкой</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 bg-transparent border border-border-light rounded-32 cursor-pointer font-ys text-sm font-normal text-text-foreground hover:bg-bg-control active:bg-gray-hover transition-colors duration-200">
+                        <span class="flex-1 text-left">Тип доступа</span>
+                        <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive States -->
+        <div class="mb-xl p-l bg-bg-background border border-border-light rounded-2xl">
+            <h2 class="text-2xl font-medium mb-m text-text-foreground">
+                Интерактивные состояния
+            </h2>
+            <p class="text-base mb-m text-text-hint">
+                Наведите курсор и нажмите для проверки состояний
+            </p>
+            
+            <div class="flex gap-m flex-wrap">
+                <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                    <span class="flex-1 text-left">Обычное состояние</span>
+                    <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                </button>
+                
+                <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text transition-colors duration-200" style="background-color: var(--figma-select-hover);">
+                    <span class="flex-1 text-left">Состояние hover</span>
+                    <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Different Gravity UI Icons -->
+        <div class="mb-xl p-l bg-bg-background border border-border-light rounded-2xl">
+            <h2 class="text-2xl font-medium mb-m text-text-foreground">
+                Варианты с разными иконками Gravity UI
+            </h2>
+            <p class="text-base mb-m text-text-hint">
+                Демонстрация различных иконок из Gravity UI в компоненте
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-m mt-m">
+                <!-- Chevron Down -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Стрелка вниз</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">Выпадающий список</span>
+                        <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Gear -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Настройки</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">Настройки</span>
+                        <i class="g-icon g-icon_gear w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Person -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Пользователь</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">Профиль</span>
+                        <i class="g-icon g-icon_person w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Search -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Поиск</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">Найти</span>
+                        <i class="g-icon g-icon_magnifier w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Calendar -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Календарь</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">Дата</span>
+                        <i class="g-icon g-icon_calendar w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+                
+                <!-- Filter -->
+                <div class="flex flex-col gap-xs">
+                    <div class="text-sm text-text-hint mb-xxs">Фильтр</div>
+                    <button class="inline-flex items-center justify-between w-50 h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm font-normal figma-text figma-select-hover figma-select-active transition-colors duration-200">
+                        <span class="flex-1 text-left">Фильтры</span>
+                        <i class="g-icon g-icon_funnel w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tailwind Utility Classes Demo -->
+        <div class="mb-xl p-l bg-bg-background border border-border-light rounded-2xl">
+            <h2 class="text-2xl font-medium mb-m text-text-foreground">
+                Преимущества Tailwind CSS
+            </h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-l">
+                <div>
+                    <h3 class="text-lg font-medium mb-xs text-text-foreground">Быстрое прототипирование</h3>
+                    <div class="space-y-xs">
+                        <button class="w-full inline-flex items-center justify-between h-10 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors">
+                            <span>Синяя кнопка</span>
+                            <i class="g-icon g-icon_chevron-down w-4 h-4"></i>
+                        </button>
+                        <button class="w-full inline-flex items-center justify-between h-10 px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors">
+                            <span>Зеленая кнопка</span>
+                            <i class="g-icon g-icon_chevron-down w-4 h-4"></i>
+                        </button>
+                        <button class="w-full inline-flex items-center justify-between h-10 px-4 py-2 bg-purple-500 text-white rounded-lg hover:bg-purple-600 transition-colors">
+                            <span>Фиолетовая кнопка</span>
+                            <i class="g-icon g-icon_chevron-down w-4 h-4"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-medium mb-xs text-text-foreground">Адаптивность</h3>
+                    <button class="w-full sm:w-auto inline-flex items-center justify-between h-10 px-4 py-2 figma-select-bg border-0 rounded-32 cursor-pointer font-ys text-sm figma-text figma-select-hover transition-colors duration-200">
+                        <span class="flex-1 text-left">Адаптивная кнопка</span>
+                        <i class="g-icon g-icon_chevron-down w-4 h-4 text-current flex-shrink-0"></i>
+                    </button>
+                    <p class="text-sm text-text-hint mt-xxs">
+                        На мобильных - полная ширина, на десктопе - авто ширина
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const emoji = newTheme === 'dark' ? '☀️' : '🌙';
+            
+            body.setAttribute('data-theme', newTheme);
+            this.textContent = emoji;
+        });
+
+        // Set default theme
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            document.body.setAttribute('data-theme', 'dark');
+            document.getElementById('themeToggle').textContent = '☀️';
+        }
+
+        // Add interactivity to buttons
+        document.querySelectorAll('button').forEach(button => {
+            if (!button.id) { // Skip theme toggle
+                button.addEventListener('click', function() {
+                    const label = this.querySelector('span');
+                    if (label) {
+                        console.log('Кнопка нажата:', label.textContent);
+                        
+                        // Visual feedback
+                        this.style.transform = 'scale(0.95)';
+                        setTimeout(() => {
+                            this.style.transform = 'scale(1)';
+                        }, 100);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html> 

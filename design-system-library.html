@@ -1,0 +1,1389 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Design Library</title>
+    <link rel="stylesheet" href="styles/fonts.css">
+    <link rel="stylesheet" href="styles/design-tokens.css?v=2">
+    <!-- Now using SVG icons directly instead of external library -->
+    <style>
+        /* SVG Icons базовые стили */
+        svg {
+            display: inline-block;
+            vertical-align: middle;
+            flex-shrink: 0;
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'red-primary': 'var(--color-red)',
+                        'text-hint': 'var(--color-hint)',
+                        'text-foreground': 'var(--color-foreground)',
+                        'border-light': 'var(--color-border-light)',
+                        'bg-control': 'var(--color-control)',
+                        'bg-background': 'var(--color-background)',
+                        'link': 'var(--color-link)',
+                        'white': 'var(--color-white)'
+                    },
+                    fontFamily: {
+                        'ys': ['YS Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        'sans': ['YS Text', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif']
+                    },
+                    fontWeight: {
+                        'light': '300',
+                        'normal': '400',
+                        'medium': '500',
+                        'bold': '700'
+                    },
+                    spacing: {
+                        '0': '0px',
+                        'xxxs': '2px',
+                        'xxs': '4px', 
+                        'xs': '6px',
+                        's': '8px',
+                        's-spec': '12px',
+                        'm': '16px',
+                        'm-spec': '20px',
+                        'l': '24px',
+                        'xl': '32px',
+                        'xxl': '40px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Стили для сворачиваемых блоков в стиле FAQ */
+        .toggle-section {
+            margin-bottom: var(--spacing-l);
+            background: var(--color-background);
+            border: 1px solid var(--color-border-light);
+            border-radius: 12px;
+            overflow: hidden;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .toggle-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            padding: var(--spacing-l);
+            transition: background-color 0.2s ease;
+            user-select: none;
+            border-bottom: 1px solid transparent;
+        }
+
+        .toggle-header:hover {
+            background: var(--color-control);
+        }
+
+        .toggle-section.open .toggle-header {
+            border-bottom-color: var(--color-border-light);
+        }
+
+        .toggle-header-content {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-l);
+            flex: 1;
+        }
+
+        .toggle-number {
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--color-hint);
+            min-width: 32px;
+            flex-shrink: 0;
+        }
+
+        .toggle-title {
+            flex: 1;
+        }
+
+        .toggle-icon {
+            font-size: 20px;
+            font-weight: 300;
+            color: var(--color-hint);
+            transition: color 0.2s ease;
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .toggle-icon.open {
+            color: var(--color-foreground);
+        }
+
+        .toggle-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            padding: 0 var(--spacing-l);
+        }
+
+        .toggle-content.open {
+            max-height: 5000px;
+            transition: max-height 0.3s ease-in, padding 0.3s ease-in;
+            padding: var(--spacing-l);
+        }
+
+        /* Стили для компонентов */
+        .figma-control-bg {
+            background-color: rgba(0, 0, 0, 0.08);
+        }
+        
+        .figma-control-hover:hover {
+            background-color: rgba(0, 0, 0, 0.14);
+        }
+        
+        .toggle-checkbox {
+            appearance: none;
+            width: 44px;
+            height: 24px;
+            background: var(--color-control);
+            border: 1px solid var(--color-border-light);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .toggle-checkbox:checked {
+            background: var(--color-red);
+        }
+        
+        .toggle-checkbox::before {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 1px;
+            left: 1px;
+            transition: transform 0.2s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .toggle-checkbox:checked::before {
+            transform: translateX(20px);
+        }
+
+        .code-example {
+            background: var(--color-control);
+            border: 1px solid var(--color-border-light);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: 'SF Mono', 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.875rem;
+            color: var(--color-foreground);
+            overflow-x: auto;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .code-example:hover {
+            background: var(--color-hover);
+        }
+
+        [data-theme="dark"] .figma-control-bg {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        [data-theme="dark"] .figma-control-hover:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Figma Button System CSS */
+        
+        /* Base Button Styles */
+        .figma-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'YS Text', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-weight: 400;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+            position: relative;
+        }
+
+        /* 40px Size */
+        .figma-btn-40 {
+            height: 40px;
+            border-radius: 32px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        /* 32px Size */
+        .figma-btn-32 {
+            height: 32px;
+            border-radius: 32px;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+
+        /* Action Buttons (красные) */
+        .figma-btn-action {
+            background: #f8604a;
+            color: #ffffff;
+        }
+        .figma-btn-action:hover {
+            background: #e45844;
+        }
+        .figma-btn-action:active {
+            background: #f8604a;
+        }
+
+        /* Fill Buttons (серые) */
+        .figma-btn-fill {
+            background: rgba(0,0,0,0.05);
+            color: rgba(0,0,0,0.9);
+        }
+        .figma-btn-fill:hover {
+            background: rgba(0,0,0,0.08);
+        }
+        .figma-btn-fill:active {
+            background: rgba(0,0,0,0.05);
+        }
+
+        /* Outline Buttons */
+        .figma-btn-outline {
+            background: transparent;
+            color: rgba(0,0,0,0.9);
+            border: 1px solid var(--color-border);
+        }
+        .figma-btn-outline:hover {
+            background: rgba(0,0,0,0.08);
+        }
+        .figma-btn-outline:active {
+            background: rgba(0,0,0,0.05);
+        }
+
+        /* Blank Buttons (прозрачные) */
+        .figma-btn-blank {
+            background: transparent;
+            color: rgba(0,0,0,0.9);
+        }
+        .figma-btn-blank:hover {
+            background: rgba(0,0,0,0.08);
+        }
+        .figma-btn-blank:active {
+            background: rgba(0,0,0,0.05);
+        }
+
+        /* Disabled Buttons */
+        .figma-btn-disabled {
+            background: rgba(0,0,0,0.05);
+            color: rgba(0,0,0,0.4);
+            cursor: not-allowed;
+        }
+        .figma-btn-disabled:hover {
+            background: rgba(0,0,0,0.05);
+        }
+
+        /* Padding для текстовых кнопок */
+        .figma-btn-40.figma-btn-text {
+            padding: 0 16px;
+        }
+        .figma-btn-32.figma-btn-text {
+            padding: 0 16px;
+        }
+
+        /* Padding для кнопок с иконкой в начале */
+        .figma-btn-40.figma-btn-icon-start {
+            padding: 0 20px 0 16px;
+        }
+        .figma-btn-32.figma-btn-icon-start {
+            padding: 0 16px 0 12px;
+        }
+
+        /* Padding для кнопок с иконкой в конце */
+        .figma-btn-40.figma-btn-icon-end {
+            padding: 0 16px 0 20px;
+        }
+        .figma-btn-32.figma-btn-icon-end {
+            padding: 0 12px 0 16px;
+        }
+
+        /* Padding для кнопок только с иконкой */
+        .figma-btn-40.figma-btn-icon-only {
+            padding: 12px;
+            width: 40px;
+        }
+        .figma-btn-32.figma-btn-icon-only {
+            padding: 8px;
+            width: 32px;
+        }
+
+        /* Иконки */
+        .figma-btn-40 .figma-icon {
+            width: 16px;
+            height: 16px;
+        }
+        .figma-btn-32 .figma-icon {
+            width: 12px;
+            height: 12px;
+        }
+
+        .figma-btn-icon-start {
+            gap: 6px;
+        }
+        .figma-btn-icon-end {
+            gap: 6px;
+            flex-direction: row-reverse;
+        }
+
+        .switch {
+          width: 56px;
+          height: 32px;
+          border-radius: 32px;
+          background: #f2f2f2;
+          position: relative;
+          cursor: pointer;
+          transition: background 0.2s;
+          display: inline-block;
+          vertical-align: middle;
+          border: none;
+          outline: none;
+          padding: 0;
+        }
+        .switch.on {
+          background: #f8604a;
+        }
+        .switch__circle {
+          width: 28px;
+          height: 28px;
+          background: #fff;
+          border-radius: 50%;
+          position: absolute;
+          top: 2px;
+          left: 2px;
+          transition: left 0.2s;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+        .switch.on .switch__circle {
+          left: 26px;
+        }
+        /* Switch 32px */
+        .switch.switch-32 {
+          width: 40px;
+          height: 20px;
+          border-radius: 20px;
+        }
+        .switch-32 .switch__circle-32 {
+          width: 16px;
+          height: 16px;
+          top: 2px;
+          left: 2px;
+        }
+        .switch-32.on .switch__circle-32 {
+          left: 22px;
+        }
+    </style>
+</head>
+<body class="font-sans m-0 p-10 bg-bg-background text-text-foreground">
+    <!-- Theme Toggle -->
+    <button id="themeToggle" class="fixed top-m right-m bg-bg-control border border-border-light rounded-full w-12 h-12 cursor-pointer flex items-center justify-center text-xl z-50 hover:opacity-80 transition-opacity">
+        🌙
+    </button>
+    
+    <!-- Main Container -->
+    <div class="max-w-6xl mx-auto">
+        <!-- Header -->
+        <header class="mb-xl">
+            <h1 class="text-4xl font-bold mb-xs text-text-foreground">
+                Design Library
+            </h1>
+            <p class="text-lg text-text-hint">
+                Полная библиотека компонентов и токенов дизайн-системы
+            </p>
+        </header>
+
+        <!-- Typography Section -->
+        <div class="toggle-section" id="typographySection">
+            <div class="toggle-header" onclick="toggleSection('typography')">
+                <div class="toggle-header-content">
+                    <div class="toggle-number">01</div>
+                    <div class="toggle-title">
+                        <h2 class="text-lg font-medium text-text-foreground">Типографика YS Text</h2>
+                    </div>
+                </div>
+                <div class="toggle-icon">+</div>
+            </div>
+            <div class="toggle-content" id="typographyContent">
+                <div class="space-y-6">
+                    <!-- Typography Scale from Figma -->
+                    <div class="space-y-6">
+                        <div class="flex items-baseline gap-4">
+                            <div class="font-medium text-4xl leading-tight tracking-tight text-text-foreground" style="font-size: 32px; line-height: 1.2; letter-spacing: -1px;">
+                                Display 2
+                            </div>
+                            <div class="text-sm text-text-hint">32px • Medium • -1px</div>
+                        </div>
+                        
+                        <div class="flex items-baseline gap-4">
+                            <div class="font-medium text-text-foreground" style="font-size: 26px; line-height: 1.2; letter-spacing: -0.26px;">
+                                Display 1
+                            </div>
+                            <div class="text-sm text-text-hint">26px • Medium • -0.26px</div>
+                        </div>
+                        
+                        <div class="flex items-baseline gap-4">
+                            <div class="font-medium text-text-foreground" style="font-size: 22px; line-height: 1.2; letter-spacing: -0.22px;">
+                                Header 2
+                            </div>
+                            <div class="text-sm text-text-hint">22px • Medium • -0.22px</div>
+                        </div>
+                        
+                        <div class="flex items-baseline gap-4">
+                            <div class="font-medium text-text-foreground" style="font-size: 18px; line-height: 1.2; letter-spacing: -0.09px;">
+                                Header 1
+                            </div>
+                            <div class="text-sm text-text-hint">18px • Medium • -0.09px</div>
+                        </div>
+                        
+                        <div class="flex items-baseline gap-4">
+                            <div class="font-medium text-text-foreground" style="font-size: 14px; line-height: 1.4;">
+                                Subheader 1
+                            </div>
+                            <div class="text-sm text-text-hint">14px • Medium • 1.4</div>
+                        </div>
+                        
+                        <div class="flex items-baseline gap-4">
+                            <div class="font-normal text-text-foreground" style="font-size: 14px; line-height: 1.4;">
+                                Body 1
+                            </div>
+                            <div class="text-sm text-text-hint">14px • Regular • 1.4</div>
+                        </div>
+                        
+                        <div class="flex items-baseline gap-4">
+                            <div class="font-normal text-text-foreground" style="font-size: 12px; line-height: 1.4;">
+                                Caption 2
+                            </div>
+                            <div class="text-sm text-text-hint">12px • Regular • 1.4</div>
+                        </div>
+                        
+                        <div class="flex items-baseline gap-4">
+                            <div class="font-normal text-text-foreground" style="font-size: 10px; line-height: 1.4; letter-spacing: 0.1px;">
+                                Caption 1
+                            </div>
+                            <div class="text-sm text-text-hint">10px • Regular • 0.1px</div>
+                        </div>
+                    </div>
+                    
+                    <!-- CSS Classes -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">CSS классы</h3>
+                        <div class="code-example">
+/* Display стили */
+.text-display-2 { font-size: 32px; line-height: 1.2; letter-spacing: -1px; font-weight: 500; }
+.text-display-1 { font-size: 26px; line-height: 1.2; letter-spacing: -0.26px; font-weight: 500; }
+
+/* Header стили */
+.text-header-2 { font-size: 22px; line-height: 1.2; letter-spacing: -0.22px; font-weight: 500; }
+.text-header-1 { font-size: 18px; line-height: 1.2; letter-spacing: -0.09px; font-weight: 500; }
+
+/* Body стили */
+.text-subheader-1 { font-size: 14px; line-height: 1.4; font-weight: 500; }
+.text-body-1 { font-size: 14px; line-height: 1.4; font-weight: 400; }
+.text-caption-2 { font-size: 12px; line-height: 1.4; font-weight: 400; }
+.text-caption-1 { font-size: 10px; line-height: 1.4; letter-spacing: 0.1px; font-weight: 400; }
+                        </div>
+                    </div>
+                    
+                    <!-- Usage Examples -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">Примеры использования</h3>
+                        <div class="space-y-4 p-4 bg-bg-control rounded-lg">
+                            <div class="font-medium text-text-foreground" style="font-size: 22px; line-height: 1.2; letter-spacing: -0.22px;">
+                                Заголовок страницы
+                            </div>
+                            <p class="font-normal text-text-foreground" style="font-size: 14px; line-height: 1.4;">
+                                Это основной текст статьи, написанный в стиле Body 1. Он обеспечивает хорошую читаемость 
+                                и используется для большинства текстового контента.
+                            </p>
+                            <div class="font-medium text-text-foreground" style="font-size: 14px; line-height: 1.4;">
+                                Подзаголовок секции
+                            </div>
+                            <p class="font-normal text-text-hint" style="font-size: 12px; line-height: 1.4;">
+                                Дополнительная информация в стиле Caption 2 для пояснений и метаданных
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Colors Section -->
+        <div class="toggle-section" id="colorsSection">
+            <div class="toggle-header" onclick="toggleSection('colors')">
+                <div class="toggle-header-content">
+                    <div class="toggle-number">02</div>
+                    <div class="toggle-title">
+                        <h2 class="text-lg font-medium text-text-foreground">Цветовая палитра</h2>
+                    </div>
+                </div>
+                <div class="toggle-icon">+</div>
+            </div>
+            
+            <div class="toggle-content" id="colorsContent">
+                <div class="space-y-l">
+                    <!-- Система цветов для светлой темы -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">Системные цвета (Light)</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-m">
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffffff; border: 1px solid #0000001a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Background</div>
+                                    <div class="text-xs text-text-hint">#ffffff</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #000000e5; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Foreground</div>
+                                    <div class="text-xs text-text-hint">rgba(0,0,0,0.9)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #f2f2f2; border: 1px solid #0000001a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Submerged</div>
+                                    <div class="text-xs text-text-hint">#f2f2f2</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #0000000d; border: 1px solid #0000001a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Control</div>
+                                    <div class="text-xs text-text-hint">rgba(0,0,0,0.05)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #00000014; border: 1px solid #0000001a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Hover</div>
+                                    <div class="text-xs text-text-hint">rgba(0,0,0,0.08)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #00000026; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Border</div>
+                                    <div class="text-xs text-text-hint">rgba(0,0,0,0.15)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #0000001a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Border Light</div>
+                                    <div class="text-xs text-text-hint">rgba(0,0,0,0.1)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #00000066; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Hint</div>
+                                    <div class="text-xs text-text-hint">rgba(0,0,0,0.4)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #00000080; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Fade</div>
+                                    <div class="text-xs text-text-hint">rgba(0,0,0,0.5)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Система цветов для темной темы -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">Системные цвета (Dark)</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-m">
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #252525; border: 1px solid #ffffff26; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Background</div>
+                                    <div class="text-xs text-text-hint">#252525</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffffffe5; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Foreground</div>
+                                    <div class="text-xs text-text-hint">rgba(255,255,255,0.9)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #181818; border: 1px solid #ffffff26; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Submerged</div>
+                                    <div class="text-xs text-text-hint">#181818</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffffff26; border: 1px solid #ffffff33; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Control</div>
+                                    <div class="text-xs text-text-hint">rgba(255,255,255,0.15)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffffff2e; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Hover</div>
+                                    <div class="text-xs text-text-hint">rgba(255,255,255,0.18)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffffff33; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Border</div>
+                                    <div class="text-xs text-text-hint">rgba(255,255,255,0.2)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffffff1a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Border Light</div>
+                                    <div class="text-xs text-text-hint">rgba(255,255,255,0.1)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffffff80; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Hint</div>
+                                    <div class="text-xs text-text-hint">rgba(255,255,255,0.5)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #000000b3; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Fade</div>
+                                    <div class="text-xs text-text-hint">rgba(0,0,0,0.7)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Функциональные цвета -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">Функциональные цвета</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-m">
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #004da6; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Link (Light)</div>
+                                    <div class="text-xs text-text-hint">#004da6</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #3884db; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Link (Dark)</div>
+                                    <div class="text-xs text-text-hint">#3884db</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #f8604a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Red</div>
+                                    <div class="text-xs text-text-hint">#f8604a</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #f8604a1a; border: 1px solid #0000001a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Light Red (Light)</div>
+                                    <div class="text-xs text-text-hint">rgba(248,96,74,0.1)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #f8604a33; border: 1px solid #ffffff26; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Light Red (Dark)</div>
+                                    <div class="text-xs text-text-hint">rgba(248,96,74,0.2)</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #e45844; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Red Hover</div>
+                                    <div class="text-xs text-text-hint">#e45844</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Бренд-цвета -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">Бренд-цвета</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-m">
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #324cf0; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Blue (Light)</div>
+                                    <div class="text-xs text-text-hint">#324cf0</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #7a82e5; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Blue (Dark)</div>
+                                    <div class="text-xs text-text-hint">#7a82e5</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #55a867; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Green (Light)</div>
+                                    <div class="text-xs text-text-hint">#55a867</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #24904f; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Green (Dark)</div>
+                                    <div class="text-xs text-text-hint">#24904f</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #8822d0; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Purple</div>
+                                    <div class="text-xs text-text-hint">#8822d0</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffbf1a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Yellow (Light)</div>
+                                    <div class="text-xs text-text-hint">#ffbf1a</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffdb4d; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Yellow (Dark)</div>
+                                    <div class="text-xs text-text-hint">#ffdb4d</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Базовые цвета -->
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">Базовые цвета</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-m">
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #ffffff; border: 1px solid #0000001a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">White</div>
+                                    <div class="text-xs text-text-hint">#ffffff</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #000000; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Black</div>
+                                    <div class="text-xs text-text-hint">#000000</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #f2f2f2; border: 1px solid #0000001a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Grey (Light)</div>
+                                    <div class="text-xs text-text-hint">#f2f2f2</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 40px; background: #1a1a1a; border-radius: 100px;"></div>
+                                <div>
+                                    <div class="text-sm font-medium">Grey (Dark)</div>
+                                    <div class="text-xs text-text-hint">#1a1a1a</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-example mt-l">
+/* Цветовые переменные из Figma */
+--color-background: #ffffff; /* Light theme */
+--color-background-dark: #252525; /* Dark theme */
+--color-foreground: rgba(0,0,0,0.9); /* Light theme */
+--color-foreground-dark: rgba(255,255,255,0.9); /* Dark theme */
+--color-submerged: #f2f2f2; /* Light theme */
+--color-submerged-dark: #181818; /* Dark theme */
+--color-control: rgba(0,0,0,0.05); /* Light theme */
+--color-control-dark: rgba(255,255,255,0.15); /* Dark theme */
+--color-hover: rgba(0,0,0,0.08); /* Light theme */
+--color-hover-dark: rgba(255,255,255,0.18); /* Dark theme */
+--color-border: rgba(0,0,0,0.15); /* Light theme */
+--color-border-dark: rgba(255,255,255,0.2); /* Dark theme */
+--color-border-light: rgba(0,0,0,0.1); /* Light theme */
+--color-border-light-dark: rgba(255,255,255,0.1); /* Dark theme */
+--color-hint: rgba(0,0,0,0.4); /* Light theme */
+--color-hint-dark: rgba(255,255,255,0.5); /* Dark theme */
+--color-fade: rgba(0,0,0,0.5); /* Light theme */
+--color-fade-dark: rgba(0,0,0,0.7); /* Dark theme */
+--color-link: #004da6; /* Light theme */
+--color-link-dark: #3884db; /* Dark theme */
+--color-red: #f8604a;
+--color-red-light: rgba(248,96,74,0.1); /* Light theme */
+--color-red-light-dark: rgba(248,96,74,0.2); /* Dark theme */
+--color-red-hover: #e45844;
+--color-blue: #324cf0; /* Light theme */
+--color-blue-dark: #7a82e5; /* Dark theme */
+--color-green: #55a867; /* Light theme */
+--color-green-dark: #24904f; /* Dark theme */
+--color-purple: #8822d0;
+--color-yellow: #ffbf1a; /* Light theme */
+--color-yellow-dark: #ffdb4d; /* Dark theme */
+--color-white: #ffffff;
+--color-black: #000000;
+--color-grey: #f2f2f2; /* Light theme */
+--color-grey-dark: #1a1a1a; /* Dark theme */
+                </div>
+            </div>
+        </div>
+
+        <!-- Icons Section -->
+        <div class="toggle-section" id="iconsSection">
+            <div class="toggle-header">
+                <div class="toggle-header-content">
+                    <div class="toggle-number">03</div>
+                    <div class="toggle-title">
+                        <h2 class="text-lg font-medium text-text-hint">Иконки</h2>
+                    </div>
+                </div>
+                <div class="toggle-icon">+</div>
+            </div>
+            <div class="toggle-content">
+                <div class="flex justify-center items-center py-12">
+                    <div class="px-8 py-6 rounded-xl bg-bg-control border border-border-light text-text-hint text-xl font-medium shadow-sm select-none" style="min-width: 320px; text-align: center;">
+                        камен-сун
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Buttons Section -->
+        <div class="toggle-section" id="buttonsSection">
+            <div class="toggle-header" onclick="toggleSection('buttons')">
+                <div class="toggle-header-content">
+                    <div class="toggle-number">05</div>
+                    <div class="toggle-title">
+                        <h2 class="text-lg font-medium text-text-foreground">Кнопки</h2>
+                    </div>
+                </div>
+                <div class="toggle-icon">+</div>
+            </div>
+            
+            <div class="toggle-content" id="buttonsContent">
+                <!-- 40px Buttons -->
+                <div class="mb-l">
+                    <h3 class="text-lg font-medium mb-m text-text-foreground">40px</h3>
+                    <div class="flex flex-wrap gap-m">
+                        <!-- Action Button -->
+                        <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-text">
+                            Action
+                        </button>
+                        
+                        <!-- Fill Button -->
+                        <button class="figma-btn figma-btn-40 figma-btn-fill figma-btn-text">
+                            Fill
+                        </button>
+                        
+                        <!-- Outline Button -->
+                        <button class="figma-btn figma-btn-40 figma-btn-outline figma-btn-text">
+                            Outline
+                        </button>
+                        
+                        <!-- Blank Button -->
+                        <button class="figma-btn figma-btn-40 figma-btn-blank figma-btn-text">
+                            Blank
+                        </button>
+                        
+                        <!-- Disabled Button -->
+                        <button class="figma-btn figma-btn-40 figma-btn-disabled figma-btn-text" disabled>
+                            Disabled
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 32px Buttons -->
+                <div class="mb-l">
+                    <h3 class="text-lg font-medium mb-m text-text-foreground">32px</h3>
+                    <div class="flex flex-wrap gap-m">
+                        <!-- Action Button -->
+                        <button class="figma-btn figma-btn-32 figma-btn-action figma-btn-text">
+                            Action
+                        </button>
+                        
+                        <!-- Fill Button -->
+                        <button class="figma-btn figma-btn-32 figma-btn-fill figma-btn-text">
+                            Fill
+                        </button>
+                        
+                        <!-- Outline Button -->
+                        <button class="figma-btn figma-btn-32 figma-btn-outline figma-btn-text">
+                            Outline
+                        </button>
+                        
+                        <!-- Blank Button -->
+                        <button class="figma-btn figma-btn-32 figma-btn-blank figma-btn-text">
+                            Blank
+                        </button>
+                        
+                        <!-- Disabled Button -->
+                        <button class="figma-btn figma-btn-32 figma-btn-disabled figma-btn-text" disabled>
+                            Disabled
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Buttons with Icons -->
+                <div class="mb-l">
+                    <h3 class="text-lg font-medium mb-m text-text-foreground">С иконками</h3>
+                    <div class="flex flex-wrap gap-m">
+                        <!-- Icon Start -->
+                        <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-icon-start">
+                            <svg class="figma-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="currentColor"/>
+                                <path d="M8 4C8.41421 4 8.75 4.33579 8.75 4.75V7.25H11.25C11.6642 7.25 12 7.58579 12 8C12 8.41421 11.6642 8.75 11.25 8.75H8.75V11.25C8.75 11.6642 8.41421 12 8 12C7.58579 12 7.25 11.6642 7.25 11.25V8.75H4.75C4.33579 8.75 4 8.41421 4 8C4 7.58579 4.33579 7.25 4.75 7.25H7.25V4.75C7.25 4.33579 7.58579 4 8 4Z" fill="currentColor"/>
+                            </svg>
+                            Icon Start
+                        </button>
+                        
+                        <!-- Icon End -->
+                        <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-icon-end">
+                            Icon End
+                            <svg class="figma-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="currentColor"/>
+                                <path d="M8 4C8.41421 4 8.75 4.33579 8.75 4.75V7.25H11.25C11.6642 7.25 12 7.58579 12 8C12 8.41421 11.6642 8.75 11.25 8.75H8.75V11.25C8.75 11.6642 8.41421 12 8 12C7.58579 12 7.25 11.6642 7.25 11.25V8.75H4.75C4.33579 8.75 4 8.41421 4 8C4 7.58579 4.33579 7.25 4.75 7.25H7.25V4.75C7.25 4.33579 7.58579 4 8 4Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                        
+                        <!-- Icon Only -->
+                        <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-icon-only">
+                            <svg class="figma-icon" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15ZM8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16Z" fill="currentColor"/>
+                                <path d="M8 4C8.41421 4 8.75 4.33579 8.75 4.75V7.25H11.25C11.6642 7.25 12 7.58579 12 8C12 8.41421 11.6642 8.75 11.25 8.75H8.75V11.25C8.75 11.6642 8.41421 12 8 12C7.58579 12 7.25 11.6642 7.25 11.25V8.75H4.75C4.33579 8.75 4 8.41421 4 8C4 7.58579 4.33579 7.25 4.75 7.25H7.25V4.75C7.25 4.33579 7.58579 4 8 4Z" fill="currentColor"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- CSS Classes -->
+                <div class="code-example">
+/* Базовый класс */
+.figma-btn { display: inline-flex; align-items: center; justify-content: center; }
+
+/* Размеры */
+.figma-btn-40 { height: 40px; border-radius: 32px; font-size: 14px; }
+.figma-btn-32 { height: 32px; border-radius: 32px; font-size: 12px; }
+
+/* Варианты */
+.figma-btn-action { background: var(--color-red); color: white; }
+.figma-btn-fill { background: var(--color-control); color: var(--color-foreground); }
+.figma-btn-outline { border: 1px solid var(--color-border); }
+.figma-btn-blank { background: transparent; }
+.figma-btn-disabled { background: var(--color-control); color: var(--color-hint); }
+
+/* Отступы */
+.figma-btn-text { padding: 0 16px; }
+.figma-btn-icon-start { padding: 0 20px 0 16px; gap: 6px; }
+.figma-btn-icon-end { padding: 0 16px 0 20px; gap: 6px; flex-direction: row-reverse; }
+.figma-btn-icon-only { padding: 12px; width: 40px; }
+                </div>
+            </div>
+        </div>
+
+        <!-- Switches Section -->
+        <div class="toggle-section" id="switchesSection">
+            <div class="toggle-header" onclick="toggleSection('switches')">
+                <div class="toggle-header-content">
+                    <div class="toggle-number">06</div>
+                    <div class="toggle-title">
+                        <h2 class="text-lg font-medium text-text-foreground">Переключатели</h2>
+                    </div>
+                </div>
+                <div class="toggle-icon">+</div>
+            </div>
+            
+            <div class="toggle-content" id="switchesContent">
+                <!-- 32px Switches -->
+                <div class="mb-l">
+                    <h3 class="text-lg font-medium mb-m text-text-foreground">32px</h3>
+                    <div class="flex flex-wrap gap-m">
+                        <!-- Off State -->
+                        <button class="switch">
+                            <div class="switch__circle"></div>
+                        </button>
+                        
+                        <!-- On State -->
+                        <button class="switch on">
+                            <div class="switch__circle"></div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- 20px Switches -->
+                <div class="mb-l">
+                    <h3 class="text-lg font-medium mb-m text-text-foreground">20px</h3>
+                    <div class="flex flex-wrap gap-m">
+                        <!-- Off State -->
+                        <button class="switch switch-32">
+                            <div class="switch__circle-32"></div>
+                        </button>
+                        
+                        <!-- On State -->
+                        <button class="switch switch-32 on">
+                            <div class="switch__circle-32"></div>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- CSS Classes -->
+                <div class="code-example">
+/* Базовые стили */
+.switch {
+    width: 56px;
+    height: 32px;
+    border-radius: 32px;
+    background: var(--color-submerged);
+    position: relative;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+/* Состояния */
+.switch.on { background: var(--color-red); }
+
+/* Переключатель */
+.switch__circle {
+    width: 28px;
+    height: 28px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+.switch.on .switch__circle { left: 26px; }
+
+/* 20px размер */
+.switch.switch-32 {
+    width: 40px;
+    height: 20px;
+    border-radius: 20px;
+}
+.switch-32 .switch__circle-32 {
+    width: 16px;
+    height: 16px;
+    top: 2px;
+    left: 2px;
+}
+.switch-32.on .switch__circle-32 { left: 22px; }
+                </div>
+            </div>
+        </div>
+
+        <!-- Spacing Section -->
+        <div class="toggle-section" id="spacingSection">
+            <div class="toggle-header" onclick="toggleSection('spacing')">
+                <div class="toggle-header-content">
+                    <div class="toggle-number">04</div>
+                    <div class="toggle-title">
+                        <h2 class="text-lg font-medium text-text-foreground">Система отступов</h2>
+                    </div>
+                </div>
+                <div class="toggle-icon">+</div>
+            </div>
+            
+            <div class="toggle-content" id="spacingContent">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-l mb-l">
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">Полная шкала отступов</h3>
+                        <div class="space-y-m">
+                            <div class="flex items-center gap-3">
+                                <div style="width: 0px; height: 24px; background: var(--color-border); min-width: 1px;"></div>
+                                <span class="text-sm font-medium">0</span>
+                                <span class="text-xs text-text-hint">(0px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 2px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">XXXS</span>
+                                <span class="text-xs text-text-hint">(2px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 4px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">XXS</span>
+                                <span class="text-xs text-text-hint">(4px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 6px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">XS</span>
+                                <span class="text-xs text-text-hint">(6px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 8px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">S</span>
+                                <span class="text-xs text-text-hint">(8px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 12px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">S spec</span>
+                                <span class="text-xs text-text-hint">(12px)</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h3 class="text-lg font-medium mb-m text-text-foreground">&nbsp;</h3>
+                        <div class="space-y-m">
+                            <div class="flex items-center gap-3">
+                                <div style="width: 16px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">M</span>
+                                <span class="text-xs text-text-hint">(16px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 20px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">M spec</span>
+                                <span class="text-xs text-text-hint">(20px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 24px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">L</span>
+                                <span class="text-xs text-text-hint">(24px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 32px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">XL</span>
+                                <span class="text-xs text-text-hint">(32px)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <div style="width: 40px; height: 24px; background: var(--color-link);"></div>
+                                <span class="text-sm font-medium">XXL</span>
+                                <span class="text-xs text-text-hint">(40px)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="code-example">
+/* CSS переменные */
+--spacing-0: 0px; --spacing-xxxs: 2px; --spacing-xxs: 4px;
+--spacing-xs: 6px; --spacing-s: 8px; --spacing-s-spec: 12px;
+--spacing-m: 16px; --spacing-m-spec: 20px; --spacing-l: 24px;
+--spacing-xl: 32px; --spacing-xxl: 40px;
+
+/* Tailwind классы */
+/* Margin */ m-xs mt-s mb-m mx-l my-xl
+/* Padding */ p-xs pt-s pb-m px-l py-xl
+/* Gap */ gap-xs space-x-s space-y-m
+
+/* Прямое использование */
+margin: var(--spacing-m); /* 16px */
+padding: var(--spacing-s) var(--spacing-m); /* 8px 16px */
+                </div>
+            </div>
+        </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        let isDarkMode = false;
+
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            body.classList.toggle('dark-theme');
+            themeToggle.innerHTML = isDarkMode ? '☀️' : '🌙';
+            
+            // Update CSS variables for dark mode
+            if (isDarkMode) {
+                document.documentElement.style.setProperty('--color-background', '#252525');
+                document.documentElement.style.setProperty('--color-foreground', 'rgba(255,255,255,0.9)');
+                document.documentElement.style.setProperty('--color-submerged', '#181818');
+                document.documentElement.style.setProperty('--color-control', 'rgba(255,255,255,0.15)');
+                document.documentElement.style.setProperty('--color-hover', 'rgba(255,255,255,0.18)');
+                document.documentElement.style.setProperty('--color-border', 'rgba(255,255,255,0.2)');
+                document.documentElement.style.setProperty('--color-border-light', 'rgba(255,255,255,0.1)');
+                document.documentElement.style.setProperty('--color-hint', 'rgba(255,255,255,0.5)');
+                document.documentElement.style.setProperty('--color-fade', 'rgba(0,0,0,0.7)');
+                document.documentElement.style.setProperty('--color-link', '#3884db');
+                document.documentElement.style.setProperty('--color-red-light', 'rgba(248,96,74,0.2)');
+                document.documentElement.style.setProperty('--color-blue', '#7a82e5');
+                document.documentElement.style.setProperty('--color-green', '#24904f');
+                document.documentElement.style.setProperty('--color-yellow', '#ffdb4d');
+                document.documentElement.style.setProperty('--color-grey', '#1a1a1a');
+            } else {
+                document.documentElement.style.setProperty('--color-background', '#ffffff');
+                document.documentElement.style.setProperty('--color-foreground', 'rgba(0,0,0,0.9)');
+                document.documentElement.style.setProperty('--color-submerged', '#f2f2f2');
+                document.documentElement.style.setProperty('--color-control', 'rgba(0,0,0,0.05)');
+                document.documentElement.style.setProperty('--color-hover', 'rgba(0,0,0,0.08)');
+                document.documentElement.style.setProperty('--color-border', 'rgba(0,0,0,0.15)');
+                document.documentElement.style.setProperty('--color-border-light', 'rgba(0,0,0,0.1)');
+                document.documentElement.style.setProperty('--color-hint', 'rgba(0,0,0,0.4)');
+                document.documentElement.style.setProperty('--color-fade', 'rgba(0,0,0,0.5)');
+                document.documentElement.style.setProperty('--color-link', '#004da6');
+                document.documentElement.style.setProperty('--color-red-light', 'rgba(248,96,74,0.1)');
+                document.documentElement.style.setProperty('--color-blue', '#324cf0');
+                document.documentElement.style.setProperty('--color-green', '#55a867');
+                document.documentElement.style.setProperty('--color-yellow', '#ffbf1a');
+                document.documentElement.style.setProperty('--color-grey', '#f2f2f2');
+            }
+        }
+
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Section Toggle
+        function toggleSection(sectionId) {
+            const section = document.getElementById(sectionId + 'Section');
+            const content = document.getElementById(sectionId + 'Content');
+            const icon = section.querySelector('.toggle-icon');
+            
+            if (content.style.display === 'none' || !content.style.display) {
+                content.style.display = 'block';
+                icon.textContent = '-';
+            } else {
+                content.style.display = 'none';
+                icon.textContent = '+';
+            }
+        }
+
+        // Switch Toggle
+        document.querySelectorAll('.switch').forEach(switchEl => {
+            switchEl.addEventListener('click', function() {
+                this.classList.toggle('on');
+            });
+        });
+
+        // Copy icon code functionality
+        function copyIconCode(iconName) {
+            // Получаем SVG элемент из нажатой карточки
+            const iconCard = event.currentTarget;
+            const svgElement = iconCard.querySelector('svg');
+            
+            if (svgElement) {
+                // Клонируем SVG для изменения
+                const svgClone = svgElement.cloneNode(true);
+                
+                // Устанавливаем стандартные атрибуты для копирования
+                svgClone.setAttribute('class', 'w-4 h-4');
+                svgClone.removeAttribute('width');
+                svgClone.removeAttribute('height');
+                
+                // Получаем очищенный HTML
+                const svgCode = svgClone.outerHTML;
+                
+                // Копируем в буфер обмена
+                navigator.clipboard.writeText(svgCode).then(() => {
+                    // Визуальная обратная связь
+                    const originalBg = iconCard.style.backgroundColor;
+                    iconCard.style.backgroundColor = 'var(--color-green)';
+                    iconCard.style.color = 'white';
+                    
+                    // Показываем уведомление
+                    const notification = document.createElement('div');
+                    notification.className = 'fixed bottom-4 right-4 bg-green-primary text-white px-4 py-2 rounded-lg shadow-lg z-50';
+                    notification.textContent = `Код иконки ${iconName} скопирован!`;
+                    document.body.appendChild(notification);
+                    
+                    setTimeout(() => {
+                        iconCard.style.backgroundColor = originalBg;
+                        iconCard.style.color = '';
+                        notification.remove();
+                    }, 1500);
+                    
+                    console.log(`Скопировано: ${iconName} SVG иконка`);
+                }).catch(err => {
+                    console.error('Ошибка при копировании:', err);
+                });
+            }
+        }
+
+        // Copy code examples to clipboard
+        document.querySelectorAll('.code-example').forEach(codeBlock => {
+            codeBlock.addEventListener('click', function() {
+                navigator.clipboard.writeText(this.textContent.trim()).then(() => {
+                    // Visual feedback
+                    const originalBg = this.style.backgroundColor;
+                    this.style.backgroundColor = 'var(--color-red)';
+                    this.style.color = 'white';
+                    setTimeout(() => {
+                        this.style.backgroundColor = originalBg;
+                        this.style.color = '';
+                    }, 200);
+                });
+            });
+        });
+
+        // Button animations
+        document.querySelectorAll('button').forEach(button => {
+            if (!button.id && !button.onclick) {
+                button.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 100);
+                });
+            }
+        });
+
+        // Initialize Gravity UI icons
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if SVG icons are loaded
+            const testIcon = document.createElement('svg');
+            testIcon.innerHTML = '<path d="M8.75 3.5a.75.75 0 0 0-1.5 0v4h-4a.75.75 0 0 0 0 1.5h4v4a.75.75 0 0 0 1.5 0v-4h4a.75.75 0 0 0 0-1.5h-4v-4Z"/>';
+            testIcon.style.visibility = 'hidden';
+            testIcon.style.position = 'absolute';
+            document.body.appendChild(testIcon);
+            
+            // Give time for CSS to load
+            setTimeout(() => {
+                const computedStyle = window.getComputedStyle(testIcon, '::before');
+                const isLoaded = computedStyle.content !== 'none' && computedStyle.content !== '""';
+                
+                // Mark all icons as loaded if CSS is working
+                if (isLoaded) {
+                    document.querySelectorAll('.g-icon').forEach(icon => {
+                        icon.classList.add('g-icon_loaded');
+                    });
+                    console.log('✅ Gravity UI icons loaded successfully!');
+                } else {
+                    console.warn('⚠️ Gravity UI icons not loaded, using fallback icons');
+                }
+                
+                // Remove test element
+                document.body.removeChild(testIcon);
+            }, 500);
+        });
+
+        console.log('Design System Library loaded successfully!');
+    </script>
+</body>
+</html> 
