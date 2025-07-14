@@ -959,8 +959,57 @@
                         <button class="figma-btn figma-btn-40 figma-btn-disabled figma-btn-text" disabled>
                             Disabled
                         </button>
-                        </div>
                     </div>
+                </div>
+                <!-- Selects row -->
+                <div class="mb-l flex flex-row gap-2xl items-start">
+                  <!-- Первый кастомный Select -->
+                  <div>
+                    <h3 class="text-lg font-medium mb-m text-text-foreground">Select (кастомный, Figma-style)</h3>
+                    <div class="flex flex-col gap-s max-w-xs">
+                      <div class="relative">
+                        <button type="button" id="customSelectBtn" class="w-full flex items-center justify-between bg-bg-control rounded-full px-4 py-2 text-[14px] font-normal text-text-foreground border border-border-light focus:outline-none focus:ring-2 focus:ring-link transition-all select-figma" style="height:40px; min-width:200px;">
+                          <span id="customSelectLabel">choose label</span>
+                          <svg class="ml-2 transition-transform duration-200" id="customSelectChevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6L8 10L12 6" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </button>
+                        <!-- Dropdown -->
+                        <div id="customSelectDropdown" class="absolute left-0 top-12 w-full bg-white rounded-3xl shadow-[0_12px_24px_0_rgba(114,110,110,0.24)] z-10 hidden border border-border-light" style="min-width:200px;">
+                          <ul class="flex flex-col gap-1 py-2">
+                            <li><button type="button" class="w-full text-left px-4 py-2 rounded-full text-[14px] text-text-foreground hover:bg-bg-control transition select-figma-option" data-value="label 1">label 1</button></li>
+                            <li><button type="button" class="w-full text-left px-4 py-2 rounded-full text-[14px] text-text-foreground hover:bg-bg-control transition select-figma-option" data-value="label 2">label 2</button></li>
+                            <li><button type="button" class="w-full text-left px-4 py-2 rounded-full text-[14px] text-text-foreground hover:bg-bg-control transition select-figma-option" data-value="label 3">label 3</button></li>
+                            <li><button type="button" class="w-full text-left px-4 py-2 rounded-full text-[14px] text-text-foreground hover:bg-bg-control transition select-figma-option" data-value="label 4">label 4</button></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Второй эталонный Select из Figma -->
+                  <div>
+                    <h3 class="text-lg font-medium mb-m text-text-foreground">Select (Figma макет, 3 состояния)</h3>
+                    <div class="flex flex-col gap-s max-w-xs">
+                      <div class="relative" id="figmaSelectDemo">
+                        <button type="button" id="figmaSelectBtn" class="w-60 flex items-center justify-between bg-bg-control rounded-[40px] px-4 py-2 text-[14px] font-normal text-text-foreground border border-[rgba(0,0,0,0.02)] focus:outline-none transition-all figma-select-demo" style="height:40px;">
+                          <span id="figmaSelectLabel">choose label</span>
+                          <svg class="ml-2 transition-transform duration-200" id="figmaSelectChevron" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 6L8 10L12 6" stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                          </svg>
+                        </button>
+                        <!-- Dropdown -->
+                        <div id="figmaSelectDropdown" class="absolute left-0 top-12 w-[300px] bg-white rounded-3xl shadow-[0_12px_24px_0_rgba(114,110,110,0.24)] z-10 hidden p-2">
+                          <ul class="flex flex-col gap-1">
+                            <li><button type="button" class="w-full text-left px-3 py-2 rounded-[40px] text-[14px] text-text-foreground bg-transparent hover:bg-bg-control transition figma-select-demo-option" data-value="label 1">label 1</button></li>
+                            <li><button type="button" class="w-full text-left px-3 py-2 rounded-[40px] text-[14px] text-text-foreground bg-transparent hover:bg-bg-control transition figma-select-demo-option" data-value="label 2">label 2</button></li>
+                            <li><button type="button" class="w-full text-left px-3 py-2 rounded-[40px] text-[14px] text-text-foreground bg-transparent hover:bg-bg-control transition figma-select-demo-option" data-value="label 3">label 3</button></li>
+                            <li><button type="button" class="w-full text-left px-3 py-2 rounded-[40px] text-[14px] text-text-foreground bg-transparent hover:bg-bg-control transition figma-select-demo-option" data-value="label 4">label 4</button></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <!-- 32px Buttons -->
                 <div class="mb-l">
                     <h3 class="text-lg font-medium mb-m text-text-foreground">32px</h3>
@@ -1041,6 +1090,93 @@
 .figma-btn-icon-end { padding: 0 16px 0 20px; gap: 6px; flex-direction: row-reverse; }
 .figma-btn-icon-only { padding: 12px; width: 40px; }
                 </div>
+                <style>
+                .select-figma {
+                    border-radius: 999px !important;
+                    background: var(--color-control);
+                    transition: background 0.2s, border-color 0.2s;
+                }
+                .select-figma:hover {
+                    background: var(--color-hover);
+                }
+                .select-figma.open,
+                .select-figma:active,
+                .select-figma:focus {
+                    background: var(--color-white);
+                    border: none;
+                }
+                .select-figma-option {
+                    border-radius: 999px;
+                    transition: background 0.2s;
+                }
+                .select-figma-option:active,
+                .select-figma-option.selected {
+                    background: var(--color-control);
+                }
+                /* Тень только у dropdown, когда открыт */
+                #customSelectDropdown {
+                    box-shadow: none !important;
+                }
+                #customSelectDropdown:not(.hidden) {
+                    box-shadow: var(--shadow-l) !important;
+                }
+                .select-figma-option:hover,
+                .select-figma-option.selected {
+                    width: calc(100% - 24px);
+                    margin: 0 auto;
+                }
+                </style>
+                <script>
+                // Custom Select logic
+                const selectBtn = document.getElementById('customSelectBtn');
+                const selectDropdown = document.getElementById('customSelectDropdown');
+                const selectLabel = document.getElementById('customSelectLabel');
+                const selectChevron = document.getElementById('customSelectChevron');
+                let selectOpen = false;
+                function setSelectState(state) {
+                    selectBtn.classList.remove('open');
+                    if (state === 'open') {
+                        selectBtn.classList.add('open');
+                        selectChevron.style.transform = 'rotate(180deg)';
+                    } else {
+                        selectChevron.style.transform = '';
+                    }
+                }
+                selectBtn.addEventListener('mouseenter', function() {
+                    if (!selectOpen) selectBtn.classList.add('hover');
+                });
+                selectBtn.addEventListener('mouseleave', function() {
+                    selectBtn.classList.remove('hover');
+                });
+                selectBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    selectOpen = !selectOpen;
+                    if (selectOpen) {
+                        selectDropdown.classList.remove('hidden');
+                        setSelectState('open');
+                    } else {
+                        selectDropdown.classList.add('hidden');
+                        setSelectState('default');
+                    }
+                });
+                selectDropdown.querySelectorAll('button[data-value]').forEach(item => {
+                    item.addEventListener('click', function() {
+                        selectLabel.textContent = this.textContent;
+                        selectDropdown.classList.add('hidden');
+                        setSelectState('default');
+                        selectOpen = false;
+                        selectDropdown.querySelectorAll('button').forEach(btn => btn.classList.remove('selected'));
+                        this.classList.add('selected');
+                    });
+                });
+                document.addEventListener('click', function(e) {
+                    if (!selectBtn.contains(e.target)) {
+                        selectDropdown.classList.add('hidden');
+                        setSelectState('default');
+                        selectOpen = false;
+                    }
+                });
+                </script>
             </div>
         </div>
 
