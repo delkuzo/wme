@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ролевая модель доступа - Яндекс.Вебмастер</title>
+    <link rel="stylesheet" href="./styles/design-tokens.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'YS Text', sans-serif;
+            background-color: var(--submerged);
+        }
+        
+        .role-badge {
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: 'YS Text', sans-serif;
+        }
+        
+        .role-owner { 
+            background-color: #ffdb4d; 
+            color: #000; 
+        }
+        
+        .role-editor { 
+            background-color: #4caf50; 
+            color: #fff; 
+        }
+        
+        .role-viewer { 
+            background-color: #2196f3; 
+            color: #fff; 
+        }
+        
+        .role-partial { 
+            background-color: #ff9800; 
+            color: #fff; 
+        }
+        
+        .access-denied {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+        }
+        
+        .read-only {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+        }
+        
+        .feature-group {
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            transition: all 0.2s;
+        }
+        
+        .feature-group:hover {
+            border-color: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 123, 255, 0.1);
+        }
+        
+        .feature-group.selected {
+            border-color: var(--primary);
+            background-color: #f8f9ff;
+        }
+        
+        .permission-toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            background-color: #ccc;
+            border-radius: 12px;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        
+        .permission-toggle.active {
+            background-color: var(--primary);
+        }
+        
+        .permission-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background-color: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+        
+        .permission-toggle.active::after {
+            transform: translateX(20px);
+        }
+        
+        .sidebar {
+            background: var(--background);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .main-content {
+            background: var(--background);
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Кнопки из дизайн-системы */
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'YS Text', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-secondary {
+            background: var(--control);
+            color: var(--foreground);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'YS Text', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--control-hover);
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'YS Text', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .btn-danger:hover {
+            background: #c82333;
+        }
+
+        /* Поля ввода */
+        .input-field {
+            padding: 8px 12px;
+            border: 1px solid var(--control);
+            border-radius: 8px;
+            font-family: 'YS Text', sans-serif;
+            font-size: 14px;
+            background: var(--background);
+            color: var(--foreground);
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+        }
+
+        /* Таблица */
+        .table-header {
+            background: var(--control);
+            border-bottom: 1px solid var(--control);
+        }
+
+        .table-row:hover {
+            background-color: var(--control);
+        }
+
+        /* Аватары */
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            font-family: 'YS Text', sans-serif;
+        }
+
+        /* Статусы */
+        .status-active { color: #4caf50; }
+        .status-inactive { color: #f44336; }
+        .status-pending { color: #ff9800; }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Навигация -->
+    <nav class="bg-white shadow-sm border-b">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center">
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-red-500 rounded"></div>
+                            <span class="font-semibold text-lg" style="font-family: 'YS Text', sans-serif;">Яндекс.Вебмастер</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <span class="text-sm text-gray-600" style="font-family: 'YS Text', sans-serif;">promo-fall-best.org</span>
+                    <div class="w-8 h-8 bg-gray-300 rounded-full"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto p-6">
+        <!-- Заголовок -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2" style="font-family: 'YS Text', sans-serif;">Управление доступом</h1>
+            <p class="text-gray-600" style="font-family: 'YS Text', sans-serif;">Настройка ролей и прав доступа для участников проекта</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- Боковая панель -->
+            <div class="lg:col-span-1">
+                <div class="sidebar p-6">
+                    <h3 class="text-lg font-semibold mb-4" style="font-family: 'YS Text', sans-serif;">Роли доступа</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="p-3 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="role-badge role-owner">Владелец</span>
+                            </div>
+                            <p class="text-sm text-gray-600" style="font-family: 'YS Text', sans-serif;">Полный доступ ко всем функциям. Может делегировать права.</p>
+                        </div>
+                        
+                        <div class="p-3 bg-green-50 rounded-lg border-l-4 border-green-400">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="role-badge role-editor">Редактирование</span>
+                            </div>
+                            <p class="text-sm text-gray-600" style="font-family: 'YS Text', sans-serif;">Просмотр и редактирование. Не может делегировать права.</p>
+                        </div>
+                        
+                        <div class="p-3 bg-blue-50 rounded-lg border-l-4 border-blue-400">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="role-badge role-viewer">Просмотр</span>
+                            </div>
+                            <p class="text-sm text-gray-600" style="font-family: 'YS Text', sans-serif;">Только просмотр данных. Не может редактировать.</p>
+                        </div>
+                        
+                        <div class="p-3 bg-orange-50 rounded-lg border-l-4 border-orange-400">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="role-badge role-partial">Частичный доступ</span>
+                            </div>
+                            <p class="text-sm text-gray-600" style="font-family: 'YS Text', sans-serif;">Доступ к выбранным разделам.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Основной контент -->
+            <div class="lg:col-span-3">
+                <!-- Вкладки -->
+                <div class="mb-6">
+                    <div class="border-b border-gray-200">
+                        <nav class="-mb-px flex space-x-8">
+                            <button class="border-b-2 border-blue-500 py-2 px-1 text-sm font-medium text-blue-600" style="font-family: 'YS Text', sans-serif;">
+                                Управление пользователями
+                            </button>
+                            <button class="border-b-2 border-transparent py-2 px-1 text-sm font-medium text-gray-500 hover:text-gray-700" style="font-family: 'YS Text', sans-serif;">
+                                Настройки ролей
+                            </button>
+                            <button class="border-b-2 border-transparent py-2 px-1 text-sm font-medium text-gray-500 hover:text-gray-700" style="font-family: 'YS Text', sans-serif;">
+                                История изменений
+                            </button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Таблица пользователей -->
+                <div class="main-content overflow-hidden">
+                    <div class="p-6 border-b border-gray-200">
+                        <div class="flex justify-between items-center">
+                            <h2 class="text-xl font-semibold" style="font-family: 'YS Text', sans-serif;">Пользователи с доступом</h2>
+                            <button class="btn-primary">
+                                Добавить пользователя
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="table-header">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="font-family: 'YS Text', sans-serif;">Пользователь</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="font-family: 'YS Text', sans-serif;">Роль</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="font-family: 'YS Text', sans-serif;">Доступ к разделам</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="font-family: 'YS Text', sans-serif;">Дата добавления</th>
+                                    <th class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider" style="font-family: 'YS Text', sans-serif;">Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-gray-200">
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="avatar">АК</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900" style="font-family: 'YS Text', sans-serif;">Алексей Козлов</div>
+                                                <div class="text-sm text-gray-500" style="font-family: 'YS Text', sans-serif;">alexey.kozlov@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="role-badge role-owner">Владелец</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" style="font-family: 'YS Text', sans-serif;">
+                                        Все разделы
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" style="font-family: 'YS Text', sans-serif;">
+                                        15.01.2024
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-3" style="font-family: 'YS Text', sans-serif;">Изменить</button>
+                                        <button class="text-red-600 hover:text-red-900" style="font-family: 'YS Text', sans-serif;">Удалить</button>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="avatar">МП</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900" style="font-family: 'YS Text', sans-serif;">Мария Петрова</div>
+                                                <div class="text-sm text-gray-500" style="font-family: 'YS Text', sans-serif;">maria.petrova@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="role-badge role-editor">Редактирование</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" style="font-family: 'YS Text', sans-serif;">
+                                        Все разделы
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" style="font-family: 'YS Text', sans-serif;">
+                                        20.01.2024
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-3" style="font-family: 'YS Text', sans-serif;">Изменить</button>
+                                        <button class="text-red-600 hover:text-red-900" style="font-family: 'YS Text', sans-serif;">Удалить</button>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="avatar">ДС</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900" style="font-family: 'YS Text', sans-serif;">Дмитрий Сидоров</div>
+                                                <div class="text-sm text-gray-500" style="font-family: 'YS Text', sans-serif;">dmitry.sidorov@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="role-badge role-viewer">Просмотр</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" style="font-family: 'YS Text', sans-serif;">
+                                        Все разделы (только просмотр)
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" style="font-family: 'YS Text', sans-serif;">
+                                        25.01.2024
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-3" style="font-family: 'YS Text', sans-serif;">Изменить</button>
+                                        <button class="text-red-600 hover:text-red-900" style="font-family: 'YS Text', sans-serif;">Удалить</button>
+                                    </td>
+                                </tr>
+                                
+                                <tr class="table-row">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="flex items-center">
+                                            <div class="avatar">ЕВ</div>
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-gray-900" style="font-family: 'YS Text', sans-serif;">Елена Васильева</div>
+                                                <div class="text-sm text-gray-500" style="font-family: 'YS Text', sans-serif;">elena.vasileva@company.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="role-badge role-partial">Частичный доступ</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" style="font-family: 'YS Text', sans-serif;">
+                                        Аналитика, Управление отзывами
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500" style="font-family: 'YS Text', sans-serif;">
+                                        01.02.2024
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-center text-sm font-medium">
+                                        <button class="text-blue-600 hover:text-blue-900 mr-3" style="font-family: 'YS Text', sans-serif;">Изменить</button>
+                                        <button class="text-red-600 hover:text-red-900" style="font-family: 'YS Text', sans-serif;">Удалить</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Группы фичей -->
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold mb-4" style="font-family: 'YS Text', sans-serif;">Группы функций для частичного доступа</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="feature-group p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium" style="font-family: 'YS Text', sans-serif;">Аналитика</h4>
+                                <div class="permission-toggle active"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2" style="font-family: 'YS Text', sans-serif;">Поисковые запросы, Индексирование</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Просмотр</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Редактирование</span>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-group p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium" style="font-family: 'YS Text', sans-serif;">Настройки представления</h4>
+                                <div class="permission-toggle"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2" style="font-family: 'YS Text', sans-serif;">Региональность, Переезд сайта</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Просмотр</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Редактирование</span>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-group p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium" style="font-family: 'YS Text', sans-serif;">Управление фидами</h4>
+                                <div class="permission-toggle active"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2" style="font-family: 'YS Text', sans-serif;">Услуги и предложения, Новостные фиды</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Просмотр</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Редактирование</span>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-group p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium" style="font-family: 'YS Text', sans-serif;">Управление отзывами</h4>
+                                <div class="permission-toggle"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2" style="font-family: 'YS Text', sans-serif;">Просмотр и модерация отзывов</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Просмотр</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Редактирование</span>
+                            </div>
+                        </div>
+                        
+                        <div class="feature-group p-4">
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-medium" style="font-family: 'YS Text', sans-serif;">Оптимизация сайта</h4>
+                                <div class="permission-toggle"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2" style="font-family: 'YS Text', sans-serif;">Диагностика, Безопасность, Чеклист</p>
+                            <div class="flex gap-2">
+                                <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Просмотр</span>
+                                <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded" style="font-family: 'YS Text', sans-serif;">Редактирование</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Примеры страниц с ограниченным доступом -->
+                <div class="mt-8">
+                    <h3 class="text-lg font-semibold mb-4" style="font-family: 'YS Text', sans-serif;">Примеры интерфейса для разных ролей</h3>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Страница без доступа -->
+                        <div class="main-content p-6">
+                            <div class="access-denied p-6 rounded-lg text-center">
+                                <div class="text-4xl mb-4">🔒</div>
+                                <h4 class="text-xl font-semibold mb-2" style="font-family: 'YS Text', sans-serif;">Доступ запрещен</h4>
+                                <p class="mb-4" style="font-family: 'YS Text', sans-serif;">У вас нет прав для просмотра этого раздела. Обратитесь к владельцу сайта для получения доступа.</p>
+                                <button class="btn-primary">
+                                    Запросить доступ
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Страница только для просмотра -->
+                        <div class="main-content p-6">
+                            <div class="read-only p-6 rounded-lg">
+                                <div class="flex items-center gap-2 mb-4">
+                                    <div class="text-2xl">👁️</div>
+                                    <h4 class="text-xl font-semibold" style="font-family: 'YS Text', sans-serif;">Только для просмотра</h4>
+                                </div>
+                                <p class="mb-4" style="font-family: 'YS Text', sans-serif;">Эта страница доступна только для просмотра. Для внесения изменений обратитесь к владельцу сайта.</p>
+                                <div class="bg-gray-100 p-4 rounded-lg">
+                                    <h5 class="font-medium mb-2" style="font-family: 'YS Text', sans-serif;">Доступные действия:</h5>
+                                    <ul class="text-sm space-y-1" style="font-family: 'YS Text', sans-serif;">
+                                        <li>• Просмотр данных и отчетов</li>
+                                        <li>• Экспорт информации</li>
+                                        <li>• Просмотр настроек</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Переключатели разрешений
+        document.querySelectorAll('.permission-toggle').forEach(toggle => {
+            toggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+            });
+        });
+
+        // Выбор групп фичей
+        document.querySelectorAll('.feature-group').forEach(group => {
+            group.addEventListener('click', function() {
+                this.classList.toggle('selected');
+            });
+        });
+    </script>
+</body>
+</html> 

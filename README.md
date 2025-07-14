@@ -1,31 +1,45 @@
 # Design System & Interface Playground
 
-Этот проект — ваша лаборатория для создания, развития и тестирования дизайн-системы и пользовательских интерфейсов.
+This project is your laboratory for creating, developing, and testing a design system and user interfaces.
 
-## О проекте
+## About the project
 
-- **Гибкая дизайн-система**: цвета, отступы, кнопки, поля, иконки и др.
-- **Эксперименты**: быстрое прототипирование новых интерфейсов в отдельных файлах.
-- **Интеграция с реальными проектами**: возможность тестировать элементы в боевом окружении.
-- **Поддержка нескольких дизайн-систем**: можно вести параллельные эксперименты для разных сервисов.
+- **Flexible design system**: colors, spacing, buttons, fields, icons, etc.
+- **Experiments**: rapid prototyping of new interfaces in separate files.
+- **Integration with real projects**: ability to test elements in a production environment.
+- **Support for multiple design systems**: you can run parallel experiments for different services.
 
-## Структура
+## Structure
 
-- `design-system-library.html` — основная библиотека компонентов
-- `archive/` — старые версии и эксперименты
-- `styles/`, `font/` — стили и шрифты
-- `EXPERIMENTS.md` — как запускать и оформлять playground-файлы
-- `PROJECT_PLAN.md` — дорожная карта и направления
-- `MILESTONES.md` — ключевые этапы и прогресс
-- `CONTRIBUTING.md` — правила работы с проектом
-- `STYLE_GUIDE.md` — гайд по стилю кода и компонентов
+- `design-system-library.html` — main component library
+- `experiments/` — experimental files and playground
+  - `gravity-ui-playground.html` — CSS-only experiments with Gravity UI
+  - `gravity-ui-demo/` — full React project with Gravity UI
+- `styles/`, `font/` — styles and fonts
+- `EXPERIMENTS.md` — how to run and structure playground files
+- `PROJECT_PLAN.md` — roadmap and directions
+- `MILESTONES.md` — key milestones and progress
+- `CONTRIBUTING.md` — contribution guidelines
+- `STYLE_GUIDE.md` — code and component style guide
+- `GRAVITY_UI_INTEGRATION.md` — integration with external design system
 
-## Быстрый старт
+## Quick Start
 
-1. Откройте `design-system-library.html` в браузере
-2. Ознакомьтесь с документацией (см. выше)
-3. Начинайте создавать или улучшать интерфейсы!
+### Main library
+1. Open `design-system-library.html` in your browser
+2. Read the documentation (see above)
+3. Start creating or improving interfaces!
+
+### Gravity UI experiments
+1. **CSS-only**: Open `experiments/gravity-ui-playground.html`
+2. **React project**:
+   ```bash
+   cd experiments/gravity-ui-demo
+   npm install
+   npm start
+   ```
+   Open http://localhost:3000
 
 ---
 
-> Для подробностей см. другие markdown-файлы в корне проекта. 
+> For details, see other markdown files in the project root. 

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ролевая модель - Таблица пользователей</title>
+    <link rel="stylesheet" href="./styles/design-tokens.css">
+    <link rel="stylesheet" href="./styles/fonts.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'YS Text', sans-serif;
+            background-color: #f2f2f2;
+        }
+        .role-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        .role-owner { background-color: #ffdb4d; color: #000; }
+        .role-editor { background-color: #4caf50; color: #fff; }
+        .role-viewer { background-color: #2196f3; color: #fff; }
+        .role-partial { background-color: #ff9800; color: #fff; }
+        .role-analyst { background-color: #9c27b0; color: #fff; }
+        
+        .table-container {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .table-header {
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .table-row:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .status-active { color: #4caf50; }
+        .status-inactive { color: #f44336; }
+        .status-pending { color: #ff9800; }
+    </style>
+</head>
+<body class="min-h-screen p-8">
+    <div class="max-w-7xl mx-auto">
+        <!-- Заголовок -->
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">Управление пользователями</h1>
+            <p class="text-gray-600">Настройка ролей и прав доступа для участников проекта</p>
+        </div>
+
+        <!-- Панель управления -->
+        <div class="flex justify-between items-center mb-6">
+            <div class="flex gap-3">
+                <button class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center gap-2">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Добавить пользователя
+                </button>
+                <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors">
+                    Экспорт
+                </button>
+            </div>
+            <div class="flex gap-3">
+                <input type="text" placeholder="Поиск пользователей..." class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <select class="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <option>Все роли</option>
+                    <option>Владелец</option>
+                    <option>Редактор</option>
+                    <option>Наблюдатель</option>
+                    <option>Аналитик</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Таблица пользователей -->
+        <div class="table-container overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="table-header">
+                        <tr>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Пользователь</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Email</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Роль</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Статус</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Дата добавления</th>
+                            <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Последний вход</th>
+                            <th class="px-6 py-4 text-center text-sm font-medium text-gray-700">Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <!-- Владелец -->
+                        <tr class="table-row">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar">АК</div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Алексей Козлов</div>
+                                        <div class="text-sm text-gray-500">@alexey.kozlov</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">alexey.kozlov@company.com</td>
+                            <td class="px-6 py-4">
+                                <span class="role-badge role-owner">Владелец</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="status-active text-sm font-medium">Активен</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">15.01.2024</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Сегодня, 14:30</td>
+                            <td class="px-6 py-4">
+                                <div class="flex justify-center gap-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">Изменить</button>
+                                    <button class="text-red-600 hover:text-red-800 text-sm">Удалить</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Редактор -->
+                        <tr class="table-row">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar">МП</div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Мария Петрова</div>
+                                        <div class="text-sm text-gray-500">@maria.petrova</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">maria.petrova@company.com</td>
+                            <td class="px-6 py-4">
+                                <span class="role-badge role-editor">Редактор</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="status-active text-sm font-medium">Активен</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">20.01.2024</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Вчера, 16:45</td>
+                            <td class="px-6 py-4">
+                                <div class="flex justify-center gap-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">Изменить</button>
+                                    <button class="text-red-600 hover:text-red-800 text-sm">Удалить</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Наблюдатель -->
+                        <tr class="table-row">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar">ДС</div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Дмитрий Сидоров</div>
+                                        <div class="text-sm text-gray-500">@dmitry.sidorov</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">dmitry.sidorov@company.com</td>
+                            <td class="px-6 py-4">
+                                <span class="role-badge role-viewer">Наблюдатель</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="status-active text-sm font-medium">Активен</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">25.01.2024</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">2 дня назад</td>
+                            <td class="px-6 py-4">
+                                <div class="flex justify-center gap-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">Изменить</button>
+                                    <button class="text-red-600 hover:text-red-800 text-sm">Удалить</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Аналитик -->
+                        <tr class="table-row">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar">ЕВ</div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Елена Васильева</div>
+                                        <div class="text-sm text-gray-500">@elena.vasileva</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">elena.vasileva@company.com</td>
+                            <td class="px-6 py-4">
+                                <span class="role-badge role-analyst">Аналитик</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="status-active text-sm font-medium">Активен</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">01.02.2024</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Сегодня, 09:15</td>
+                            <td class="px-6 py-4">
+                                <div class="flex justify-center gap-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">Изменить</button>
+                                    <button class="text-red-600 hover:text-red-800 text-sm">Удалить</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Частичный доступ -->
+                        <tr class="table-row">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar">ИН</div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Игорь Николаев</div>
+                                        <div class="text-sm text-gray-500">@igor.nikolaev</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">igor.nikolaev@company.com</td>
+                            <td class="px-6 py-4">
+                                <span class="role-badge role-partial">Частичный доступ</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="status-pending text-sm font-medium">Ожидает</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">05.02.2024</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Никогда</td>
+                            <td class="px-6 py-4">
+                                <div class="flex justify-center gap-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">Изменить</button>
+                                    <button class="text-red-600 hover:text-red-800 text-sm">Удалить</button>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <!-- Неактивный пользователь -->
+                        <tr class="table-row">
+                            <td class="px-6 py-4">
+                                <div class="flex items-center gap-3">
+                                    <div class="avatar">АМ</div>
+                                    <div>
+                                        <div class="font-medium text-gray-900">Анна Морозова</div>
+                                        <div class="text-sm text-gray-500">@anna.morozova</div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-900">anna.morozova@company.com</td>
+                            <td class="px-6 py-4">
+                                <span class="role-badge role-viewer">Наблюдатель</span>
+                            </td>
+                            <td class="px-6 py-4">
+                                <span class="status-inactive text-sm font-medium">Неактивен</span>
+                            </td>
+                            <td class="px-6 py-4 text-sm text-gray-500">10.01.2024</td>
+                            <td class="px-6 py-4 text-sm text-gray-500">Неделю назад</td>
+                            <td class="px-6 py-4">
+                                <div class="flex justify-center gap-2">
+                                    <button class="text-blue-600 hover:text-blue-800 text-sm">Изменить</button>
+                                    <button class="text-red-600 hover:text-red-800 text-sm">Удалить</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Пагинация -->
+        <div class="flex justify-between items-center mt-6">
+            <div class="text-sm text-gray-500">
+                Показано 6 из 12 пользователей
+            </div>
+            <div class="flex gap-2">
+                <button class="px-3 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Предыдущая</button>
+                <button class="px-3 py-2 bg-blue-600 text-white rounded-lg">1</button>
+                <button class="px-3 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">2</button>
+                <button class="px-3 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50">Следующая</button>
+            </div>
+        </div>
+
+        <!-- Информационные блоки -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <div class="bg-white p-6 rounded-16 shadow-sm">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Владелец</h3>
+                <p class="text-gray-600 text-sm mb-3">Полный доступ ко всем функциям системы. Может управлять пользователями и настройками.</p>
+                <div class="text-sm text-gray-500">Пользователей: 1</div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-16 shadow-sm">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Редактор</h3>
+                <p class="text-gray-600 text-sm mb-3">Может редактировать контент и настройки, но не может управлять пользователями.</p>
+                <div class="text-sm text-gray-500">Пользователей: 1</div>
+            </div>
+            
+            <div class="bg-white p-6 rounded-16 shadow-sm">
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Наблюдатель</h3>
+                <p class="text-gray-600 text-sm mb-3">Только просмотр данных и отчетов. Не может вносить изменения.</p>
+                <div class="text-sm text-gray-500">Пользователей: 2</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

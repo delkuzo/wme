@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Меню из Figma</title>
+    <link rel="stylesheet" href="styles/design-tokens.css">
+    <link rel="stylesheet" href="styles/fonts.css">
+    <style>
+        body {
+            font-family: 'YS Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+        }
+        .sidebar {
+            width: 300px;
+            background: #fff;
+            border-radius: 24px;
+            margin: 32px;
+            padding: 24px 0 24px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            box-shadow: 0 4px 24px 0 rgba(34,34,34,0.06);
+        }
+        .logo-block {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0 32px;
+            margin-bottom: 8px;
+        }
+        .logo-svg {
+            width: 32px;
+            height: 32px;
+            display: block;
+        }
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 0 8px;
+        }
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-size: 15px;
+            color: #222;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .menu-item.active, .menu-item:hover {
+            background: #f3f3f3;
+            color: #000;
+        }
+        .menu-icon {
+            width: 20px;
+            height: 20px;
+            display: block;
+        }
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #f8604a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 500;
+            font-size: 16px;
+        }
+        .token {
+            background: #f8604a;
+            color: #fff;
+            border-radius: 20px;
+            font-size: 12px;
+            padding: 2px 8px;
+            margin-left: 8px;
+        }
+    </style>
+</head>
+<body>
+    <aside class="sidebar">
+        <div class="logo-block">
+            <!-- SVG логотип из библиотеки -->
+            <svg width="156" height="32" viewBox="0 0 156 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M32.9766 16.0203C32.9766 7.18696 25.8099 0.00363159 16.9599 0.00363159C8.1099 0.00363159 0.976562 7.15363 0.976562 16.0203C0.976562 24.837 8.12656 32.0036 16.9599 32.0036C25.7932 32.0036 32.9766 24.837 32.9766 16.0203ZM16.9599 29.287C9.72656 29.287 3.89323 23.437 3.89323 16.0036C3.89323 8.58696 9.72656 2.7203 16.9599 2.7203C24.2432 2.7203 30.0266 8.60363 30.0266 16.0036C30.0599 23.4536 24.2432 29.287 16.9599 29.287Z" fill="black" fill-opacity="0.9"/>
+<path d="M19.0623 9.46386H17.6005C15.0944 9.46386 13.8414 10.7169 13.8414 12.5964C13.8414 14.6847 14.6768 15.7289 16.5563 16.9819L18.0181 18.0261L13.8414 24.5H10.5001L14.4679 18.6526C12.1707 16.9819 10.9177 15.5201 10.9177 12.8052C10.9177 9.46386 13.2149 7.16667 17.6005 7.16667H21.986V24.5H19.0623V9.46386Z" fill="black" fill-opacity="0.9"/>
+<path d="M38.9999 6.45175V25.111H44.3919C48.7958 25.111 51.4526 23.4219 51.4526 19.7424C51.4526 17.2741 50.1111 15.873 47.6114 15.4213C49.6007 14.9106 50.8898 13.6732 50.8898 11.1526C50.8898 7.9314 48.6584 6.45175 44.5293 6.45175H38.9999ZM44.5555 14.2952H42.2456V8.97894H44.5817C46.5971 8.97894 47.6703 9.64674 47.6703 11.5258C47.6703 13.5161 46.4859 14.2952 44.5555 14.2952ZM44.634 22.5838H42.2456V16.7111H44.6079C47.0487 16.7111 48.148 17.4836 48.148 19.5525C48.148 21.7785 46.8393 22.5838 44.634 22.5838ZM63.794 24.1944V21.5952C62.7993 22.263 61.1372 22.8523 59.5798 22.8523C57.2437 22.8523 56.3603 21.7523 56.2294 19.5001H63.9248V17.811C63.9248 13.1102 61.8636 11.3424 58.6702 11.3424C54.7768 11.3424 52.9249 14.3214 52.9249 18.4002C52.9249 23.0945 55.2348 25.3794 59.3115 25.3794C61.3532 25.3794 62.8517 24.8426 63.794 24.1944ZM58.6114 13.8631C60.1949 13.8631 60.6792 15.179 60.6792 16.8682V17.1366H56.2294C56.308 14.9892 57.0867 13.8631 58.6114 13.8631ZM65.5346 17.1628V17.7259C65.5346 23.0421 67.923 25.3794 71.4108 25.3794C74.8986 25.3794 77.3917 22.9112 77.3917 18.6163C77.3917 14.0791 75.0884 11.768 72.2419 11.768C70.3115 11.768 68.8653 12.6257 68.139 14.2101C68.5708 10.6681 69.9646 9.5158 73.6684 9.24737C75.2781 9.13607 76.0503 8.89382 76.5869 8.57302V6C76.0241 6.29462 75.2781 6.47794 73.4263 6.61543C67.3603 7.09992 65.5346 10.6681 65.5346 17.1628ZM68.8391 18.6163C68.8391 15.6635 69.7487 14.3214 71.522 14.3214C73.2365 14.3214 74.1461 15.5522 74.1461 18.6163C74.1461 21.6214 73.1841 22.8523 71.4108 22.8523C69.7487 22.8523 68.8391 21.4839 68.8391 18.6163ZM91.0484 25.111H94.1632L94.1108 11.6109H89.7331L86.8146 20.6001L84.1841 11.6109H79.5381V25.111H82.2537V15.0154L85.1722 25.111H87.7766L91.0484 15.0154V25.111ZM106.936 15.8992C106.936 12.6257 105.268 11.3948 101.891 11.3948C99.7711 11.3948 98.109 12.0626 97.1406 12.6257V15.2838C97.9978 14.6422 99.8758 13.9416 101.512 13.9416C103.043 13.9416 103.743 14.4785 103.743 15.932V16.6783H103.233C98.3446 16.6783 96.1721 18.2889 96.1721 21.0322C96.1721 23.7689 97.8408 25.3009 100.308 25.3009C102.186 25.3009 102.991 24.6789 103.606 24.0373H103.743C103.769 24.3843 103.874 24.8426 103.979 25.111H107.094C106.989 24.0111 106.936 22.9112 106.936 21.8113V15.8992ZM103.743 21.8898C103.337 22.4791 102.585 22.9636 101.459 22.9636C100.118 22.9636 99.4505 22.2106 99.4505 21.0584C99.4505 19.5263 100.55 18.9633 103.285 18.9633H103.743V21.8898ZM115.306 25.3794C116.778 25.3794 117.825 25.111 118.604 24.548V21.9422C117.799 22.5053 116.831 22.8523 115.489 22.8523C113.212 22.8523 112.27 21.0845 112.27 18.2889C112.27 15.3624 113.428 13.8631 115.522 13.8631C116.752 13.8631 117.963 14.2952 118.604 14.6946V11.9841C117.936 11.6109 116.752 11.3424 115.168 11.3424C111.092 11.3424 108.972 14.2625 108.972 18.374C108.972 22.885 111.039 25.3794 115.306 25.3794ZM130.513 14.1315V11.6109H119.808V14.1315H123.564V25.111H126.757V14.1315H130.513ZM141.919 24.1944V21.5952C140.924 22.263 139.262 22.8523 137.705 22.8523C135.369 22.8523 134.485 21.7523 134.355 19.5001H142.05V17.811C142.05 13.1102 139.989 11.3424 136.795 11.3424C132.902 11.3424 131.05 14.3214 131.05 18.4002C131.05 23.0945 133.36 25.3794 137.437 25.3794C139.478 25.3794 140.977 24.8426 141.919 24.1944ZM136.743 13.8631C138.327 13.8631 138.804 15.179 138.804 16.8682V17.1366H134.355C134.433 14.9892 135.212 13.8631 136.743 13.8631ZM147.147 11.6109H144.196V29H147.39V23.5266C148.194 24.7313 149.379 25.3794 150.746 25.3794C153.855 25.3794 156.001 22.885 156.001 18.3479C156.001 13.8369 153.914 11.3424 150.904 11.3424C149.405 11.3424 148.168 12.0364 147.311 13.3524L147.147 11.6109ZM149.942 22.8523C148.253 22.8523 147.39 21.4839 147.39 18.374C147.39 15.2314 148.306 13.8631 150.099 13.8631C151.846 13.8631 152.703 15.2314 152.703 18.3479C152.703 21.4839 151.793 22.8523 149.942 22.8523Z" fill="black" fill-opacity="0.9"/>
+</svg>
+        </div>
+        <nav class="menu-list">
+            <div class="menu-item active">
+                <img class="menu-icon" src="http://localhost:3845/assets/753ce30cff490294ba77471cfc027dfd90994a9c.svg" alt="Поиск" />
+                Поиск
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/fdd201a62642a98a5e9855d7eb4840a11ca33a39.svg" alt="Сводка" />
+                Сводка
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/32c776655c34ef55992463539406ecd63096c826.svg" alt="Оптимизация сайта" />
+                Оптимизация сайта
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/7ff942aa843dea8df92606beaa9b420d6eeb321e.svg" alt="Качество сайта" />
+                Качество сайта
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/0df34a754569c5c04ca42fcea9cfa1e7145d381b.svg" alt="Эффективность" />
+                Эффективность
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/9ff9b4f0aaa8f39d53f431d76f7098f5b6fbc35e.svg" alt="Индексирование" />
+                Индексирование
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/fbb5bbb70887692b7dec916ab70d66674db0d945.svg" alt="Инструменты" />
+                Инструменты
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/7ad975e8f6fc0e34ba3d878011fe37b73e1450d9.svg" alt="Представление в поиске" />
+                Представление в поиске
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/7e277e19ce4ce1db8568d9a104060350f5f684be.svg" alt="Услуги и предложения" />
+                Услуги и предложения
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/f33bc08f55a8c68b6247577cf983ee76aedc5b78.svg" alt="Ссылки" />
+                Ссылки
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/6c716b6752ac9fb3ce3a943ba1d3ef247e105651.svg" alt="Обучение" />
+                Обучение
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/7ac3946f9216af1300ce954997c96f68572d67e5.svg" alt="Турбо-страницы" />
+                Турбо-страницы
+            </div>
+            <div class="menu-item">
+                <img class="menu-icon" src="http://localhost:3845/assets/7904b3a8fb500ea0d9754ed68b3d7ddfccb13c65.svg" alt="Полезные сервисы" />
+                Полезные сервисы
+            </div>
+        </nav>
+        <div class="sidebar-footer">
+            <div class="avatar">АК</div>
+            <span>alex.kuznetsov@company.com</span>
+            <span class="token">12</span>
+        </div>
+    </aside>
+</body>
+</html> 

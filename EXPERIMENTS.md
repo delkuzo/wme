@@ -1,24 +1,25 @@
-# EXPERIMENTS (Эксперименты и playground)
+# EXPERIMENTS (Experiments & Playground)
 
-## Для чего нужны
-- Быстрое прототипирование новых интерфейсов
-- Тестирование идей без влияния на основную систему
+## Purpose
+- Rapid prototyping of new interfaces
+- Testing ideas without affecting the main system
 
-## Как создавать
-- Для каждого эксперимента — отдельный HTML-файл в корне или папке `archive/`
-- Имя файла отражает суть эксперимента (например, `user-table-experiment.html`)
-- В начале файла — краткое описание цели эксперимента
+## How to create
+- For each experiment — a separate HTML file in the `experiments/` folder
+- The file name should reflect the essence of the experiment (e.g., `user-table-experiment.html`)
+- At the top of the file — a brief description of the experiment's goal
+- For experiments with external libraries, use `gravity-ui-playground.html`
 
-## Как оформлять
-- Используйте компоненты из дизайн-системы, если возможно
-- Новые элементы — оформляйте по гайду STYLE_GUIDE.md
-- Не бойтесь пробовать нестандартные решения
+## How to structure
+- Use components from the design system if possible
+- New elements — follow the STYLE_GUIDE.md
+- Don't be afraid to try unconventional solutions
 
-## Как тестировать
-- Открывайте файл в браузере
-- Проверяйте работоспособность и внешний вид
-- Описывайте выводы в комментариях или отдельном разделе файла
+## How to test
+- Open the file in your browser
+- Check functionality and appearance
+- Write conclusions in comments or a separate section in the file
 
-## Как переносить удачные решения
-- Если эксперимент удался — выносите компонент/идею в основную дизайн-систему
-- Обновляйте документацию и чеклисты 
+## How to transfer successful solutions
+- If the experiment is successful — move the component/idea to the main design system
+- Update documentation and checklists 
