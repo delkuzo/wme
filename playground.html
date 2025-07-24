@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI Kit & Interface Playground</title>
+  <!-- Подключение базовых стилей -->
+  <link rel="stylesheet" href="styles/design-tokens.css">
+  <link rel="stylesheet" href="styles/fonts.css">
+  <style>
+    body { font-family: var(--font-family, Arial, sans-serif); margin: 0; background: #f8f9fa; }
+    .tabs {
+      width: 100vw;
+      min-width: 100%;
+      border-bottom: 1px solid #ddd;
+      background: #fff;
+      box-sizing: border-box;
+      padding-left: 80px;
+      display: flex;
+      gap: 4px;
+    }
+    .tab {
+      width: 140px;
+      height: 44px;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1rem;
+      transition: color 0.2s, border-bottom 0.2s, font-weight 0.2s, background 0.2s;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+    }
+    .tab:focus {
+      outline: none;
+      box-shadow: none;
+    }
+    .tab.active {
+      border-bottom: 2px solid #007aff;
+      font-weight: bold;
+      color: #007aff;
+      background: #f4f8ff;
+    }
+    .tab-content {
+      padding: 2rem;
+      margin-left: 80px;
+    }
+  </style>
+</head>
+<body>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="ui-kit">UI Kit</button>
+    <button class="tab" data-tab="experiments">Эксперименты</button>
+    <button class="tab" data-tab="interfaces">Интерфейсы</button>
+    <button class="tab" data-tab="docs">Документация</button>
+  </div>
+  <div class="tab-content" id="tab-content">
+    <!-- Здесь будет отображаться содержимое выбранного таба -->
+    <h2>UI Kit</h2>
+    <p>Здесь будет демонстрация всех атомарных компонентов и токенов.</p>
+  </div>
+  <script>
+    // Простейший JS для переключения табов
+    const tabs = document.querySelectorAll('.tab');
+    const tabContent = document.getElementById('tab-content');
+    const tabTemplates = {
+      'ui-kit': `<h2>UI Kit</h2><p>Здесь будет демонстрация всех атомарных компонентов и токенов.</p>`,
+      'experiments': `<h2>Эксперименты</h2><p>Здесь будут мини-комбинации и паттерны.</p>`,
+      'interfaces': `<h2>Интерфейсы</h2><p>Здесь будут собраны готовые интерфейсы для передачи в разработку.</p>`,
+      'docs': `<h2>Документация</h2><p>Здесь будет отображаться документация проекта.</p>`
+    };
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        const tabKey = tab.getAttribute('data-tab');
+        tabContent.innerHTML = tabTemplates[tabKey] || '';
+      });
+    });
+  </script>
+</body>
+</html> 
