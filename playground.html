@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="styles/design-tokens.css">
   <link rel="stylesheet" href="styles/fonts.css">
   <style>
-    body { font-family: var(--font-family, Arial, sans-serif); margin: 0; background: #f8f9fa; }
+    body { font-family: var(--font-family, Arial, sans-serif); margin: 0; background: #fff; }
     .tabs {
       width: 100vw;
       min-width: 100%;
@@ -46,8 +46,304 @@
       background: #f4f8ff;
     }
     .tab-content {
-      padding: 2rem;
-      margin-left: 80px;
+      padding: 24px 24px 24px 104px;
+      background: #fff;
+      text-align: left;
+    }
+    /* --- Документация --- */
+    .docs-layout {
+      display: flex;
+      min-height: 60vh;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      overflow: hidden;
+      max-width: 1100px;
+    }
+    .docs-menu {
+      width: 240px;
+      background: #f7f8fa;
+      border-right: 1px solid #e5e7eb;
+      padding: 32px 0 32px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .docs-menu-item {
+      padding: 12px 32px;
+      cursor: pointer;
+      font-size: 1rem;
+      color: #222;
+      border-left: 3px solid transparent;
+      background: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .docs-menu-item.active {
+      background: #eaf2ff;
+      border-left: 3px solid #007aff;
+      color: #007aff;
+      font-weight: 500;
+    }
+    .docs-content {
+      flex: 1;
+      padding: 32px 40px;
+      overflow-x: auto;
+    }
+    .docs-content h2, .docs-content h1 {
+      margin-top: 0;
+      font-size: 2rem;
+      font-weight: 700;
+    }
+    .docs-content p, .docs-content ul, .docs-content ol {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: #222;
+    }
+    .docs-content code, .docs-content pre {
+      background: #f4f4f4;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 0.95em;
+      color: #333;
+    }
+    .docs-content pre {
+      padding: 12px;
+      overflow-x: auto;
+    }
+    .accordion {
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--color-border-light);
+      margin: 24px 0;
+      overflow: hidden;
+      /* box-shadow: 0 2px 8px rgba(0,0,0,0.03); */
+    }
+    .accordion-item + .accordion-item { border-top: 1px solid var(--color-border-light); }
+    .accordion-header {
+      width: 100%;
+      text-align: left;
+      background: none;
+      border: none;
+      outline: none;
+      font-size: 1.15rem;
+      font-weight: 500;
+      padding: 20px 24px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.15s;
+    }
+    .accordion-header[aria-expanded="true"] { background: #fff; }
+    .accordion-panel { padding: 20px 24px 12px 24px; background: #fff; }
+    .color-token-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 14px;
+      padding: 12px 24px;
+      position: relative;
+    }
+    .color-token-row::after {
+      content: '';
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 0;
+      height: 1px;
+      background: var(--color-border);
+      opacity: 1;
+      pointer-events: none;
+    }
+    .color-token-row:last-child::after {
+      display: none;
+    }
+    .color-sample {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--color-border);
+      flex-shrink: 0;
+      background: #fff;
+    }
+    .color-token-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 12px;
+    }
+    .color-token-name {
+      font-weight: 600;
+      color: var(--color-black);
+      font-size: 12px;
+      min-width: 140px;
+      display: inline-block;
+    }
+    .color-token-value {
+      color: var(--color-black);
+      font-family: monospace;
+      font-size: 12px;
+      min-width: 80px;
+      display: inline-block;
+    }
+    .color-token-alpha {
+      font-size: 12px;
+      color: var(--color-black);
+      font-family: monospace;
+      min-width: 40px;
+      display: inline-block;
+    }
+    .shadow-token-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 8px;
+      padding: 32px 24px;
+      position: relative;
+    }
+    .shadow-token-row::after {
+      content: '';
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 0;
+      height: 1px;
+      background: var(--color-border);
+      opacity: 1;
+      pointer-events: none;
+    }
+    .shadow-token-row:last-child::after {
+      display: none;
+    }
+    .shadow-token-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 12px;
+    }
+    .shadow-token-name {
+      font-size: 0.95rem;
+      color: var(--color-black);
+      font-weight: 600;
+      min-width: 140px;
+      display: inline-block;
+    }
+    .shadow-sample {
+      width: 64px;
+      max-width: 64px;
+      min-width: 64px;
+      height: 40px;
+      border-radius: 8px;
+      background: #fff;
+      border: 1px solid var(--color-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+    }
+    .shadow-token-value {
+      color: var(--color-black);
+      font-family: monospace;
+      font-size: 12px;
+      min-width: 200px;
+      display: inline-block;
+    }
+    .shadow-comment-row {
+      font-size: 0.9rem;
+      color: #666;
+      margin-bottom: 16px;
+      padding: 0 24px;
+    }
+    .uikit-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      width: 100%;
+      margin: 0;
+      align-items: stretch;
+      text-align: left;
+    }
+    .uikit-block {
+      background: #fff;
+      border-radius: 16px;
+      border: 1px solid var(--color-border);
+      box-sizing: border-box;
+      padding: 0;
+      overflow: hidden;
+      width: 800px;
+      max-width: 100%;
+      text-align: left;
+    }
+    .palette-block {
+      border-radius: 32px;
+      border: 1.5px solid var(--color-border);
+      background: #fff;
+      padding: 40px 48px 32px 48px;
+      max-width: 540px;
+      margin: 40px auto 0 auto;
+      box-sizing: border-box;
+    }
+    .palette-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 36px;
+      color: #222;
+    }
+    .palette-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .palette-row {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      min-height: 72px;
+      padding: 0;
+      position: relative;
+    }
+    .palette-row:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 96px;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: var(--color-border);
+      opacity: 0.7;
+    }
+    .palette-sample {
+      width: 48px;
+      height: 48px;
+      border-radius: 16px;
+      border: 2px solid var(--color-border);
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 32px;
+      box-sizing: border-box;
+    }
+    .palette-name {
+      font-size: 1.25rem;
+      color: #222;
+      font-weight: 400;
+      min-width: 120px;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+    .palette-value {
+      font-size: 1.25rem;
+      color: #222;
+      font-family: monospace;
+      min-width: 100px;
+      text-transform: lowercase;
+    }
+    .palette-alpha {
+      font-size: 1.25rem;
+      color: #222;
+      min-width: 60px;
+      text-align: right;
     }
   </style>
 </head>
@@ -59,9 +355,40 @@
     <button class="tab" data-tab="docs">Документация</button>
   </div>
   <div class="tab-content" id="tab-content">
-    <!-- Здесь будет отображаться содержимое выбранного таба -->
-    <h2>UI Kit</h2>
-    <p>Здесь будет демонстрация всех атомарных компонентов и токенов.</p>
+    <div class="uikit-section">
+      <div class="uikit-block">
+        <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+          Цветовая палитра
+        </button>
+        <div class="accordion-panel" style="display:none;">
+          <div id="color-tokens-list"></div>
+        </div>
+      </div>
+      <div class="uikit-block">
+        <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+          Тени
+        </button>
+        <div class="accordion-panel" style="display:none;">
+          <div id="shadow-tokens-list"></div>
+        </div>
+      </div>
+      <div class="uikit-block">
+        <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+          Типографика
+        </button>
+        <div class="accordion-panel" style="display:none;">
+          <div id="typography-list"></div>
+        </div>
+      </div>
+      <div class="uikit-block">
+        <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+          Размеры
+        </button>
+        <div class="accordion-panel" style="display:none;">
+          <div id="size-list"></div>
+        </div>
+      </div>
+    </div>
   </div>
   <script>
     // Простейший JS для переключения табов
@@ -71,7 +398,28 @@
       'ui-kit': `<h2>UI Kit</h2><p>Здесь будет демонстрация всех атомарных компонентов и токенов.</p>`,
       'experiments': `<h2>Эксперименты</h2><p>Здесь будут мини-комбинации и паттерны.</p>`,
       'interfaces': `<h2>Интерфейсы</h2><p>Здесь будут собраны готовые интерфейсы для передачи в разработку.</p>`,
-      'docs': `<h2>Документация</h2><p>Здесь будет отображаться документация проекта.</p>`
+      'docs': `
+        <div class="docs-layout">
+          <nav class="docs-menu">
+            <div class="docs-menu-item active" data-doc="readme">README.md</div>
+            <div class="docs-menu-item" data-doc="style">STYLE_GUIDE.md</div>
+            <div class="docs-menu-item" data-doc="contributing">CONTRIBUTING.md</div>
+            <div class="docs-menu-item" data-doc="plan">PROJECT_PLAN.md</div>
+            <div class="docs-menu-item" data-doc="milestones">MILESTONES.md</div>
+            <div class="docs-menu-item" data-doc="experiments">EXPERIMENTS.md</div>
+          </nav>
+          <div class="docs-content" id="docs-content">
+            <h2>README.md</h2>
+            <p>Главная страница проекта: цели, роли, структура, как запустить проект, как пользоваться.</p>
+            <ul>
+              <li>Роли в проекте</li>
+              <li>Цели и задачи</li>
+              <li>Структура</li>
+              <li>Как запускать и обновлять</li>
+            </ul>
+          </div>
+        </div>
+      `
     };
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
@@ -81,6 +429,264 @@
         tabContent.innerHTML = tabTemplates[tabKey] || '';
       });
     });
+    // --- Документация: обработка кликов по меню ---
+    if (tabTemplates['docs']) {
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('docs-menu-item')) {
+          document.querySelectorAll('.docs-menu-item').forEach(item => item.classList.remove('active'));
+          e.target.classList.add('active');
+          const doc = e.target.getAttribute('data-doc');
+          const docsContent = document.getElementById('docs-content');
+          if (doc === 'readme') {
+            docsContent.innerHTML = `<h2>README.md</h2><p>Главная страница проекта: цели, роли, структура, как запустить проект, как пользоваться.</p><ul><li>Роли в проекте</li><li>Цели и задачи</li><li>Структура</li><li>Как запускать и обновлять</li></ul>`;
+          } else if (doc === 'style') {
+            docsContent.innerHTML = `<h2>STYLE_GUIDE.md</h2><p>Гайд по стилям: типографика, цвета, отступы, иконки, тени, визуальный язык.</p>`;
+          } else if (doc === 'contributing') {
+            docsContent.innerHTML = `<h2>CONTRIBUTING.md</h2><p>Как вносить изменения: правила для участников, процесс ревью, как предлагать новые компоненты или паттерны.</p>`;
+          } else if (doc === 'plan') {
+            docsContent.innerHTML = `<h2>PROJECT_PLAN.md</h2><p>План развития: этапы, приоритеты, крупные задачи, дорожная карта.</p>`;
+          } else if (doc === 'milestones') {
+            docsContent.innerHTML = `<h2>MILESTONES.md</h2><p>Ключевые вехи проекта: что уже реализовано, что в работе, что запланировано.</p>`;
+          } else if (doc === 'experiments') {
+            docsContent.innerHTML = `<h2>EXPERIMENTS.md</h2><p>Описание экспериментов: какие мини-компоненты и паттерны были реализованы, для чего, какие выводы.</p>`;
+          }
+        }
+      });
+    }
+    // --- Accordion logic ---
+    function toggleAccordion(btn) {
+      const expanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', !expanded);
+      const panel = btn.parentElement.querySelector('.accordion-panel');
+      if (panel) panel.style.display = expanded ? 'none' : 'block';
+    }
+    // --- Color tokens visualization ---
+    const colorTokens = [
+      { name: '--color-background', value: '#FFFFFF' },
+      { name: '--color-foreground', value: '#E6E6E6', alpha: 90 },
+      { name: '--color-submerged', value: '#F2F2F2' },
+      { name: '--color-control', value: '#F2F2F2' },
+      { name: '--color-hover', value: '#F2F2F2' },
+      { name: '--color-border', value: '#E6E6E6' },
+      { name: '--color-border-light', value: '#F2F2F2' },
+      { name: '--color-hint', value: '#B3B3B3' },
+      { name: '--color-fade', value: '#999999' },
+      { name: '--color-link', value: '#004DA6' },
+      { name: '--color-red', value: '#F8604A' },
+      { name: '--color-light-red', value: '#FDF2F1' },
+      { name: '--color-red-hover', value: '#E45844' },
+      { name: '--color-blue', value: '#324CF0' },
+      { name: '--color-green', value: '#00B894' },
+      { name: '--color-purple', value: '#6C5CE7' },
+      { name: '--color-yellow', value: '#FDCB6E' },
+      { name: '--color-white', value: '#FFFFFF' },
+      { name: '--color-black', value: '#000000' },
+      { name: '--color-grey', value: '#808080' },
+      // ... другие токены ...
+    ];
+    // Специальные токены с прозрачностью (для демонстрации)
+    const transparentTokens = [
+      { name: '--color-overlay', value: '#000000', alpha: 90 },
+      { name: '--color-mask', value: '#FFFFFF', alpha: 50 },
+      { name: '--color-shadow', value: '#000000', alpha: 25 },
+    ];
+    function renderColorTokens() {
+      const list = document.getElementById('color-tokens-list');
+      list.innerHTML = '';
+      // Обычные токены
+      colorTokens.forEach(token => {
+        const row = document.createElement('div');
+        row.className = 'color-token-row';
+        const sample = document.createElement('div');
+        sample.className = 'color-sample';
+        sample.style.background = token.value;
+        row.appendChild(sample);
+        const info = document.createElement('div');
+        info.className = 'color-token-info';
+        const name = document.createElement('span');
+        name.className = 'color-token-name';
+        name.textContent = token.name.replace('--', '');
+        info.appendChild(name);
+        const value = document.createElement('span');
+        value.className = 'color-token-value';
+        value.textContent = token.value;
+        info.appendChild(value);
+        const alphaSpan = document.createElement('span');
+        alphaSpan.className = 'color-token-alpha';
+        alphaSpan.textContent = token.alpha ? `${token.alpha}%` : '';
+        info.appendChild(alphaSpan);
+        row.appendChild(info);
+        list.appendChild(row);
+      });
+      // Токены с прозрачностью
+      transparentTokens.forEach(token => {
+        const row = document.createElement('div');
+        row.className = 'color-token-row';
+        const sample = document.createElement('div');
+        sample.className = 'color-sample';
+        sample.style.background = token.value;
+        row.appendChild(sample);
+        const info = document.createElement('div');
+        info.className = 'color-token-info';
+        const name = document.createElement('span');
+        name.className = 'color-token-name';
+        name.textContent = token.name.replace('--', '');
+        info.appendChild(name);
+        const value = document.createElement('span');
+        value.className = 'color-token-value';
+        value.textContent = token.value;
+        info.appendChild(value);
+        const alphaSpan = document.createElement('span');
+        alphaSpan.className = 'color-token-alpha';
+        alphaSpan.textContent = token.alpha ? `${token.alpha}%` : '';
+        info.appendChild(alphaSpan);
+        row.appendChild(info);
+        list.appendChild(row);
+      });
+    }
+    renderColorTokens();
+    // Перерисовывать при смене темы
+    const observer = new MutationObserver(renderColorTokens);
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    // --- Shadow tokens visualization ---
+    const shadowTokens = [
+      { name: '--shadow-s', alpha: 30 },
+      { name: '--shadow-m', alpha: 24 },
+    ];
+    const shadowComments = [
+      'Для маленьких объектов',
+      'Для обычных объектов',
+    ];
+    function renderShadowTokens() {
+      const list = document.getElementById('shadow-tokens-list');
+      if (!list) return;
+      list.innerHTML = '';
+      shadowTokens.forEach((token, idx) => {
+        // Добавляем комментарий
+        const commentRow = document.createElement('div');
+        commentRow.className = 'shadow-comment-row';
+        commentRow.textContent = shadowComments[idx];
+        list.appendChild(commentRow);
+        
+        const value = getComputedStyle(document.documentElement).getPropertyValue(token.name).trim();
+        const row = document.createElement('div');
+        row.className = 'shadow-token-row';
+        
+        const sample = document.createElement('div');
+        sample.className = 'shadow-sample';
+        sample.style.boxShadow = value;
+        // Размеры: маленький — 36x36, обычный — 64x40
+        if (idx === 0) {
+          sample.style.width = '36px';
+          sample.style.height = '36px';
+        } else {
+          sample.style.width = '64px';
+          sample.style.height = '40px';
+        }
+        row.appendChild(sample);
+        
+        const info = document.createElement('div');
+        info.className = 'shadow-token-info';
+        
+        const name = document.createElement('span');
+        name.className = 'shadow-token-name';
+        name.textContent = token.name.replace('--', '');
+        info.appendChild(name);
+        
+        const val = document.createElement('span');
+        val.className = 'shadow-token-value';
+        val.textContent = value;
+        info.appendChild(val);
+        
+        // Добавляем ячейку для прозрачности (пустую или с процентом)
+        // Для теней не показываем процент прозрачности, если уже есть rgba
+        
+        row.appendChild(info);
+        list.appendChild(row);
+      });
+    }
+    renderShadowTokens();
+    // Перерисовывать при смене темы
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    document.addEventListener('DOMContentLoaded', renderShadowTokens);
+    // --- Typography visualization ---
+    const typographyTokens = [
+      { label: 'Display 2', class: 'text-display-2', size: '32px', weight: '700', lineHeight: '1.2', letterSpacing: '-2%' },
+      { label: 'Display 1', class: 'text-display-1', size: '26px', weight: '500', lineHeight: '1.2', letterSpacing: '-1%' },
+      { label: 'Header 2', class: 'text-header-2', size: '22px', weight: '500', lineHeight: '1.2', letterSpacing: '-1%' },
+      { label: 'Header 1', class: 'text-header-1', size: '18px', weight: '500', lineHeight: '1.2', letterSpacing: '-0.5%' },
+      { label: 'Subheader 1', class: 'text-subheader-1', size: '14px', weight: '500', lineHeight: '1.4', letterSpacing: '0' },
+      { label: 'Body', class: 'text-body-1', size: '14px', weight: '400', lineHeight: '1.4', letterSpacing: '0' },
+      { label: 'Caption 2', class: 'text-caption-2', size: '12px', weight: '400', lineHeight: '1.4', letterSpacing: '0' },
+      { label: 'Caption 1', class: 'text-caption-1', size: '10px', weight: '400', lineHeight: '1.4', letterSpacing: '1%' },
+    ];
+    function renderTypography() {
+      const list = document.getElementById('typography-list');
+      if (!list) return;
+      list.innerHTML = '';
+      typographyTokens.forEach(token => {
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.alignItems = 'baseline';
+        row.style.gap = '24px';
+        row.style.padding = '16px 24px';
+        row.style.borderBottom = '1px solid var(--color-border)';
+        row.style.position = 'relative';
+        const sample = document.createElement('span');
+        sample.className = token.class;
+        sample.textContent = token.label;
+        row.appendChild(sample);
+        const info = document.createElement('span');
+        info.style.fontSize = '13px';
+        info.style.color = 'var(--color-hint)';
+        info.textContent = `${token.size} • ${token.weight} • ${token.lineHeight}${token.letterSpacing !== '0' ? ' • ' + token.letterSpacing : ''}`;
+        row.appendChild(info);
+        list.appendChild(row);
+      });
+      // У последнего убираем разделитель
+      if (list.lastChild) list.lastChild.style.borderBottom = 'none';
+    }
+    renderTypography();
+    // --- Size visualization ---
+    const sizeTokens = [
+      { label: '# 0', value: '0' },
+      { label: '# XXXS', value: '2' },
+      { label: '# XXS', value: '4' },
+      { label: '# XS', value: '6' },
+      { label: '# S', value: '8' },
+      { label: '# S spec', value: '12' },
+      { label: '# M', value: '16' },
+      { label: '# M spec', value: '20' },
+      { label: '# L', value: '24' },
+      { label: '# XL', value: '32' },
+      { label: '# XXL', value: '40' },
+    ];
+    function renderSizes() {
+      const list = document.getElementById('size-list');
+      if (!list) return;
+      list.innerHTML = '';
+      sizeTokens.forEach(token => {
+        const row = document.createElement('div');
+        row.style.display = 'flex';
+        row.style.alignItems = 'center';
+        row.style.gap = '24px';
+        row.style.padding = '16px 24px';
+        row.style.borderBottom = '1px solid var(--color-border)';
+        row.style.position = 'relative';
+        const label = document.createElement('span');
+        label.style.fontWeight = '600';
+        label.style.minWidth = '120px';
+        label.textContent = token.label;
+        row.appendChild(label);
+        const value = document.createElement('span');
+        value.style.fontFamily = 'monospace';
+        value.textContent = token.value;
+        row.appendChild(value);
+        list.appendChild(row);
+      });
+      if (list.lastChild) list.lastChild.style.borderBottom = 'none';
+    }
+    renderSizes();
   </script>
 </body>
 </html> 

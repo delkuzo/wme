@@ -43,69 +43,59 @@
   --spacing-xl: 32px;
   --spacing-xxl: 40px;
 
-  /* Light Theme Colors */
+  /* Colors - Light Theme */
   --color-background: #FFFFFF;
-  --color-foreground: rgba(0, 0, 0, 0.9);
+  --color-foreground: #E6E6E6;
   --color-submerged: #F2F2F2;
-  --color-control: rgba(0, 0, 0, 0.05);
-  --color-hover: rgba(0, 0, 0, 0.08);
-  --color-border: rgba(0, 0, 0, 0.15);
-  --color-border-light: rgba(0, 0, 0, 0.1);
-  --color-hint: rgba(0, 0, 0, 0.4);
-  --color-fade: rgba(0, 0, 0, 0.5);
-  
-  /* Brand Colors - Light */
+  --color-control: #F2F2F2;
+  --color-hover: #F2F2F2;
+  --color-border: #E6E6E6;
+  --color-border-light: #F2F2F2;
+  --color-hint: #B3B3B3;
+  --color-fade: #999999;
   --color-link: #004DA6;
   --color-red: #F8604A;
-  --color-light-red: rgba(248, 96, 74, 0.1);
+  --color-light-red: #FDF2F1;
   --color-red-hover: #E45844;
   --color-blue: #324CF0;
-  --color-green: #55A867;
-  --color-purple: #8822D0;
-  --color-yellow: #FFBF1A;
-  
-  /* Base Colors */
+  --color-green: #00B894;
+  --color-purple: #6C5CE7;
+  --color-yellow: #FDCB6E;
   --color-white: #FFFFFF;
   --color-black: #000000;
-  --color-grey: #F2F2F2;
+  --color-grey: #808080;
   
   /* Shadows - Light Theme */
   --shadow-s: 0px 12px 24px 0px rgba(34, 34, 34, 0.3);
   --shadow-m: 0px 12px 24px 0px rgba(114, 110, 110, 0.24);
-  --shadow-l: 0px 20px 40px 0px rgba(0, 0, 0, 0.15);
 }
 
 [data-theme="dark"] {
-  /* Dark Theme Colors */
-  --color-background: #252525;
-  --color-foreground: rgba(255, 255, 255, 0.9);
-  --color-submerged: #181818;
-  --color-control: rgba(255, 255, 255, 0.15);
-  --color-hover: rgba(255, 255, 255, 0.18);
-  --color-border: rgba(255, 255, 255, 0.2);
-  --color-border-light: rgba(255, 255, 255, 0.1);
-  --color-hint: rgba(255, 255, 255, 0.5);
-  --color-fade: rgba(0, 0, 0, 0.7);
-  
-  /* Brand Colors - Dark */
-  --color-link: #3884DB;
-  --color-red: #F8604A;
-  --color-light-red: rgba(248, 96, 74, 0.2);
-  --color-red-hover: #E45844;
-  --color-blue: #7A82E5;
-  --color-green: #24904F;
-  --color-purple: #8822D0;
-  --color-yellow: #FFDB4D;
-  
-  /* Base Colors */
+  /* Colors - Dark Theme */
+  --color-background: #1A1A1A;
+  --color-foreground: #FFFFFF;
+  --color-submerged: #2A2A2A;
+  --color-control: #2A2A2A;
+  --color-hover: #2A2A2A;
+  --color-border: #404040;
+  --color-border-light: #333333;
+  --color-hint: #808080;
+  --color-fade: #666666;
+  --color-link: #4A9EFF;
+  --color-red: #FF6B6B;
+  --color-light-red: #2A1A1A;
+  --color-red-hover: #FF5252;
+  --color-blue: #5B7BFF;
+  --color-green: #00D4AA;
+  --color-purple: #8B7FFF;
+  --color-yellow: #FFD93D;
   --color-white: #FFFFFF;
   --color-black: #000000;
-  --color-grey: #1A1A1A;
+  --color-grey: #A0A0A0;
   
   /* Shadows - Dark Theme */
   --shadow-s: 0px 8px 16px 0px rgba(11, 11, 11, 0.7);
   --shadow-m: 0px 12px 24px 0px rgba(0, 0, 0, 0.4);
-  --shadow-l: 0px 16px 32px 0px rgba(0, 0, 0, 0.5);
 }
 
 /* Theme Toggle Utility */
