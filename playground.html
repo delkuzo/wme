@@ -8,16 +8,23 @@
   <link rel="stylesheet" href="styles/design-tokens.css">
   <link rel="stylesheet" href="styles/fonts.css">
   <style>
-    body { font-family: var(--font-family, Arial, sans-serif); margin: 0; background: #fff; }
+    body { 
+      font-family: var(--font-family, Arial, sans-serif); 
+      margin: 0; 
+      background: var(--color-background);
+      color: var(--color-foreground);
+      transition: background-color 0.2s ease, color 0.2s ease;
+    }
     .tabs {
       width: 100vw;
       min-width: 100%;
-      border-bottom: 1px solid #ddd;
-      background: #fff;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-background);
       box-sizing: border-box;
       padding-left: 80px;
       display: flex;
       gap: 4px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
     .tab {
       width: 140px;
@@ -28,12 +35,14 @@
       border: none;
       background: none;
       font-size: 1rem;
+      color: var(--color-foreground);
       transition: color 0.2s, border-bottom 0.2s, font-weight 0.2s, background 0.2s;
       border-radius: 8px 8px 0 0;
       display: flex;
       align-items: center;
       justify-content: center;
       outline: none;
+      position: relative;
     }
     .tab:focus {
       outline: none;
@@ -47,64 +56,70 @@
     }
     .tab-content {
       padding: 24px 24px 24px 104px;
-      background: #fff;
+      background: var(--color-background);
       text-align: left;
+      transition: background-color 0.2s ease;
     }
     /* --- Документация --- */
     .docs-layout {
       display: flex;
       min-height: 60vh;
-      background: #fff;
+      background: var(--color-background);
       border-radius: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.03);
       overflow: hidden;
       max-width: 1100px;
+      transition: background-color 0.2s ease;
     }
     .docs-menu {
       width: 240px;
-      background: #f7f8fa;
-      border-right: 1px solid #e5e7eb;
+      background: var(--color-submerged);
+      border-right: 1px solid var(--color-border);
       padding: 32px 0 32px 0;
       display: flex;
       flex-direction: column;
       gap: 2px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
     .docs-menu-item {
       padding: 12px 32px;
       cursor: pointer;
       font-size: 1rem;
-      color: #222;
+      color: var(--color-foreground);
       border-left: 3px solid transparent;
       background: none;
-      transition: background 0.15s, border-color 0.15s;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
     }
     .docs-menu-item.active {
-      background: #eaf2ff;
-      border-left: 3px solid #007aff;
-      color: #007aff;
+      background: var(--color-hover);
+      border-left: 3px solid var(--color-link);
+      color: var(--color-link);
       font-weight: 500;
     }
     .docs-content {
       flex: 1;
       padding: 32px 40px;
       overflow-x: auto;
+      background: var(--color-background);
+      transition: background-color 0.2s ease;
     }
     .docs-content h2, .docs-content h1 {
       margin-top: 0;
       font-size: 2rem;
       font-weight: 700;
+      color: var(--color-foreground);
     }
     .docs-content p, .docs-content ul, .docs-content ol {
       font-size: 1.1rem;
       line-height: 1.7;
-      color: #222;
+      color: var(--color-foreground);
     }
     .docs-content code, .docs-content pre {
-      background: #f4f4f4;
+      background: var(--color-submerged);
       border-radius: 4px;
       padding: 2px 6px;
       font-size: 0.95em;
-      color: #333;
+      color: var(--color-foreground);
     }
     .docs-content pre {
       padding: 12px;
@@ -112,10 +127,11 @@
     }
     .accordion {
       border-radius: 12px;
-      background: #fff;
+      background: var(--color-background);
       border: 1px solid var(--color-border-light);
       margin: 24px 0;
       overflow: hidden;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
       /* box-shadow: 0 2px 8px rgba(0,0,0,0.03); */
     }
     .accordion-item + .accordion-item { border-top: 1px solid var(--color-border-light); }
@@ -133,9 +149,10 @@
       align-items: center;
       gap: 8px;
       transition: background 0.15s;
+      color: var(--color-foreground);
     }
-    .accordion-header[aria-expanded="true"] { background: #fff; }
-    .accordion-panel { padding: 20px 24px 12px 24px; background: #fff; }
+    .accordion-header[aria-expanded="true"] { background: var(--color-submerged); }
+    .accordion-panel { padding: 20px 24px 12px 24px; background: var(--color-background); transition: background-color 0.2s ease; }
     .color-token-row {
       display: flex;
       align-items: center;
@@ -164,7 +181,8 @@
       border-radius: 8px;
       border: 1px solid var(--color-border);
       flex-shrink: 0;
-      background: #fff;
+      background: var(--color-background);
+      transition: border-color 0.2s ease;
     }
     .color-token-info {
       display: flex;
@@ -173,25 +191,25 @@
       font-size: 12px;
     }
     .color-token-name {
-      font-weight: 600;
-      color: var(--color-black);
-      font-size: 12px;
-      min-width: 140px;
-      display: inline-block;
+      font-size: 1.1rem;
+      color: var(--color-foreground);
+      font-weight: 400;
+      min-width: 120px;
+      text-transform: none;
+      letter-spacing: 0;
     }
     .color-token-value {
-      color: var(--color-black);
+      font-size: 1.1rem;
+      color: var(--color-foreground);
       font-family: monospace;
-      font-size: 12px;
-      min-width: 80px;
-      display: inline-block;
+      min-width: 100px;
+      text-transform: lowercase;
     }
     .color-token-alpha {
-      font-size: 12px;
-      color: var(--color-black);
-      font-family: monospace;
-      min-width: 40px;
-      display: inline-block;
+      font-size: 1.1rem;
+      color: var(--color-foreground);
+      min-width: 60px;
+      text-align: right;
     }
     .shadow-token-row {
       display: flex;
@@ -234,12 +252,13 @@
       min-width: 64px;
       height: 40px;
       border-radius: 8px;
-      background: #fff;
+      background: var(--color-background);
       border: 1px solid var(--color-border);
       display: flex;
       align-items: center;
       justify-content: center;
       box-sizing: border-box;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
     .shadow-token-value {
       color: var(--color-black);
@@ -264,7 +283,7 @@
       text-align: left;
     }
     .uikit-block {
-      background: #fff;
+      background: var(--color-background);
       border-radius: 16px;
       border: 1px solid var(--color-border);
       box-sizing: border-box;
@@ -273,21 +292,23 @@
       width: 800px;
       max-width: 100%;
       text-align: left;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
     .palette-block {
       border-radius: 32px;
       border: 1.5px solid var(--color-border);
-      background: #fff;
+      background: var(--color-background);
       padding: 40px 48px 32px 48px;
       max-width: 540px;
       margin: 40px auto 0 auto;
       box-sizing: border-box;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
     }
     .palette-title {
       font-size: 2rem;
       font-weight: 700;
       margin-bottom: 36px;
-      color: #222;
+      color: var(--color-foreground);
     }
     .palette-list {
       display: flex;
@@ -317,16 +338,17 @@
       height: 48px;
       border-radius: 16px;
       border: 2px solid var(--color-border);
-      background: #fff;
+      background: var(--color-background);
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: 32px;
       box-sizing: border-box;
+      transition: border-color 0.2s ease;
     }
     .palette-name {
       font-size: 1.25rem;
-      color: #222;
+      color: var(--color-foreground);
       font-weight: 400;
       min-width: 120px;
       text-transform: none;
@@ -334,20 +356,229 @@
     }
     .palette-value {
       font-size: 1.25rem;
-      color: #222;
+      color: var(--color-foreground);
       font-family: monospace;
       min-width: 100px;
       text-transform: lowercase;
     }
     .palette-alpha {
       font-size: 1.25rem;
-      color: #222;
+      color: var(--color-foreground);
       min-width: 60px;
       text-align: right;
+    }
+    .typography-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      position: relative;
+      color: var(--color-black);
+      font-size: 16px;
+      background: none;
+    }
+    .typography-row::after {
+      content: '';
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 0;
+      height: 1px;
+      background: var(--color-border);
+      opacity: 1;
+      pointer-events: none;
+    }
+    .typography-row:last-child::after {
+      display: none;
+    }
+    .size-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 12px 24px;
+      position: relative;
+      color: var(--color-black);
+      font-size: 16px;
+      background: none;
+    }
+    .size-row::after {
+      content: '';
+      position: absolute;
+      left: 24px;
+      right: 24px;
+      bottom: 0;
+      height: 1px;
+      background: var(--color-border);
+      opacity: 1;
+      pointer-events: none;
+    }
+    .size-row:last-child::after {
+      display: none;
+    }
+    .size-visual {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--color-red);
+      display: inline-block;
+      vertical-align: middle;
+    }
+    
+    /* Кнопка переключения темы */
+    .theme-toggle-btn {
+      position: fixed;
+      top: 0;
+      right: 16px;
+      z-index: 1000;
+      width: 40px;
+      height: 44px;
+      border: none;
+      background: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: none;
+      padding: 0;
+    }
+    .theme-toggle-btn svg {
+      width: 28px;
+      height: 28px;
+      color: var(--color-foreground);
+      transition: color 0.2s;
+    }
+    .theme-toggle-btn:active svg {
+      opacity: 0.7;
+    }
+    /* --- Tabs --- */
+    .tabs {
+      width: 100vw;
+      min-width: 100%;
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-background);
+      box-sizing: border-box;
+      padding-left: 80px;
+      display: flex;
+      gap: 4px;
+      transition: background-color 0.2s ease, border-color 0.2s ease;
+    }
+    .tab {
+      width: 140px;
+      height: 44px;
+      padding: 0;
+      margin: 0;
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-size: 1rem;
+      color: var(--color-foreground);
+      transition: color 0.2s, border-bottom 0.2s, font-weight 0.2s, background 0.2s;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      outline: none;
+      position: relative;
+    }
+    .tab.active {
+      color: var(--color-tab-active-text, #fff);
+      background: var(--color-tab-active-bg, #222);
+      font-weight: bold;
+      border-bottom: 2.5px solid var(--color-link);
+      z-index: 1;
+    }
+    [data-theme="dark"] .tab.active {
+      color: #fff;
+      background: #23232b;
+      border-bottom: 2.5px solid #8f5fff;
+      box-shadow: 0 2px 8px rgba(143,95,255,0.10);
+    }
+    [data-theme="dark"] .tab {
+      color: #aaa;
+      background: none;
+    }
+    [data-theme="dark"] .tab:hover {
+      color: #fff;
+      background: #23232b;
+    }
+    /* --- Figma Components Demo --- */
+    .figma-component-demo {
+      padding: 24px;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .figma-component-demo:last-child {
+      border-bottom: none;
+    }
+    .figma-component-demo h3 {
+      margin: 0 0 16px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-foreground);
+    }
+    .figma-button-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 32px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      border: 1px solid var(--color-border);
+    }
+    .figma-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 32px;
+      background: rgba(0, 0, 0, 0.05);
+      border: none;
+      border-radius: 24px;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+      font-family: Inter, sans-serif;
+      font-size: 12px;
+      line-height: 1.21;
+      color: #000000;
+    }
+    .figma-button:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .figma-button:active {
+      background: rgba(0, 0, 0, 0.12);
+    }
+    .figma-button-text {
+      font-weight: 400;
+    }
+    .figma-component-info {
+      background: var(--color-submerged);
+      padding: 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      line-height: 1.4;
+    }
+    .figma-component-info p {
+      margin: 0 0 8px 0;
+      color: var(--color-foreground);
+    }
+    .figma-component-info p:last-child {
+      margin-bottom: 0;
     }
   </style>
 </head>
 <body>
+  <div class="theme-toggle-btn" id="theme-toggle">
+    <svg class="theme-icon" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </div>
   <div class="tabs" id="tabs">
     <button class="tab active" data-tab="ui-kit">UI Kit</button>
     <button class="tab" data-tab="experiments">Эксперименты</button>
@@ -388,6 +619,7 @@
           <div id="size-list"></div>
         </div>
       </div>
+
     </div>
   </div>
   <script>
@@ -460,155 +692,112 @@
       const panel = btn.parentElement.querySelector('.accordion-panel');
       if (panel) panel.style.display = expanded ? 'none' : 'block';
     }
-    // --- Color tokens visualization ---
-    const colorTokens = [
-      { name: '--color-background', value: '#FFFFFF' },
-      { name: '--color-foreground', value: '#E6E6E6', alpha: 90 },
-      { name: '--color-submerged', value: '#F2F2F2' },
-      { name: '--color-control', value: '#F2F2F2' },
-      { name: '--color-hover', value: '#F2F2F2' },
-      { name: '--color-border', value: '#E6E6E6' },
-      { name: '--color-border-light', value: '#F2F2F2' },
-      { name: '--color-hint', value: '#B3B3B3' },
-      { name: '--color-fade', value: '#999999' },
-      { name: '--color-link', value: '#004DA6' },
-      { name: '--color-red', value: '#F8604A' },
-      { name: '--color-light-red', value: '#FDF2F1' },
-      { name: '--color-red-hover', value: '#E45844' },
-      { name: '--color-blue', value: '#324CF0' },
-      { name: '--color-green', value: '#00B894' },
-      { name: '--color-purple', value: '#6C5CE7' },
-      { name: '--color-yellow', value: '#FDCB6E' },
-      { name: '--color-white', value: '#FFFFFF' },
-      { name: '--color-black', value: '#000000' },
-      { name: '--color-grey', value: '#808080' },
-      // ... другие токены ...
+    // Тема: переключение
+    const themeToggle = document.getElementById('theme-toggle');
+    themeToggle.addEventListener('click', () => {
+      const current = document.body.getAttribute('data-theme') || 'light';
+      const next = current === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', next);
+      renderColorTokens();
+      renderShadowTokens();
+    });
+
+    // При загрузке — светлая тема
+    document.body.setAttribute('data-theme', 'light');
+
+    // Цветовые токены для визуализации
+    const colorTokenNames = [
+      '--color-background',
+      '--color-foreground',
+      '--color-submerged',
+      '--color-control',
+      '--color-hover',
+      '--color-border',
+      '--color-border-light',
+      '--color-hint',
+      '--color-fade',
+      '--color-link',
+      '--color-red',
+      '--color-light-red',
+      '--color-red-hover',
+      '--color-blue',
+      '--color-green',
+      '--color-purple',
+      '--color-yellow',
+      '--color-white',
+      '--color-black',
+      '--color-grey',
     ];
-    // Специальные токены с прозрачностью (для демонстрации)
-    const transparentTokens = [
-      { name: '--color-overlay', value: '#000000', alpha: 90 },
-      { name: '--color-mask', value: '#FFFFFF', alpha: 50 },
-      { name: '--color-shadow', value: '#000000', alpha: 25 },
-    ];
+
+    function getColorTokenValue(tokenName) {
+      return getComputedStyle(document.body).getPropertyValue(tokenName).trim();
+    }
+
     function renderColorTokens() {
       const list = document.getElementById('color-tokens-list');
       list.innerHTML = '';
-      // Обычные токены
-      colorTokens.forEach(token => {
+      colorTokenNames.forEach(tokenName => {
         const row = document.createElement('div');
         row.className = 'color-token-row';
         const sample = document.createElement('div');
         sample.className = 'color-sample';
-        sample.style.background = token.value;
+        sample.style.background = getColorTokenValue(tokenName);
         row.appendChild(sample);
         const info = document.createElement('div');
         info.className = 'color-token-info';
         const name = document.createElement('span');
         name.className = 'color-token-name';
-        name.textContent = token.name.replace('--', '');
+        name.textContent = tokenName.replace('--', '');
         info.appendChild(name);
         const value = document.createElement('span');
         value.className = 'color-token-value';
-        value.textContent = token.value;
+        value.textContent = getColorTokenValue(tokenName);
         info.appendChild(value);
-        const alphaSpan = document.createElement('span');
-        alphaSpan.className = 'color-token-alpha';
-        alphaSpan.textContent = token.alpha ? `${token.alpha}%` : '';
-        info.appendChild(alphaSpan);
-        row.appendChild(info);
-        list.appendChild(row);
-      });
-      // Токены с прозрачностью
-      transparentTokens.forEach(token => {
-        const row = document.createElement('div');
-        row.className = 'color-token-row';
-        const sample = document.createElement('div');
-        sample.className = 'color-sample';
-        sample.style.background = token.value;
-        row.appendChild(sample);
-        const info = document.createElement('div');
-        info.className = 'color-token-info';
-        const name = document.createElement('span');
-        name.className = 'color-token-name';
-        name.textContent = token.name.replace('--', '');
-        info.appendChild(name);
-        const value = document.createElement('span');
-        value.className = 'color-token-value';
-        value.textContent = token.value;
-        info.appendChild(value);
-        const alphaSpan = document.createElement('span');
-        alphaSpan.className = 'color-token-alpha';
-        alphaSpan.textContent = token.alpha ? `${token.alpha}%` : '';
-        info.appendChild(alphaSpan);
         row.appendChild(info);
         list.appendChild(row);
       });
     }
-    renderColorTokens();
-    // Перерисовывать при смене темы
-    const observer = new MutationObserver(renderColorTokens);
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    // --- Shadow tokens visualization ---
-    const shadowTokens = [
-      { name: '--shadow-s', alpha: 30 },
-      { name: '--shadow-m', alpha: 24 },
+
+    // Теневые токены для визуализации
+    const shadowTokenNames = [
+      '--shadow-s',
+      '--shadow-m',
     ];
-    const shadowComments = [
-      'Для маленьких объектов',
-      'Для обычных объектов',
-    ];
+
+    function getShadowTokenValue(tokenName) {
+      return getComputedStyle(document.body).getPropertyValue(tokenName).trim();
+    }
+
     function renderShadowTokens() {
       const list = document.getElementById('shadow-tokens-list');
-      if (!list) return;
       list.innerHTML = '';
-      shadowTokens.forEach((token, idx) => {
-        // Добавляем комментарий
-        const commentRow = document.createElement('div');
-        commentRow.className = 'shadow-comment-row';
-        commentRow.textContent = shadowComments[idx];
-        list.appendChild(commentRow);
-        
-        const value = getComputedStyle(document.documentElement).getPropertyValue(token.name).trim();
+      shadowTokenNames.forEach(tokenName => {
         const row = document.createElement('div');
         row.className = 'shadow-token-row';
-        
         const sample = document.createElement('div');
         sample.className = 'shadow-sample';
-        sample.style.boxShadow = value;
-        // Размеры: маленький — 36x36, обычный — 64x40
-        if (idx === 0) {
-          sample.style.width = '36px';
-          sample.style.height = '36px';
-        } else {
-          sample.style.width = '64px';
-          sample.style.height = '40px';
-        }
+        sample.style.boxShadow = getShadowTokenValue(tokenName);
         row.appendChild(sample);
-        
         const info = document.createElement('div');
         info.className = 'shadow-token-info';
-        
         const name = document.createElement('span');
         name.className = 'shadow-token-name';
-        name.textContent = token.name.replace('--', '');
+        name.textContent = tokenName.replace('--', '');
         info.appendChild(name);
-        
-        const val = document.createElement('span');
-        val.className = 'shadow-token-value';
-        val.textContent = value;
-        info.appendChild(val);
-        
-        // Добавляем ячейку для прозрачности (пустую или с процентом)
-        // Для теней не показываем процент прозрачности, если уже есть rgba
-        
+        const value = document.createElement('span');
+        value.className = 'shadow-token-value';
+        value.textContent = getShadowTokenValue(tokenName);
+        info.appendChild(value);
         row.appendChild(info);
         list.appendChild(row);
       });
     }
+
+
+
+    // Вызовы рендера
+    renderColorTokens();
     renderShadowTokens();
-    // Перерисовывать при смене темы
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
-    document.addEventListener('DOMContentLoaded', renderShadowTokens);
     // --- Typography visualization ---
     const typographyTokens = [
       { label: 'Display 2', class: 'text-display-2', size: '32px', weight: '700', lineHeight: '1.2', letterSpacing: '-2%' },
@@ -626,12 +815,7 @@
       list.innerHTML = '';
       typographyTokens.forEach(token => {
         const row = document.createElement('div');
-        row.style.display = 'flex';
-        row.style.alignItems = 'baseline';
-        row.style.gap = '24px';
-        row.style.padding = '16px 24px';
-        row.style.borderBottom = '1px solid var(--color-border)';
-        row.style.position = 'relative';
+        row.className = 'typography-row';
         const sample = document.createElement('span');
         sample.className = token.class;
         sample.textContent = token.label;
@@ -667,21 +851,23 @@
       list.innerHTML = '';
       sizeTokens.forEach(token => {
         const row = document.createElement('div');
-        row.style.display = 'flex';
-        row.style.alignItems = 'center';
-        row.style.gap = '24px';
-        row.style.padding = '16px 24px';
-        row.style.borderBottom = '1px solid var(--color-border)';
-        row.style.position = 'relative';
-        const label = document.createElement('span');
-        label.style.fontWeight = '600';
-        label.style.minWidth = '120px';
-        label.textContent = token.label;
-        row.appendChild(label);
+        row.className = 'size-row';
+        if (token.disabled) row.style.opacity = 0.5;
+        const name = document.createElement('span');
+        name.textContent = token.label;
+        name.style.minWidth = '80px';
         const value = document.createElement('span');
-        value.style.fontFamily = 'monospace';
         value.textContent = token.value;
+        value.style.fontFamily = 'monospace';
+        value.style.minWidth = '32px';
+        // Визуальный индикатор размера
+        const visual = document.createElement('span');
+        visual.className = 'size-visual';
+        const sizePx = Math.max(parseInt(token.value, 10) || 0, 2); // не меньше 2px
+        visual.style.width = sizePx + 'px';
+        row.appendChild(name);
         row.appendChild(value);
+        row.appendChild(visual);
         list.appendChild(row);
       });
       if (list.lastChild) list.lastChild.style.borderBottom = 'none';

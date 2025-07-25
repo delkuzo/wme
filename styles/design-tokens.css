@@ -43,9 +43,9 @@
   --spacing-xl: 32px;
   --spacing-xxl: 40px;
 
-  /* Colors - Light Theme */
+  /* Цветовые токены — светлая тема */
   --color-background: #FFFFFF;
-  --color-foreground: #E6E6E6;
+  --color-foreground: #000000;
   --color-submerged: #F2F2F2;
   --color-control: #F2F2F2;
   --color-hover: #F2F2F2;
@@ -64,14 +64,19 @@
   --color-white: #FFFFFF;
   --color-black: #000000;
   --color-grey: #808080;
-  
-  /* Shadows - Light Theme */
+  /* Тени — светлая тема */
   --shadow-s: 0px 12px 24px 0px rgba(34, 34, 34, 0.3);
   --shadow-m: 0px 12px 24px 0px rgba(114, 110, 110, 0.24);
 }
 
+/* Теневые токены — светлая тема */
+:root {
+  --shadow-s: 0px 12px 24px 0px rgba(34, 34, 34, 0.3);
+  --shadow-m: 0px 12px 24px 0px rgba(114, 110, 110, 0.24);
+}
+
+/* Цветовые токены — тёмная тема */
 [data-theme="dark"] {
-  /* Colors - Dark Theme */
   --color-background: #1A1A1A;
   --color-foreground: #FFFFFF;
   --color-submerged: #2A2A2A;
@@ -92,8 +97,7 @@
   --color-white: #FFFFFF;
   --color-black: #000000;
   --color-grey: #A0A0A0;
-  
-  /* Shadows - Dark Theme */
+  /* Тени — тёмная тема */
   --shadow-s: 0px 8px 16px 0px rgba(11, 11, 11, 0.7);
   --shadow-m: 0px 12px 24px 0px rgba(0, 0, 0, 0.4);
 }
@@ -169,4 +173,7 @@ body {
   line-height: var(--line-height-body-1);
   color: var(--color-foreground);
   background-color: var(--color-background);
+} 
+html, body, button, input, select, textarea, .uikit-block, .color-token-row, .shadow-token-row, .typography-row, .size-row {
+  font-family: 'YS Text', sans-serif;
 } 
