@@ -1279,7 +1279,184 @@ margin: var(--spacing-m); /* 16px */
 padding: var(--spacing-s) var(--spacing-m); /* 8px 16px */
                     </div>
                 </div>
-    </div>
+        </div>
+
+        <!-- Figma Components Section -->
+        <div class="toggle-section" id="figmaComponentsSection">
+            <div class="toggle-header" onclick="toggleSection('figmaComponents')">
+                <div class="toggle-header-content">
+                    <div class="toggle-number">06</div>
+                    <div class="toggle-title">
+                        <h2 class="text-lg font-medium text-text-foreground">Компоненты из Figma</h2>
+                        <span class="text-sm text-text-hint ml-2">Синхронизировано с MCP • Webmaster UI-kit</span>
+                    </div>
+                </div>
+                <div class="toggle-icon">+</div>
+            </div>
+            
+            <div class="toggle-content" id="figmaComponentsContent">
+                <div class="space-y-l">
+                    <!-- Component Categories -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-l">
+                        
+                        <!-- Buttons Category -->
+                        <div class="bg-bg-control rounded-lg p-m border border-border-light">
+                            <h3 class="text-lg font-medium mb-m text-text-foreground">Кнопки</h3>
+                            <div class="space-y-s">
+                                <div class="text-sm text-text-hint">
+                                    <strong>Основные кнопки:</strong> 100+ вариантов
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Сложные кнопки:</strong> 30+ вариантов
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Стили:</strong> Action, Fill, Outline, Blank
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Размеры:</strong> 32px, 40px
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Состояния:</strong> Base, Hovered, Pressed, Disabled
+                                </div>
+                            </div>
+                            <div class="mt-m">
+                                <button class="figma-btn figma-btn-40 figma-btn-action figma-btn-text">
+                                    Кнопка Action
+                                </button>
+                                <button class="figma-btn figma-btn-32 figma-btn-fill figma-btn-text ml-s">
+                                    Кнопка Fill
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Form Elements Category -->
+                        <div class="bg-bg-control rounded-lg p-m border border-border-light">
+                            <h3 class="text-lg font-medium mb-m text-text-foreground">Формы</h3>
+                            <div class="space-y-s">
+                                <div class="text-sm text-text-hint">
+                                    <strong>Select:</strong> Обычный и Multi-select
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Search Input:</strong> Поля поиска
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Checkbox:</strong> Чекбоксы
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Radio:</strong> Радиокнопки
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Toggle:</strong> Переключатели
+                                </div>
+                            </div>
+                            <div class="mt-m space-y-s">
+                                <div class="switch switch-40">
+                                    <div class="switch__circle"></div>
+                                </div>
+                                <div class="switch switch-32">
+                                    <div class="switch__circle-32"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Navigation Category -->
+                        <div class="bg-bg-control rounded-lg p-m border border-border-light">
+                            <h3 class="text-lg font-medium mb-m text-text-foreground">Навигация</h3>
+                            <div class="space-y-s">
+                                <div class="text-sm text-text-hint">
+                                    <strong>Tabs:</strong> Вкладки
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Mode Switcher:</strong> Переключатели режимов
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Drag Button:</strong> Кнопки перетаскивания
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Branding Category -->
+                        <div class="bg-bg-control rounded-lg p-m border border-border-light">
+                            <h3 class="text-lg font-medium mb-m text-text-foreground">Брендинг</h3>
+                            <div class="space-y-s">
+                                <div class="text-sm text-text-hint">
+                                    <strong>Logotype:</strong> RU/EN версии
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Типы:</strong> Text, Sign
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Design Tokens Category -->
+                        <div class="bg-bg-control rounded-lg p-m border border-border-light">
+                            <h3 class="text-lg font-medium mb-m text-text-foreground">Дизайн-токены</h3>
+                            <div class="space-y-s">
+                                <div class="text-sm text-text-hint">
+                                    <strong>Цвета:</strong> 20 токенов
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Типографика:</strong> 8 стилей
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Тени:</strong> Light/Dark темы
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Размеры:</strong> Система отступов
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Interface Examples Category -->
+                        <div class="bg-bg-control rounded-lg p-m border border-border-light">
+                            <h3 class="text-lg font-medium mb-m text-text-foreground">Интерфейсы</h3>
+                            <div class="space-y-s">
+                                <div class="text-sm text-text-hint">
+                                    <strong>Готовые интерфейсы:</strong> Примеры сборки
+                                </div>
+                                <div class="text-sm text-text-hint">
+                                    <strong>Композиции:</strong> Группы компонентов
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Sync Status -->
+                    <div class="bg-green-primary bg-opacity-10 border border-green-primary rounded-lg p-m">
+                        <div class="flex items-center gap-s">
+                            <div class="w-3 h-3 bg-green-primary rounded-full"></div>
+                            <div>
+                                <h4 class="font-medium text-text-foreground">Синхронизация активна</h4>
+                                <p class="text-sm text-text-hint">Файл: MCP • Webmaster UI-kit (EYBiZeGKpH72yhCMKL9QwX)</p>
+                                <p class="text-sm text-text-hint">Последнее обновление: 25 июля 2025</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Component Count -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-m">
+                        <div class="text-center p-m bg-bg-control rounded-lg">
+                            <div class="text-2xl font-bold text-text-foreground">100+</div>
+                            <div class="text-sm text-text-hint">Компонентов</div>
+                        </div>
+                        <div class="text-center p-m bg-bg-control rounded-lg">
+                            <div class="text-2xl font-bold text-text-foreground">12</div>
+                            <div class="text-sm text-text-hint">Категорий</div>
+                        </div>
+                        <div class="text-center p-m bg-bg-control rounded-lg">
+                            <div class="text-2xl font-bold text-text-foreground">20</div>
+                            <div class="text-sm text-text-hint">Цветовых токенов</div>
+                        </div>
+                        <div class="text-center p-m bg-bg-control rounded-lg">
+                            <div class="text-2xl font-bold text-text-foreground">8</div>
+                            <div class="text-sm text-text-hint">Типографических стилей</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
     <script>
         // Theme Toggle
