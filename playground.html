@@ -1078,6 +1078,42 @@
       color: rgba(0, 0, 0, 0.9);
     }
 
+    /* Mode Switcher компонент */
+    .mode-switcher-container {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 40px;
+      padding: 4px;
+      width: fit-content;
+      gap: 4px;
+    }
+
+    .mode-switcher-button {
+      height: 40px;
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: 'YS Text', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: rgba(0, 0, 0, 0.9);
+      transition: all 0.2s ease;
+      border-radius: 40px;
+      white-space: nowrap;
+    }
+
+    .mode-switcher-button:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .mode-switcher-button[aria-pressed="true"] {
+      background: #FFFFFF;
+      color: rgba(0, 0, 0, 0.9);
+    }
+
     .component-caption {
       font-size: 10px;
       font-weight: 400;
@@ -1340,6 +1376,17 @@
                 <button class="switcher-button" type="button" aria-pressed="false" onclick="toggleSwitcher(this)">Опция 3</button>
               </div>
               <span class="component-caption">switcher-button</span>
+            </div>
+
+            <!-- Mode Switcher -->
+            <div class="component-category">
+              <h3>Mode Switcher</h3>
+              <div class="mode-switcher-container">
+                <button class="mode-switcher-button" type="button" aria-pressed="true" onclick="toggleModeSwitcher(this)">Режим 1</button>
+                <button class="mode-switcher-button" type="button" aria-pressed="false" onclick="toggleModeSwitcher(this)">Режим 2</button>
+                <button class="mode-switcher-button" type="button" aria-pressed="false" onclick="toggleModeSwitcher(this)">Режим 3</button>
+              </div>
+              <span class="component-caption">mode-switcher</span>
             </div>
             
 
@@ -1755,6 +1802,16 @@
       // Сначала сбрасываем все switcher кнопки
       const allSwitchers = btn.parentElement.querySelectorAll('.switcher-button');
       allSwitchers.forEach(switcher => {
+        switcher.setAttribute('aria-pressed', 'false');
+      });
+      // Затем активируем выбранную кнопку
+      btn.setAttribute('aria-pressed', 'true');
+    }
+
+    function toggleModeSwitcher(btn) {
+      // Сначала сбрасываем все mode switcher кнопки
+      const allModeSwitchers = btn.parentElement.querySelectorAll('.mode-switcher-button');
+      allModeSwitchers.forEach(switcher => {
         switcher.setAttribute('aria-pressed', 'false');
       });
       // Затем активируем выбранную кнопку
