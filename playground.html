@@ -1139,8 +1139,8 @@
     }
 
     .icons-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 16px;
       margin-bottom: 48px;
     }
@@ -1155,6 +1155,8 @@
       background: var(--color-background);
       cursor: pointer;
       transition: all 0.2s ease;
+      width: 120px;
+      flex-shrink: 0;
     }
 
     .icon-item:hover {
