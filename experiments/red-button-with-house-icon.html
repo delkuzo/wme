@@ -59,38 +59,41 @@
       flex-wrap: wrap;
     }
     
-    /* Красная кнопка 40px с иконкой */
-    .red-button-40 {
+    /* Используем стили из UI Kit */
+    .btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      height: 40px;
-      padding: 0 16px;
-      background: #ff4444;
-      color: white;
       border: none;
       border-radius: 8px;
       font-family: 'YS Text', sans-serif;
-      font-size: 14px;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.2s ease;
       text-decoration: none;
+      white-space: nowrap;
     }
     
-    .red-button-40:hover {
-      background: #e63939;
-      transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+    .btn-40 {
+      height: 40px;
+      padding: 12px 16px;
+      font-size: 14px;
+      line-height: 1.4;
     }
     
-    .red-button-40:active {
-      background: #d63333;
-      transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(255, 68, 68, 0.2);
+    .btn-action {
+      background: #F8604A;
+      color: #FFFFFF;
+    }
+    .btn-action:hover {
+      background: #E45844;
+    }
+    .btn-action:active {
+      background: #F8604A;
     }
     
-    .red-button-40 svg {
+    .btn svg {
       width: 16px;
       height: 16px;
       flex-shrink: 0;
@@ -158,29 +161,29 @@
     
     <div class="experiment-header">
       <h1>Эксперимент: Красная кнопка с иконкой house</h1>
-      <p>Демонстрация использования иконок Gravity UI в кастомных кнопках. Красная кнопка высотой 40px с иконкой дома.</p>
+      <p>Демонстрация использования иконок Gravity UI в кнопках из UI Kit. Красная кнопка высотой 40px с иконкой дома.</p>
     </div>
     
     <div class="experiment-section">
       <h2>Демо кнопки</h2>
       <div class="button-demo">
-        <button class="red-button-40" onclick="alert('Кнопка нажата!')">
+        <button class="btn btn-action btn-40" onclick="alert('Кнопка нажата!')">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-            <path fill="currentColor" fill-rule="evenodd" d="M8.5 2.5a.75.75 0 0 0-1 0l-4.5 4.5a.75.75 0 0 0 1 1.06L8 4.06l3.5 3.94a.75.75 0 1 0 1-1.06L8.5 2.5ZM3.5 7.5a.75.75 0 0 0-1.5 0v4.5c0 .828.672 1.5 1.5 1.5h8c.828 0 1.5-.672 1.5-1.5V7.5a.75.75 0 0 0-1.5 0v4.5H3.5V7.5Z" clip-rule="evenodd"/>
+            <path fill="currentColor" fill-rule="evenodd" d="M12.5 12.618c.307-.275.5-.674.5-1.118V6.977a1.5 1.5 0 0 0-.585-1.189l-3.5-2.692a1.5 1.5 0 0 0-1.83 0l-3.5 2.692A1.5 1.5 0 0 0 3 6.978V11.5A1.496 1.496 0 0 0 4.493 13H5V9.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V13h.507c.381-.002.73-.146.993-.382m2-1.118a3 3 0 0 1-3 3h-7a3 3 0 0 1-3-3V6.977A3 3 0 0 1 2.67 4.6l3.5-2.692a3 3 0 0 1 3.66 0l3.5 2.692a3 3 0 0 1 1.17 2.378zm-5-2A.5.5 0 0 0 9 9H7a.5.5 0 0 0-.5.5V13h3z" clip-rule="evenodd"/>
           </svg>
           Главная
         </button>
         
-        <button class="red-button-40" onclick="alert('Кнопка нажата!')">
+        <button class="btn btn-action btn-40" onclick="alert('Кнопка нажата!')">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-            <path fill="currentColor" fill-rule="evenodd" d="M8.5 2.5a.75.75 0 0 0-1 0l-4.5 4.5a.75.75 0 0 0 1 1.06L8 4.06l3.5 3.94a.75.75 0 1 0 1-1.06L8.5 2.5ZM3.5 7.5a.75.75 0 0 0-1.5 0v4.5c0 .828.672 1.5 1.5 1.5h8c.828 0 1.5-.672 1.5-1.5V7.5a.75.75 0 0 0-1.5 0v4.5H3.5V7.5Z" clip-rule="evenodd"/>
+            <path fill="currentColor" fill-rule="evenodd" d="M12.5 12.618c.307-.275.5-.674.5-1.118V6.977a1.5 1.5 0 0 0-.585-1.189l-3.5-2.692a1.5 1.5 0 0 0-1.83 0l-3.5 2.692A1.5 1.5 0 0 0 3 6.978V11.5A1.496 1.496 0 0 0 4.493 13H5V9.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V13h.507c.381-.002.73-.146.993-.382m2-1.118a3 3 0 0 1-3 3h-7a3 3 0 0 1-3-3V6.977A3 3 0 0 1 2.67 4.6l3.5-2.692a3 3 0 0 1 3.66 0l3.5 2.692a3 3 0 0 1 1.17 2.378zm-5-2A.5.5 0 0 0 9 9H7a.5.5 0 0 0-.5.5V13h3z" clip-rule="evenodd"/>
           </svg>
           Домой
         </button>
         
-        <button class="red-button-40" onclick="alert('Кнопка нажата!')">
+        <button class="btn btn-action btn-40" onclick="alert('Кнопка нажата!')">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-            <path fill="currentColor" fill-rule="evenodd" d="M8.5 2.5a.75.75 0 0 0-1 0l-4.5 4.5a.75.75 0 0 0 1 1.06L8 4.06l3.5 3.94a.75.75 0 1 0 1-1.06L8.5 2.5ZM3.5 7.5a.75.75 0 0 0-1.5 0v4.5c0 .828.672 1.5 1.5 1.5h8c.828 0 1.5-.672 1.5-1.5V7.5a.75.75 0 0 0-1.5 0v4.5H3.5V7.5Z" clip-rule="evenodd"/>
+            <path fill="currentColor" fill-rule="evenodd" d="M12.5 12.618c.307-.275.5-.674.5-1.118V6.977a1.5 1.5 0 0 0-.585-1.189l-3.5-2.692a1.5 1.5 0 0 0-1.83 0l-3.5 2.692A1.5 1.5 0 0 0 3 6.978V11.5A1.496 1.496 0 0 0 4.493 13H5V9.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V13h.507c.381-.002.73-.146.993-.382m2-1.118a3 3 0 0 1-3 3h-7a3 3 0 0 1-3-3V6.977A3 3 0 0 1 2.67 4.6l3.5-2.692a3 3 0 0 1 3.66 0l3.5 2.692a3 3 0 0 1 1.17 2.378zm-5-2A.5.5 0 0 0 9 9H7a.5.5 0 0 0-.5.5V13h3z" clip-rule="evenodd"/>
           </svg>
           Начало
         </button>
@@ -188,46 +191,46 @@
       
       <div class="code-example">
         <h3>HTML код кнопки:</h3>
-        <pre><code>&lt;button class="red-button-40" onclick="alert('Кнопка нажата!')"&gt;
+        <pre><code>&lt;button class="btn btn-action btn-40" onclick="alert('Кнопка нажата!')"&gt;
   &lt;svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16"&gt;
-    &lt;path fill="currentColor" fill-rule="evenodd" d="M8.5 2.5a.75.75 0 0 0-1 0l-4.5 4.5a.75.75 0 0 0 1 1.06L8 4.06l3.5 3.94a.75.75 0 1 0 1-1.06L8.5 2.5ZM3.5 7.5a.75.75 0 0 0-1.5 0v4.5c0 .828.672 1.5 1.5 1.5h8c.828 0 1.5-.672 1.5-1.5V7.5a.75.75 0 0 0-1.5 0v4.5H3.5V7.5Z" clip-rule="evenodd"/&gt;
+    &lt;path fill="currentColor" fill-rule="evenodd" d="M12.5 12.618c.307-.275.5-.674.5-1.118V6.977a1.5 1.5 0 0 0-.585-1.189l-3.5-2.692a1.5 1.5 0 0 0-1.83 0l-3.5 2.692A1.5 1.5 0 0 0 3 6.978V11.5A1.496 1.496 0 0 0 4.493 13H5V9.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V13h.507c.381-.002.73-.146.993-.382m2-1.118a3 3 0 0 1-3 3h-7a3 3 0 0 1-3-3V6.977A3 3 0 0 1 2.67 4.6l3.5-2.692a3 3 0 0 1 3.66 0l3.5 2.692a3 3 0 0 1 1.17 2.378zm-5-2A.5.5 0 0 0 9 9H7a.5.5 0 0 0-.5.5V13h3z" clip-rule="evenodd"/&gt;
   &lt;/svg&gt;
   Главная
 &lt;/button&gt;</code></pre>
       </div>
       
       <div class="code-example">
-        <h3>CSS стили кнопки:</h3>
-        <pre><code>.red-button-40 {
+        <h3>CSS стили кнопки (из UI Kit):</h3>
+        <pre><code>.btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  height: 40px;
-  padding: 0 16px;
-  background: #ff4444;
-  color: white;
   border: none;
   border-radius: 8px;
   font-family: 'YS Text', sans-serif;
-  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.red-button-40:hover {
-  background: #e63939;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.3);
+.btn-40 {
+  height: 40px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.4;
 }
 
-.red-button-40:active {
-  background: #d63333;
-  transform: translateY(0);
-  box-shadow: 0 2px 8px rgba(255, 68, 68, 0.2);
+.btn-action {
+  background: #F8604A;
+  color: #FFFFFF;
 }
 
-.red-button-40 svg {
+.btn-action:hover {
+  background: #E45844;
+}
+
+.btn svg {
   width: 16px;
   height: 16px;
   flex-shrink: 0;
@@ -238,11 +241,12 @@
     <div class="experiment-section">
       <h2>Особенности реализации</h2>
       <ul style="color: var(--color-foreground); line-height: 1.6;">
+        <li><strong>Кнопка из UI Kit:</strong> Использует классы <code>btn btn-action btn-40</code> из дизайн-системы</li>
         <li><strong>Высота 40px:</strong> Соответствует дизайн-системе для кнопок среднего размера</li>
-        <li><strong>Красный цвет:</strong> #ff4444 с hover эффектом #e63939</li>
-        <li><strong>Иконка house:</strong> Использована иконка из Gravity UI с размером 16x16px</li>
+        <li><strong>Красный цвет:</strong> #F8604A с hover эффектом #E45844 (стандартные цвета UI Kit)</li>
+        <li><strong>Иконка house:</strong> Правильная иконка из Gravity UI с размером 16x16px</li>
         <li><strong>Flexbox layout:</strong> Иконка и текст выровнены по центру с отступом 8px</li>
-        <li><strong>Интерактивность:</strong> Hover и active состояния с анимацией</li>
+        <li><strong>Интерактивность:</strong> Hover и active состояния из UI Kit</li>
         <li><strong>Типографика:</strong> Шрифт YS Text Medium 14px</li>
       </ul>
     </div>
