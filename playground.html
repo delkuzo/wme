@@ -833,6 +833,62 @@
       left: 22px;
       transform: none;
     }
+
+    /* Интерактивные checkbox компоненты */
+    .checkbox {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 6px;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .checkbox:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .checkbox[aria-pressed="true"] {
+      background: #F8604A;
+      border-color: #F8604A;
+    }
+
+    .checkbox[aria-pressed="true"]::before {
+      content: '';
+      width: 10.5px;
+      height: 9px;
+      background-image: url("data:image/svg+xml,%3Csvg width='11' height='9' viewBox='0 0 11 9' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 4L4 7L10 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+    }
+
+    .checkbox-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .checkbox-caption {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--color-hint);
+      font-family: monospace;
+      text-align: center;
+    }
+
+    .checkboxes-row {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
   </style>
 </head>
 <body>
@@ -1036,6 +1092,17 @@
                 <div class="toggle-item">
                   <button class="toggle-switch toggle-32" type="button" aria-pressed="false" onclick="toggleSwitch(this)"></button>
                   <span class="toggle-caption">toggle-32</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Чекбоксы -->
+            <div class="component-category">
+              <h3>Чекбоксы</h3>
+              <div class="checkboxes-row">
+                <div class="checkbox-item">
+                  <button class="checkbox" type="button" aria-pressed="false" onclick="toggleCheckbox(this)"></button>
+                  <span class="checkbox-caption">checkbox</span>
                 </div>
               </div>
             </div>
@@ -1419,6 +1486,11 @@
       const pressed = btn.getAttribute('aria-pressed') === 'true';
       btn.setAttribute('aria-pressed', !pressed);
       btn.classList.toggle('on', !pressed);
+    }
+
+    function toggleCheckbox(btn) {
+      const pressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', !pressed);
     }
   </script>
 </body>
