@@ -151,8 +151,8 @@
       transition: background 0.15s;
       color: var(--color-foreground);
     }
-    .accordion-header[aria-expanded="true"] { background: var(--color-submerged); }
-    .accordion-panel { padding: 20px 24px 12px 24px; background: var(--color-background); transition: background-color 0.2s ease; }
+    .accordion-header[aria-expanded="true"] { background: none; }
+    .accordion-panel { padding: 20px 24px 12px 24px; background: none; transition: background-color 0.2s ease; }
     .color-token-row {
       display: flex;
       align-items: center;
@@ -204,10 +204,11 @@
       margin-bottom: 32px;
     }
     .component-category h3 {
-      font-size: 1.5rem;
-      font-weight: 600;
+      font-size: 1.1rem;
+      font-weight: 500;
       color: var(--color-foreground);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
+      font-family: 'YS Text', sans-serif;
     }
     .component-category p {
       color: var(--color-hint);
@@ -249,12 +250,11 @@
       margin-bottom: 40px;
     }
     .button-size-group h4 {
-      font-size: 1.2rem;
-      font-weight: 600;
+      font-size: 1rem;
+      font-weight: 500;
       color: var(--color-foreground);
-      margin-bottom: 20px;
-      padding-bottom: 8px;
-      border-bottom: 2px solid var(--color-border);
+      margin-bottom: 16px;
+      font-family: 'YS Text', sans-serif;
     }
     .buttons-row {
       display: flex;
@@ -928,13 +928,9 @@
               </div>
             </div>
             
-            <!-- Кнопки -->
+            <!-- Кнопки 40px -->
             <div class="component-category">
-              <h3>Кнопки</h3>
-              
-              <!-- Кнопки 40px -->
-              <div class="button-size-group">
-                <h4>Кнопки 40px</h4>
+              <h3>Кнопки 40px</h3>
                 <div class="buttons-row">
                   <div class="button-item">
                     <button class="btn btn-action btn-40">Кнопка</button>
@@ -980,9 +976,9 @@
                 </div>
               </div>
               
-              <!-- Кнопки 32px -->
-              <div class="button-size-group">
-                <h4>Кнопки 32px</h4>
+            <!-- Кнопки 32px -->
+            <div class="component-category">
+              <h3>Кнопки 32px</h3>
                 <div class="buttons-row">
                   <div class="button-item">
                     <button class="btn btn-action btn-32">Кнопка</button>
@@ -1031,7 +1027,7 @@
             
             <!-- Переключатели -->
             <div class="component-category">
-              <h3>Переключатели (Toggle)</h3>
+              <h3>Переключатели</h3>
               <div class="toggles-row">
                 <div class="toggle-item">
                   <button class="toggle-switch toggle-40" type="button" aria-pressed="false" onclick="toggleSwitch(this)"></button>
