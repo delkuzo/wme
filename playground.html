@@ -889,6 +889,60 @@
       gap: 32px;
       align-items: flex-start;
     }
+
+    /* Интерактивные radio button компоненты */
+    .radio-button {
+      width: 20px;
+      height: 20px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      border-radius: 50%;
+      background: transparent;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .radio-button:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .radio-button[aria-pressed="true"] {
+      background: #F8604A;
+      border-color: #F8604A;
+    }
+
+    .radio-button[aria-pressed="true"]::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      background: #FFFFFF;
+      border-radius: 50%;
+    }
+
+    .radio-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .radio-caption {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--color-hint);
+      font-family: monospace;
+      text-align: center;
+    }
+
+    .radio-row {
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+    }
   </style>
 </head>
 <body>
@@ -1103,6 +1157,17 @@
                 <div class="checkbox-item">
                   <button class="checkbox" type="button" aria-pressed="false" onclick="toggleCheckbox(this)"></button>
                   <span class="checkbox-caption">checkbox</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Radio кнопки -->
+            <div class="component-category">
+              <h3>Radio кнопки</h3>
+              <div class="radio-row">
+                <div class="radio-item">
+                  <button class="radio-button" type="button" aria-pressed="false" onclick="toggleRadio(this)"></button>
+                  <span class="radio-caption">radio-button</span>
                 </div>
               </div>
             </div>
@@ -1489,6 +1554,11 @@
     }
 
     function toggleCheckbox(btn) {
+      const pressed = btn.getAttribute('aria-pressed') === 'true';
+      btn.setAttribute('aria-pressed', !pressed);
+    }
+
+    function toggleRadio(btn) {
       const pressed = btn.getAttribute('aria-pressed') === 'true';
       btn.setAttribute('aria-pressed', !pressed);
     }
