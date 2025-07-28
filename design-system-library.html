@@ -410,6 +410,83 @@
         .switch-40.on .switch__circle-40 {
           left: 18px;
         }
+
+        /* New Toggle Components */
+        .toggle-container {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-bottom: 8px;
+        }
+
+        .toggle {
+          position: relative;
+          cursor: pointer;
+          border: none;
+          outline: none;
+          padding: 0;
+          transition: background 0.2s ease;
+          display: inline-block;
+        }
+
+        .toggle__circle {
+          position: absolute;
+          background: #fff;
+          border-radius: 50%;
+          transition: left 0.2s ease;
+          box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+        }
+
+        /* Toggle 40px (60x40) */
+        .toggle.toggle-40 {
+          width: 60px;
+          height: 40px;
+          border-radius: 20px;
+          background: rgba(0,0,0,0.05);
+        }
+
+        .toggle.toggle-40.toggle-on {
+          background: #F8604A;
+        }
+
+        .toggle.toggle-40 .toggle__circle {
+          width: 36px;
+          height: 36px;
+          top: 2px;
+          left: 2px;
+        }
+
+        .toggle.toggle-40.toggle-on .toggle__circle {
+          left: 22px;
+        }
+
+        /* Toggle 32px (48x32) */
+        .toggle.toggle-32 {
+          width: 48px;
+          height: 32px;
+          border-radius: 16px;
+          background: rgba(0,0,0,0.05);
+        }
+
+        .toggle.toggle-32.toggle-on {
+          background: #F8604A;
+        }
+
+        .toggle.toggle-32 .toggle__circle {
+          width: 28px;
+          height: 28px;
+          top: 2px;
+          left: 2px;
+        }
+
+        .toggle.toggle-32.toggle-on .toggle__circle {
+          left: 18px;
+        }
+
+        .toggle-label {
+          font-size: 14px;
+          color: var(--text-hint);
+        }
     </style>
 </head>
 <body class="font-sans m-0 p-10 bg-bg-background text-text-foreground">
@@ -1350,11 +1427,20 @@ padding: var(--spacing-s) var(--spacing-m); /* 8px 16px */
                                 </div>
                             </div>
                             <div class="mt-m space-y-s">
-                                <div class="switch switch-40">
-                                    <div class="switch__circle"></div>
+                                <!-- Toggle 40px (60x40) -->
+                                <div class="toggle-container">
+                                    <div class="toggle toggle-40 toggle-off" onclick="toggleToggle(this)">
+                                        <div class="toggle__circle"></div>
+                                    </div>
+                                    <span class="toggle-label">40px (60×40)</span>
                                 </div>
-                                <div class="switch switch-32">
-                                    <div class="switch__circle-32"></div>
+                                
+                                <!-- Toggle 32px (48x32) -->
+                                <div class="toggle-container">
+                                    <div class="toggle toggle-32 toggle-off" onclick="toggleToggle(this)">
+                                        <div class="toggle__circle"></div>
+                                    </div>
+                                    <span class="toggle-label">32px (48×32)</span>
                                 </div>
                             </div>
                         </div>
@@ -1525,6 +1611,12 @@ padding: var(--spacing-s) var(--spacing-m); /* 8px 16px */
                 this.classList.toggle('on');
             });
         });
+
+        // Toggle Components
+        function toggleToggle(toggleElement) {
+            toggleElement.classList.toggle('toggle-on');
+            toggleElement.classList.toggle('toggle-off');
+        }
 
         // Copy icon code functionality
         function copyIconCode(iconName) {
