@@ -1924,6 +1924,7 @@
         
         // Если переключились на вкладку иконок, загружаем их
         if (tabKey === 'icons') {
+          console.log('Переключились на вкладку иконок, вызываем loadGravityIcons');
           loadGravityIcons();
         }
       }
@@ -2005,18 +2006,24 @@
 
     // Функция загрузки иконок Gravity UI
     async function loadGravityIcons() {
+      console.log('loadGravityIcons вызвана');
       const grid = document.getElementById('gravity-icons-grid');
-      if (!grid) return;
+      if (!grid) {
+        console.error('Элемент gravity-icons-grid не найден');
+        return;
+      }
       
       try {
+        console.log('Начинаем загрузку иконок...');
         const iconsHTML = await gravityIcons.showAllIcons();
+        console.log('Иконки загружены, обновляем DOM');
         grid.innerHTML = iconsHTML;
         
         // Загружаем демо кнопки
         loadDemoButtons();
       } catch (error) {
         console.error('Ошибка загрузки иконок:', error);
-        grid.innerHTML = '<div style="text-align: center; padding: 40px; color: red;">Ошибка загрузки иконок</div>';
+        grid.innerHTML = '<div style="text-align: center; padding: 40px; color: red;">Ошибка загрузки иконок: ' + error.message + '</div>';
       }
     }
     
@@ -2056,16 +2063,21 @@
       
       // Загрузить иконку по названию
       async loadIcon(iconName) {
+        console.log(`Загружаем иконку: ${iconName}`);
         if (this.cache[iconName]) {
+          console.log(`Иконка ${iconName} найдена в кэше`);
           return this.cache[iconName];
         }
         
         try {
-          const response = await fetch(`icons/${iconName}.svg`);
+          const url = `icons/${iconName}.svg`;
+          console.log(`Запрашиваем: ${url}`);
+          const response = await fetch(url);
           if (!response.ok) {
-            throw new Error(`Иконка ${iconName} не найдена`);
+            throw new Error(`Иконка ${iconName} не найдена (${response.status})`);
           }
           const svgContent = await response.text();
+          console.log(`Иконка ${iconName} загружена, размер: ${svgContent.length} символов`);
           this.cache[iconName] = svgContent;
           return svgContent;
         } catch (error) {
