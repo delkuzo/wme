@@ -1122,6 +1122,95 @@
       text-align: center;
       margin-top: 8px;
     }
+
+    /* Стили для иконок */
+    .icons-section {
+      padding: 24px;
+    }
+
+    .icons-section h2 {
+      margin-bottom: 16px;
+      color: var(--color-foreground);
+    }
+
+    .icons-section p {
+      margin-bottom: 32px;
+      color: var(--color-hint);
+    }
+
+    .icons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .icon-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 16px;
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      background: var(--color-background);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .icon-item:hover {
+      border-color: var(--color-primary);
+      background: rgba(248, 96, 74, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .icon-item svg {
+      margin-bottom: 8px;
+      color: var(--color-foreground);
+    }
+
+    .icon-name {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--color-foreground);
+      text-align: center;
+      font-family: monospace;
+    }
+
+    .icon-usage {
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 24px;
+    }
+
+    .icon-usage h3 {
+      margin-bottom: 16px;
+      color: var(--color-foreground);
+    }
+
+    .icon-usage p {
+      margin-bottom: 24px;
+      color: var(--color-hint);
+    }
+
+    .usage-example h4 {
+      margin-bottom: 12px;
+      color: var(--color-foreground);
+    }
+
+    .usage-example pre {
+      background: var(--color-background);
+      border: 1px solid var(--color-border);
+      border-radius: 4px;
+      padding: 16px;
+      overflow-x: auto;
+    }
+
+    .usage-example code {
+      font-family: monospace;
+      font-size: 14px;
+      color: var(--color-foreground);
+    }
   </style>
 </head>
 <body>
@@ -1140,6 +1229,7 @@
   </div>
   <div class="tabs-container" id="tabs">
     <button class="tab-button" type="button" aria-pressed="true" data-tab="ui-kit" onclick="toggleMainTab(this)">UI Kit</button>
+    <button class="tab-button" type="button" aria-pressed="false" data-tab="icons" onclick="toggleMainTab(this)">Иконки</button>
     <button class="tab-button" type="button" aria-pressed="false" data-tab="experiments" onclick="toggleMainTab(this)">Эксперименты</button>
     <button class="tab-button" type="button" aria-pressed="false" data-tab="interfaces" onclick="toggleMainTab(this)">Интерфейсы</button>
     <button class="tab-button" type="button" aria-pressed="false" data-tab="docs" onclick="toggleMainTab(this)">Документация</button>
@@ -1767,6 +1857,268 @@
       const tabContent = document.getElementById('tab-content');
       const tabTemplates = {
         'ui-kit': document.querySelector('.uikit-section').outerHTML,
+        'icons': `
+          <div class="icons-section">
+            <h2>Gravity UI Icons</h2>
+            <p>Библиотека иконок для использования в проекте. Все иконки доступны в формате SVG.</p>
+            
+            <div class="icons-grid">
+              <!-- Основные иконки -->
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="search">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="8"/>
+                  <path d="m21 21-4.35-4.35"/>
+                </svg>
+                <span class="icon-name">search</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="settings">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1 1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+                <span class="icon-name">settings</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="user">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span class="icon-name">user</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="home">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9,22 9,12 15,12 15,22"/>
+                </svg>
+                <span class="icon-name">home</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="heart">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                </svg>
+                <span class="icon-name">heart</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="star">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26 12,2"/>
+                </svg>
+                <span class="icon-name">star</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="mail">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                <span class="icon-name">mail</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="phone">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                </svg>
+                <span class="icon-name">phone</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="download">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="7,10 12,15 17,10"/>
+                  <line x1="12" y1="15" x2="12" y2="3"/>
+                </svg>
+                <span class="icon-name">download</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="upload">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                  <polyline points="17,8 12,3 7,8"/>
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                </svg>
+                <span class="icon-name">upload</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="edit">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                  <path d="m18.5 2.5 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                </svg>
+                <span class="icon-name">edit</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="trash">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="3,6 5,6 21,6"/>
+                  <path d="m19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                </svg>
+                <span class="icon-name">trash</span>
+              </div>
+              
+              <!-- Дополнительные иконки -->
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="plus">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                <span class="icon-name">plus</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="minus">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                <span class="icon-name">minus</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="check">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20,6 9,17 4,12"/>
+                </svg>
+                <span class="icon-name">check</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="xmark">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="18" y1="6" x2="6" y2="18"/>
+                  <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+                <span class="icon-name">xmark</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="arrow-right">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                  <polyline points="12,5 19,12 12,19"/>
+                </svg>
+                <span class="icon-name">arrow-right</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="arrow-left">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="19" y1="12" x2="5" y2="12"/>
+                  <polyline points="12,19 5,12 12,5"/>
+                </svg>
+                <span class="icon-name">arrow-left</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="arrow-up">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="19" x2="12" y2="5"/>
+                  <polyline points="5,12 12,5 19,12"/>
+                </svg>
+                <span class="icon-name">arrow-up</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="arrow-down">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <polyline points="19,12 12,19 5,12"/>
+                </svg>
+                <span class="icon-name">arrow-down</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="calendar">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span class="icon-name">calendar</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="clock">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polyline points="12,6 12,12 16,14"/>
+                </svg>
+                <span class="icon-name">clock</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="folder">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.93a2 2 0 0 1-1.66-.9l-.82-1.2A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13c0 1.1.9 2 2 2Z"/>
+                </svg>
+                <span class="icon-name">folder</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="file">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/>
+                  <polyline points="14,2 14,8 20,8"/>
+                </svg>
+                <span class="icon-name">file</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="image">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21,15 16,10 5,21"/>
+                </svg>
+                <span class="icon-name">image</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="video">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polygon points="23,7 16,12 23,17 23,7"/>
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                </svg>
+                <span class="icon-name">video</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="music">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M9 18V5l12-2v13"/>
+                  <circle cx="6" cy="18" r="3"/>
+                  <circle cx="18" cy="16" r="3"/>
+                </svg>
+                <span class="icon-name">music</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="sun">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="12" r="5"/>
+                  <line x1="12" y1="1" x2="12" y2="3"/>
+                  <line x1="12" y1="21" x2="12" y2="23"/>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                  <line x1="1" y1="12" x2="3" y2="12"/>
+                  <line x1="21" y1="12" x2="23" y2="12"/>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <span class="icon-name">sun</span>
+              </div>
+              
+              <div class="icon-item" onclick="copyIconCode(this)" data-icon="moon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+                <span class="icon-name">moon</span>
+              </div>
+            </div>
+            
+            <div class="icon-usage">
+              <h3>Как использовать иконки</h3>
+              <p>Кликните на любую иконку, чтобы скопировать её SVG код. Затем вставьте код в ваш компонент.</p>
+              <div class="usage-example">
+                <h4>Пример использования в кнопке:</h4>
+                <pre><code>&lt;button class="button"&gt;
+  &lt;svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+    &lt;path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/&gt;
+  &lt;/svg&gt;
+  Текст кнопки
+&lt;/button&gt;</code></pre>
+              </div>
+            </div>
+          </div>
+        `,
         'experiments': `<h2>Эксперименты</h2><p>Здесь будут мини-комбинации и паттерны.</p>`,
         'interfaces': `<h2>Интерфейсы</h2><p>Здесь будут собраны готовые интерфейсы для передачи в разработку.</p>`,
         'docs': `
@@ -1816,6 +2168,60 @@
       });
       // Затем активируем выбранную кнопку
       btn.setAttribute('aria-pressed', 'true');
+    }
+
+    function copyIconCode(iconElement) {
+      const svg = iconElement.querySelector('svg');
+      const iconName = iconElement.getAttribute('data-icon');
+      
+      if (svg) {
+        const svgCode = svg.outerHTML;
+        
+        // Копируем в буфер обмена
+        navigator.clipboard.writeText(svgCode).then(() => {
+          // Показываем уведомление
+          showNotification(`Иконка "${iconName}" скопирована в буфер обмена!`);
+        }).catch(err => {
+          console.error('Ошибка копирования:', err);
+          showNotification('Ошибка копирования иконки');
+        });
+      }
+    }
+
+    function showNotification(message) {
+      // Создаем уведомление
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--color-primary);
+        color: white;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-family: 'YS Text', sans-serif;
+        font-size: 14px;
+        z-index: 1000;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+      `;
+      notification.textContent = message;
+      
+      document.body.appendChild(notification);
+      
+      // Показываем уведомление
+      setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+      }, 100);
+      
+      // Скрываем через 3 секунды
+      setTimeout(() => {
+        notification.style.transform = 'translateX(100%)';
+        setTimeout(() => {
+          document.body.removeChild(notification);
+        }, 300);
+      }, 3000);
     }
   </script>
 </body>
