@@ -2031,8 +2031,8 @@
           { icon: 'magnifier', text: 'Поиск', class: 'button-fill-32' },
           { icon: 'plus', text: 'Добавить', class: 'button-outline-32' },
           { icon: 'trash-bin', text: 'Удалить', class: 'button-outline-32' },
-          { icon: 'download', text: '', class: 'button-fill-32' },
-          { icon: 'upload', text: '', class: 'button-fill-32' }
+          { icon: 'pencil', text: 'Редактировать', class: 'button-fill-32' },
+          { icon: 'smartphone', text: 'Мобильное', class: 'button-fill-32' }
         ];
         
         let html = '<div style="display: flex; gap: 16px; flex-wrap: wrap; margin: 20px 0;">';
@@ -2061,7 +2061,7 @@
         }
         
         try {
-          const response = await fetch(`node_modules/@gravity-ui/icons/svgs/${iconName}.svg`);
+          const response = await fetch(`icons/${iconName}.svg`);
           if (!response.ok) {
             throw new Error(`Иконка ${iconName} не найдена`);
           }
@@ -2112,10 +2112,10 @@
       // Показать все доступные иконки
       async showAllIcons() {
         const iconNames = [
-          'magnifier', 'gear', 'person', 'house', 'heart', 'star', 'mail', 'smartphone',
-          'download', 'upload', 'pencil', 'trash-bin', 'plus', 'minus', 'check', 'xmark',
+          'magnifier', 'gear', 'person', 'house', 'heart', 'star', 'smartphone',
+          'pencil', 'trash-bin', 'plus', 'minus', 'check', 'xmark',
           'arrow-right', 'arrow-left', 'arrow-up', 'arrow-down', 'calendar', 'clock',
-          'folder', 'file', 'image', 'video', 'music-note', 'sun', 'moon'
+          'folder', 'file', 'video', 'music-note', 'sun', 'moon'
         ];
         
         let html = '<div class="icons-grid">';
