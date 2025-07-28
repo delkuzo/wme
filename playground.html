@@ -1213,6 +1213,55 @@
       font-size: 14px;
       color: var(--color-foreground);
     }
+    
+    /* Стили для экспериментов */
+    .experiments-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 32px;
+    }
+    
+    .experiment-card {
+      background: var(--color-background-secondary);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 24px;
+      transition: all 0.2s ease;
+    }
+    
+    .experiment-card:hover {
+      border-color: var(--color-primary);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .experiment-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      color: var(--color-foreground);
+    }
+    
+    .experiment-card p {
+      font-size: 14px;
+      color: var(--color-hint);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+    
+    .experiment-link {
+      display: inline-flex;
+      align-items: center;
+      color: var(--color-primary);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: color 0.2s ease;
+    }
+    
+    .experiment-link:hover {
+      color: var(--color-primary-hover);
+    }
   </style>
 </head>
 <body>
@@ -1984,7 +2033,20 @@
             </div>
           </div>
         `,
-        'experiments': `<h2>Эксперименты</h2><p>Здесь будут мини-комбинации и паттерны.</p>`,
+        'experiments': `
+          <h2>Эксперименты</h2>
+          <p>Мини-комбинации и паттерны для тестирования компонентов.</p>
+          
+          <div class="experiments-grid">
+            <div class="experiment-card">
+              <h3>Красная кнопка с иконкой house</h3>
+              <p>Демонстрация использования иконок Gravity UI в кастомных кнопках. Красная кнопка высотой 40px с иконкой дома.</p>
+              <a href="experiments/red-button-with-house-icon.html" class="experiment-link">
+                Открыть эксперимент →
+              </a>
+            </div>
+          </div>
+        `,
         'interfaces': `<h2>Интерфейсы</h2><p>Здесь будут собраны готовые интерфейсы для передачи в разработку.</p>`,
         'docs': `
           <div class="docs-layout">
