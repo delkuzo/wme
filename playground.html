@@ -15,44 +15,69 @@
       color: var(--color-foreground);
       transition: background-color 0.2s ease, color 0.2s ease;
     }
-    .tabs {
+    /* Главная навигация - использует стили компонента tabs */
+    #tabs.tabs-container {
       width: 100vw;
       min-width: 100%;
       border-bottom: 1px solid var(--color-border);
       background: var(--color-background);
       box-sizing: border-box;
       padding-left: 80px;
+      padding-right: 24px;
       display: flex;
-      gap: 4px;
+      gap: 12px;
       transition: background-color 0.2s ease, border-color 0.2s ease;
     }
-    .tab {
-      width: 140px;
+    
+    #tabs .tab-button {
       height: 44px;
-      padding: 0;
-      margin: 0;
-      cursor: pointer;
+      padding: 8px 2px 0px 2px;
       border: none;
       background: none;
-      font-size: 1rem;
-      color: var(--color-foreground);
-      transition: color 0.2s, border-bottom 0.2s, font-weight 0.2s, background 0.2s;
-      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      font-family: 'YS Text', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.4;
+      letter-spacing: -0.25%;
+      color: rgba(0, 0, 0, 0.9);
+      transition: all 0.2s ease;
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      outline: none;
-      position: relative;
+      width: fit-content;
+      min-width: 0;
     }
-    .tab:focus {
-      outline: none;
-      box-shadow: none;
+    
+    #tabs .tab-button:hover {
+      font-weight: 400;
     }
-    .tab.active {
-      border-bottom: 2px solid #007aff;
-      font-weight: bold;
-      color: #007aff;
-      background: #f4f8ff;
+    
+    #tabs .tab-button:hover::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 1px;
+    }
+    
+    #tabs .tab-button[aria-pressed="true"] {
+      font-weight: 500;
+    }
+
+    #tabs .tab-button[aria-pressed="true"]::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: rgba(0, 0, 0, 0.9);
+      border-radius: 1px;
     }
     .tab-content {
       padding: 24px 24px 24px 104px;
@@ -1016,6 +1041,51 @@
       color: var(--color-foreground);
       line-height: 1.4;
     }
+
+    /* Интерактивные switcher button компоненты */
+    .switcher-container {
+      display: flex;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.05);
+      border-radius: 40px;
+      padding: 4px;
+      width: fit-content;
+      gap: 4px;
+    }
+
+    .switcher-button {
+      height: 32px;
+      padding: 6px 12px 10px 12px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: 'YS Text', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: rgba(0, 0, 0, 0.9);
+      transition: all 0.2s ease;
+      border-radius: 40px;
+      white-space: nowrap;
+    }
+
+    .switcher-button:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+
+    .switcher-button[aria-pressed="true"] {
+      background: #FFFFFF;
+      color: rgba(0, 0, 0, 0.9);
+    }
+
+    .component-caption {
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--color-hint);
+      font-family: monospace;
+      text-align: center;
+      margin-top: 8px;
+    }
   </style>
 </head>
 <body>
@@ -1032,11 +1102,11 @@
       <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
     </svg>
   </div>
-  <div class="tabs" id="tabs">
-    <button class="tab active" data-tab="ui-kit">UI Kit</button>
-    <button class="tab" data-tab="experiments">Эксперименты</button>
-    <button class="tab" data-tab="interfaces">Интерфейсы</button>
-    <button class="tab" data-tab="docs">Документация</button>
+  <div class="tabs-container" id="tabs">
+    <button class="tab-button" type="button" aria-pressed="true" data-tab="ui-kit" onclick="toggleMainTab(this)">UI Kit</button>
+    <button class="tab-button" type="button" aria-pressed="false" data-tab="experiments" onclick="toggleMainTab(this)">Эксперименты</button>
+    <button class="tab-button" type="button" aria-pressed="false" data-tab="interfaces" onclick="toggleMainTab(this)">Интерфейсы</button>
+    <button class="tab-button" type="button" aria-pressed="false" data-tab="docs" onclick="toggleMainTab(this)">Документация</button>
   </div>
   <div class="tab-content" id="tab-content">
     <div class="uikit-section">
@@ -1258,6 +1328,18 @@
                   <p>Содержимое активной вкладки. Здесь может быть любой контент.</p>
                 </div>
               </div>
+              <span class="component-caption">tabs</span>
+            </div>
+
+            <!-- Switcher button -->
+            <div class="component-category">
+              <h3>Switcher button</h3>
+              <div class="switcher-container">
+                <button class="switcher-button" type="button" aria-pressed="true" onclick="toggleSwitcher(this)">Опция 1</button>
+                <button class="switcher-button" type="button" aria-pressed="false" onclick="toggleSwitcher(this)">Опция 2</button>
+                <button class="switcher-button" type="button" aria-pressed="false" onclick="toggleSwitcher(this)">Опция 3</button>
+              </div>
+              <span class="component-caption">switcher-button</span>
             </div>
             
 
@@ -1269,44 +1351,7 @@
     </div>
   </div>
   <script>
-    // Простейший JS для переключения табов
-    const tabs = document.querySelectorAll('.tab');
-    const tabContent = document.getElementById('tab-content');
-    const tabTemplates = {
-      'ui-kit': `<h2>UI Kit</h2><p>Здесь будет демонстрация всех атомарных компонентов и токенов.</p>`,
-      'experiments': `<h2>Эксперименты</h2><p>Здесь будут мини-комбинации и паттерны.</p>`,
-      'interfaces': `<h2>Интерфейсы</h2><p>Здесь будут собраны готовые интерфейсы для передачи в разработку.</p>`,
-      'docs': `
-        <div class="docs-layout">
-          <nav class="docs-menu">
-            <div class="docs-menu-item active" data-doc="readme">README.md</div>
-            <div class="docs-menu-item" data-doc="style">STYLE_GUIDE.md</div>
-            <div class="docs-menu-item" data-doc="contributing">CONTRIBUTING.md</div>
-            <div class="docs-menu-item" data-doc="plan">PROJECT_PLAN.md</div>
-            <div class="docs-menu-item" data-doc="milestones">MILESTONES.md</div>
-            <div class="docs-menu-item" data-doc="experiments">EXPERIMENTS.md</div>
-          </nav>
-          <div class="docs-content" id="docs-content">
-            <h2>README.md</h2>
-            <p>Главная страница проекта: цели, роли, структура, как запустить проект, как пользоваться.</p>
-            <ul>
-              <li>Роли в проекте</li>
-              <li>Цели и задачи</li>
-              <li>Структура</li>
-              <li>Как запускать и обновлять</li>
-            </ul>
-          </div>
-        </div>
-      `
-    };
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
-        const tabKey = tab.getAttribute('data-tab');
-        tabContent.innerHTML = tabTemplates[tabKey] || '';
-      });
-    });
+
     // --- Документация: обработка кликов по меню ---
     if (tabTemplates['docs']) {
       document.addEventListener('click', function(e) {
@@ -1658,6 +1703,61 @@
         tab.setAttribute('aria-pressed', 'false');
       });
       // Затем активируем выбранный таб
+      btn.setAttribute('aria-pressed', 'true');
+    }
+
+    function toggleMainTab(btn) {
+      // Сначала сбрасываем все табы
+      const allTabs = btn.parentElement.querySelectorAll('.tab-button');
+      allTabs.forEach(tab => {
+        tab.setAttribute('aria-pressed', 'false');
+      });
+      // Затем активируем выбранный таб
+      btn.setAttribute('aria-pressed', 'true');
+      
+      // Обновляем контент
+      const tabKey = btn.getAttribute('data-tab');
+      const tabContent = document.getElementById('tab-content');
+      const tabTemplates = {
+        'ui-kit': document.querySelector('.uikit-section').outerHTML,
+        'experiments': `<h2>Эксперименты</h2><p>Здесь будут мини-комбинации и паттерны.</p>`,
+        'interfaces': `<h2>Интерфейсы</h2><p>Здесь будут собраны готовые интерфейсы для передачи в разработку.</p>`,
+        'docs': `
+          <div class="docs-layout">
+            <nav class="docs-menu">
+              <div class="docs-menu-item active" data-doc="readme">README.md</div>
+              <div class="docs-menu-item" data-doc="style">STYLE_GUIDE.md</div>
+              <div class="docs-menu-item" data-doc="contributing">CONTRIBUTING.md</div>
+              <div class="docs-menu-item" data-doc="plan">PROJECT_PLAN.md</div>
+              <div class="docs-menu-item" data-doc="milestones">MILESTONES.md</div>
+              <div class="docs-menu-item" data-doc="experiments">EXPERIMENTS.md</div>
+            </nav>
+            <div class="docs-content" id="docs-content">
+              <h2>README.md</h2>
+              <p>Главная страница проекта: цели, роли, структура, как запустить проект, как пользоваться.</p>
+              <ul>
+                <li>Роли в проекте</li>
+                <li>Цели и задачи</li>
+                <li>Структура</li>
+                <li>Как запускать и обновлять</li>
+              </ul>
+            </div>
+          </div>
+        `
+      };
+      
+      if (tabTemplates[tabKey]) {
+        tabContent.innerHTML = tabTemplates[tabKey];
+      }
+    }
+
+    function toggleSwitcher(btn) {
+      // Сначала сбрасываем все switcher кнопки
+      const allSwitchers = btn.parentElement.querySelectorAll('.switcher-button');
+      allSwitchers.forEach(switcher => {
+        switcher.setAttribute('aria-pressed', 'false');
+      });
+      // Затем активируем выбранную кнопку
       btn.setAttribute('aria-pressed', 'true');
     }
   </script>
