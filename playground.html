@@ -1488,6 +1488,95 @@
     </div>
   </div>
   <script>
+    // Система работы с иконками Gravity UI
+    const gravityIcons = {
+      // Кэш для загруженных иконок
+      cache: {},
+      
+      // Загрузить иконку по названию
+      async loadIcon(iconName) {
+        console.log(`Загружаем иконку: ${iconName}`);
+        if (this.cache[iconName]) {
+          console.log(`Иконка ${iconName} найдена в кэше`);
+          return this.cache[iconName];
+        }
+        
+        try {
+          const url = `icons/${iconName}.svg`;
+          console.log(`Запрашиваем: ${url}`);
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`Иконка ${iconName} не найдена (${response.status})`);
+          }
+          const svgContent = await response.text();
+          console.log(`Иконка ${iconName} загружена, размер: ${svgContent.length} символов`);
+          this.cache[iconName] = svgContent;
+          return svgContent;
+        } catch (error) {
+          console.error(`Ошибка загрузки иконки ${iconName}:`, error);
+          return null;
+        }
+      },
+      
+      // Получить HTML иконки для вставки
+      async getIconHTML(iconName, size = 16) {
+        const svgContent = await this.loadIcon(iconName);
+        if (!svgContent) {
+          return `<span style="color: red;">❌ ${iconName}</span>`;
+        }
+        
+        // Извлекаем path из SVG и создаем новый SVG с нужным размером
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(svgContent, 'text/html');
+        const originalSvg = doc.querySelector('svg');
+        
+        if (!originalSvg) {
+          return `<span style="color: red;">❌ ${iconName}</span>`;
+        }
+        
+        const path = originalSvg.querySelector('path');
+        if (!path) {
+          return `<span style="color: red;">❌ ${iconName}</span>`;
+        }
+        
+        return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" fill="none" viewBox="0 0 16 16">
+          <path fill="currentColor" fill-rule="evenodd" d="${path.getAttribute('d')}" clip-rule="evenodd"/>
+        </svg>`;
+      },
+      
+      // Создать кнопку с иконкой
+      async createButtonWithIcon(iconName, text = '', buttonClass = 'button-fill-32') {
+        const iconHTML = await this.getIconHTML(iconName, 16);
+        return `<button class="${buttonClass}">
+          ${iconHTML}
+          ${text ? `<span>${text}</span>` : ''}
+        </button>`;
+      },
+      
+      // Показать все доступные иконки
+      async showAllIcons() {
+        const iconNames = [
+          'magnifier', 'gear', 'person', 'house', 'heart', 'star', 'smartphone',
+          'pencil', 'trash-bin', 'plus', 'minus', 'check', 'xmark',
+          'arrow-right', 'arrow-left', 'arrow-up', 'arrow-down', 'calendar', 'clock',
+          'folder', 'file', 'video', 'music-note', 'sun', 'moon'
+        ];
+        
+        let html = '<div class="icons-grid">';
+        for (const iconName of iconNames) {
+          const iconHTML = await this.getIconHTML(iconName, 16);
+          html += `
+            <div class="icon-item" onclick="copyIconCode(this)" data-icon="${iconName}">
+              ${iconHTML}
+              <span class="icon-name">${iconName}</span>
+            </div>
+          `;
+        }
+        html += '</div>';
+        
+        return html;
+      }
+    };
 
     // --- Документация: обработка кликов по меню ---
     if (tabTemplates['docs']) {
@@ -2056,95 +2145,7 @@
       }
     }
 
-    // Система работы с иконками Gravity UI
-    const gravityIcons = {
-      // Кэш для загруженных иконок
-      cache: {},
-      
-      // Загрузить иконку по названию
-      async loadIcon(iconName) {
-        console.log(`Загружаем иконку: ${iconName}`);
-        if (this.cache[iconName]) {
-          console.log(`Иконка ${iconName} найдена в кэше`);
-          return this.cache[iconName];
-        }
-        
-        try {
-          const url = `icons/${iconName}.svg`;
-          console.log(`Запрашиваем: ${url}`);
-          const response = await fetch(url);
-          if (!response.ok) {
-            throw new Error(`Иконка ${iconName} не найдена (${response.status})`);
-          }
-          const svgContent = await response.text();
-          console.log(`Иконка ${iconName} загружена, размер: ${svgContent.length} символов`);
-          this.cache[iconName] = svgContent;
-          return svgContent;
-        } catch (error) {
-          console.error(`Ошибка загрузки иконки ${iconName}:`, error);
-          return null;
-        }
-      },
-      
-      // Получить HTML иконки для вставки
-      async getIconHTML(iconName, size = 16) {
-        const svgContent = await this.loadIcon(iconName);
-        if (!svgContent) {
-          return `<span style="color: red;">❌ ${iconName}</span>`;
-        }
-        
-        // Извлекаем path из SVG и создаем новый SVG с нужным размером
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(svgContent, 'text/html');
-        const originalSvg = doc.querySelector('svg');
-        
-        if (!originalSvg) {
-          return `<span style="color: red;">❌ ${iconName}</span>`;
-        }
-        
-        const path = originalSvg.querySelector('path');
-        if (!path) {
-          return `<span style="color: red;">❌ ${iconName}</span>`;
-        }
-        
-        return `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" fill="none" viewBox="0 0 16 16">
-          <path fill="currentColor" fill-rule="evenodd" d="${path.getAttribute('d')}" clip-rule="evenodd"/>
-        </svg>`;
-      },
-      
-      // Создать кнопку с иконкой
-      async createButtonWithIcon(iconName, text = '', buttonClass = 'button-fill-32') {
-        const iconHTML = await this.getIconHTML(iconName, 16);
-        return `<button class="${buttonClass}">
-          ${iconHTML}
-          ${text ? `<span>${text}</span>` : ''}
-        </button>`;
-      },
-      
-      // Показать все доступные иконки
-      async showAllIcons() {
-        const iconNames = [
-          'magnifier', 'gear', 'person', 'house', 'heart', 'star', 'smartphone',
-          'pencil', 'trash-bin', 'plus', 'minus', 'check', 'xmark',
-          'arrow-right', 'arrow-left', 'arrow-up', 'arrow-down', 'calendar', 'clock',
-          'folder', 'file', 'video', 'music-note', 'sun', 'moon'
-        ];
-        
-        let html = '<div class="icons-grid">';
-        for (const iconName of iconNames) {
-          const iconHTML = await this.getIconHTML(iconName, 16);
-          html += `
-            <div class="icon-item" onclick="copyIconCode(this)" data-icon="${iconName}">
-              ${iconHTML}
-              <span class="icon-name">${iconName}</span>
-            </div>
-          `;
-        }
-        html += '</div>';
-        
-        return html;
-      }
-    };
+
     
     // Глобальная функция для создания кнопки с иконкой
     // Использование: createButtonWithIcon('gear', 'Настройки', 'button-fill-32')
@@ -2157,6 +2158,16 @@
     window.getIconHTML = async function(iconName, size = 16) {
       return await gravityIcons.getIconHTML(iconName, size);
     };
+    
+    // Автоматическая загрузка иконок при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+      console.log('DOM загружен, проверяем активную вкладку');
+      const activeTab = document.querySelector('.tab-button[aria-pressed="true"]');
+      if (activeTab && activeTab.getAttribute('data-tab') === 'icons') {
+        console.log('Вкладка иконок активна при загрузке, загружаем иконки');
+        setTimeout(loadGravityIcons, 100);
+      }
+    });
   </script>
 </body>
 </html> 
