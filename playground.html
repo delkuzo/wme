@@ -1028,20 +1028,7 @@
       border-radius: 1px;
     }
 
-    .tabs-demo {
-      margin-top: 16px;
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 24px;
-      background: var(--color-background);
-    }
 
-    .tabs-content {
-      font-family: 'YS Text', sans-serif;
-      font-size: 14px;
-      color: var(--color-foreground);
-      line-height: 1.4;
-    }
 
     /* Интерактивные switcher button компоненты */
     .switcher-container {
@@ -1355,21 +1342,7 @@
               </div>
             </div>
 
-            <!-- Табы -->
-            <div class="component-category">
-              <h3>Табы</h3>
-              <div class="tabs-container">
-                <button class="tab-button" type="button" aria-pressed="true" onclick="toggleTab(this)">Опция 1</button>
-                <button class="tab-button" type="button" aria-pressed="false" onclick="toggleTab(this)">Опция 2</button>
-                <button class="tab-button" type="button" aria-pressed="false" onclick="toggleTab(this)">Опция 3</button>
-              </div>
-              <div class="tabs-demo">
-                <div class="tabs-content">
-                  <p>Содержимое активной вкладки. Здесь может быть любой контент.</p>
-                </div>
-              </div>
-              <span class="component-caption">tabs</span>
-            </div>
+
 
             <!-- Switcher button -->
             <div class="component-category">
@@ -1794,15 +1767,7 @@
       btn.setAttribute('aria-pressed', !pressed);
     }
 
-    function toggleTab(btn) {
-      // Сначала сбрасываем все табы
-      const allTabs = btn.parentElement.querySelectorAll('.tab-button');
-      allTabs.forEach(tab => {
-        tab.setAttribute('aria-pressed', 'false');
-      });
-      // Затем активируем выбранный таб
-      btn.setAttribute('aria-pressed', 'true');
-    }
+
 
     function toggleMainTab(btn) {
       // Сначала сбрасываем все табы
