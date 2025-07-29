@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UI Kit & Interface Playground</title>
   <!-- Подключение базовых стилей -->
-  <link rel="stylesheet" href="styles/design-tokens.css">
-  <link rel="stylesheet" href="styles/fonts.css">
+  <link rel="stylesheet" href="styles/design-tokens.css?v=3">
+  <link rel="stylesheet" href="styles/fonts.css?v=3">
   <style>
     body { 
       font-family: var(--font-family, Arial, sans-serif); 
@@ -376,6 +376,63 @@
     }
     .btn-blank:active {
       background: rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Новые типы кнопок для полной демонстрации */
+    .btn-primary {
+      background: #F8604A;
+      color: #FFFFFF;
+    }
+    .btn-primary:hover {
+      background: #E45844;
+    }
+    .btn-primary:active {
+      background: #F8604A;
+    }
+    
+    .btn-secondary {
+      background: rgba(0, 0, 0, 0.05);
+      color: rgba(0, 0, 0, 0.9);
+    }
+    .btn-secondary:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .btn-secondary:active {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    .btn-ghost {
+      background: transparent;
+      color: rgba(0, 0, 0, 0.9);
+    }
+    .btn-ghost:hover {
+      background: rgba(0, 0, 0, 0.08);
+    }
+    .btn-ghost:active {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Стили для демо-секции кнопок */
+    .button-demo-section {
+      margin-bottom: 32px;
+    }
+    
+    .button-demo-section h4 {
+      margin-bottom: 16px;
+      color: var(--color-foreground);
+      font-size: 16px;
+      font-weight: 500;
+    }
+    
+    .button-group {
+      margin-bottom: 24px;
+    }
+    
+    .button-group h5 {
+      margin-bottom: 12px;
+      color: var(--color-foreground);
+      font-size: 14px;
+      font-weight: 500;
     }
     
     /* Иконки в кнопках */
@@ -1210,102 +1267,7 @@
               </div>
             </div>
             
-            <!-- Кнопки 40px -->
-            <div class="component-category">
-              <h3>Кнопки 40px</h3>
-                <div class="buttons-row">
-                  <div class="button-item">
-                    <button class="btn btn-action btn-40">Кнопка</button>
-                    <span class="button-caption">btn-action-40</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-fill btn-40">Кнопка</button>
-                    <span class="button-caption">btn-fill-40</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-outline btn-40">Кнопка</button>
-                    <span class="button-caption">btn-outline-40</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-blank btn-40">Кнопка</button>
-                    <span class="button-caption">btn-blank-40</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-action btn-40 btn-icon-start">
-                      <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
-                        <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                      </svg>
-                      Кнопка
-                    </button>
-                    <span class="button-caption">btn-action-40-icon-start</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-action btn-40 btn-icon-only">
-                      <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
-                        <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                      </svg>
-                    </button>
-                    <span class="button-caption">btn-action-40-icon-only</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-action btn-40 btn-disabled">Кнопка</button>
-                    <span class="button-caption">btn-action-40-disabled</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-fill btn-40 btn-disabled">Кнопка</button>
-                    <span class="button-caption">btn-fill-40-disabled</span>
-                  </div>
-                </div>
-              </div>
-              
-            <!-- Кнопки 32px -->
-            <div class="component-category">
-              <h3>Кнопки 32px</h3>
-                <div class="buttons-row">
-                  <div class="button-item">
-                    <button class="btn btn-action btn-32">Кнопка</button>
-                    <span class="button-caption">btn-action-32</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-fill btn-32">Кнопка</button>
-                    <span class="button-caption">btn-fill-32</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-outline btn-32">Кнопка</button>
-                    <span class="button-caption">btn-outline-32</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-blank btn-32">Кнопка</button>
-                    <span class="button-caption">btn-blank-32</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-action btn-32 btn-icon-start">
-                      <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
-                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                      </svg>
-                      Кнопка
-                    </button>
-                    <span class="button-caption">btn-action-32-icon-start</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-action btn-32 btn-icon-only">
-                      <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
-                        <path d="M2 6h8M6 2l4 4-4 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                      </svg>
-                    </button>
-                    <span class="button-caption">btn-action-32-icon-only</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-action btn-32 btn-disabled">Кнопка</button>
-                    <span class="button-caption">btn-action-32-disabled</span>
-                  </div>
-                  <div class="button-item">
-                    <button class="btn btn-fill btn-32 btn-disabled">Кнопка</button>
-                    <span class="button-caption">btn-fill-32-disabled</span>
-                  </div>
-                </div>
-              </div>
-            </div>
+
             
             <!-- Переключатели -->
             <div class="component-category">
@@ -1376,8 +1338,278 @@
               </div>
               <span class="component-caption">mode-switcher</span>
             </div>
-            
 
+            <!-- Полная библиотека кнопок -->
+            <div class="component-category">
+              <h3>Библиотека кнопок</h3>
+              <p>Все возможные комбинации типов, состояний и размеров кнопок</p>
+              
+              <!-- Кнопки 40px -->
+              <div class="button-demo-section">
+                <h4>Кнопки 40px высота</h4>
+                
+                <!-- Primary кнопки -->
+                <div class="button-group">
+                  <h5>Primary (Активная)</h5>
+                  <div class="buttons-row">
+                    <div class="button-item">
+                      <button class="btn btn-primary btn-40">Кнопка</button>
+                      <span class="button-caption">btn-primary-40-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-primary btn-40 btn-icon-start">
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
+                          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        Кнопка
+                      </button>
+                      <span class="button-caption">btn-primary-40-icon-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-primary btn-40 btn-icon-only">
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
+                          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                      </button>
+                      <span class="button-caption">btn-primary-40-icon</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-primary btn-40 btn-disabled">Кнопка</button>
+                      <span class="button-caption">btn-primary-40-disabled</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Secondary кнопки -->
+                <div class="button-group">
+                  <h5>Secondary (Обычная)</h5>
+                  <div class="buttons-row">
+                    <div class="button-item">
+                      <button class="btn btn-secondary btn-40">Кнопка</button>
+                      <span class="button-caption">btn-secondary-40-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-secondary btn-40 btn-icon-start">
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
+                          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        Кнопка
+                      </button>
+                      <span class="button-caption">btn-secondary-40-icon-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-secondary btn-40 btn-icon-only">
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
+                          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                      </button>
+                      <span class="button-caption">btn-secondary-40-icon</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-secondary btn-40 btn-disabled">Кнопка</button>
+                      <span class="button-caption">btn-secondary-40-disabled</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Outline кнопки -->
+                <div class="button-group">
+                  <h5>Outline (С обводкой)</h5>
+                  <div class="buttons-row">
+                    <div class="button-item">
+                      <button class="btn btn-outline btn-40">Кнопка</button>
+                      <span class="button-caption">btn-outline-40-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-outline btn-40 btn-icon-start">
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
+                          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        Кнопка
+                      </button>
+                      <span class="button-caption">btn-outline-40-icon-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-outline btn-40 btn-icon-only">
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
+                          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                      </button>
+                      <span class="button-caption">btn-outline-40-icon</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-outline btn-40 btn-disabled">Кнопка</button>
+                      <span class="button-caption">btn-outline-40-disabled</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Ghost кнопки -->
+                <div class="button-group">
+                  <h5>Ghost (Невидимая)</h5>
+                  <div class="buttons-row">
+                    <div class="button-item">
+                      <button class="btn btn-ghost btn-40">Кнопка</button>
+                      <span class="button-caption">btn-ghost-40-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-ghost btn-40 btn-icon-start">
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
+                          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        Кнопка
+                      </button>
+                      <span class="button-caption">btn-ghost-40-icon-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-ghost btn-40 btn-icon-only">
+                        <svg class="btn-icon" width="16" height="16" viewBox="0 0 16 16">
+                          <path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                      </button>
+                      <span class="button-caption">btn-ghost-40-icon</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-ghost btn-40 btn-disabled">Кнопка</button>
+                      <span class="button-caption">btn-ghost-40-disabled</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Кнопки 32px -->
+              <div class="button-demo-section">
+                <h4>Кнопки 32px высота</h4>
+                
+                <!-- Primary кнопки -->
+                <div class="button-group">
+                  <h5>Primary (Активная)</h5>
+                  <div class="buttons-row">
+                    <div class="button-item">
+                      <button class="btn btn-primary btn-32">Кнопка</button>
+                      <span class="button-caption">btn-primary-32-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-primary btn-32 btn-icon-start">
+                        <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        Кнопка
+                      </button>
+                      <span class="button-caption">btn-primary-32-icon-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-primary btn-32 btn-icon-only">
+                        <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                      </button>
+                      <span class="button-caption">btn-primary-32-icon</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-primary btn-32 btn-disabled">Кнопка</button>
+                      <span class="button-caption">btn-primary-32-disabled</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Secondary кнопки -->
+                <div class="button-group">
+                  <h5>Secondary (Обычная)</h5>
+                  <div class="buttons-row">
+                    <div class="button-item">
+                      <button class="btn btn-secondary btn-32">Кнопка</button>
+                      <span class="button-caption">btn-secondary-32-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-secondary btn-32 btn-icon-start">
+                        <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        Кнопка
+                      </button>
+                      <span class="button-caption">btn-secondary-32-icon-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-secondary btn-32 btn-icon-only">
+                        <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                      </button>
+                      <span class="button-caption">btn-secondary-32-icon</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-secondary btn-32 btn-disabled">Кнопка</button>
+                      <span class="button-caption">btn-secondary-32-disabled</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Outline кнопки -->
+                <div class="button-group">
+                  <h5>Outline (С обводкой)</h5>
+                  <div class="buttons-row">
+                    <div class="button-item">
+                      <button class="btn btn-outline btn-32">Кнопка</button>
+                      <span class="button-caption">btn-outline-32-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-outline btn-32 btn-icon-start">
+                        <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        Кнопка
+                      </button>
+                      <span class="button-caption">btn-outline-32-icon-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-outline btn-32 btn-icon-only">
+                        <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                      </button>
+                      <span class="button-caption">btn-outline-32-icon</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-outline btn-32 btn-disabled">Кнопка</button>
+                      <span class="button-caption">btn-outline-32-disabled</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Ghost кнопки -->
+                <div class="button-group">
+                  <h5>Ghost (Невидимая)</h5>
+                  <div class="buttons-row">
+                    <div class="button-item">
+                      <button class="btn btn-ghost btn-32">Кнопка</button>
+                      <span class="button-caption">btn-ghost-32-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-ghost btn-32 btn-icon-start">
+                        <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                        Кнопка
+                      </button>
+                      <span class="button-caption">btn-ghost-32-icon-text</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-ghost btn-32 btn-icon-only">
+                        <svg class="btn-icon" width="12" height="12" viewBox="0 0 12 12">
+                          <path d="M6 1v10M1 6h10" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                        </svg>
+                      </button>
+                      <span class="button-caption">btn-ghost-32-icon</span>
+                    </div>
+                    <div class="button-item">
+                      <button class="btn btn-ghost btn-32 btn-disabled">Кнопка</button>
+                      <span class="button-caption">btn-ghost-32-disabled</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             
           </div>
         </div>
@@ -1837,10 +2069,10 @@
               </div>
             </div>
             <div class="uikit-block">
-              <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+              <button class="accordion-header" aria-expanded="true" onclick="toggleAccordion(this)">
                 Компоненты
               </button>
-              <div class="accordion-panel" style="display:none;">
+              <div class="accordion-panel" style="display:block;">
                 <div id="components-list">
                   <div class="component-category">
                     <h3>Логотипы</h3>
