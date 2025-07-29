@@ -25,7 +25,7 @@
       padding-left: 80px;
       padding-right: 24px;
       display: flex;
-      gap: 12px;
+      gap: 24px;
       transition: background-color 0.2s ease, border-color 0.2s ease;
     }
     
@@ -41,7 +41,7 @@
       line-height: 1.4;
       letter-spacing: -0.25%;
       color: rgba(0, 0, 0, 0.9);
-      transition: all 0.2s ease;
+      transition: color 0.2s ease;
       position: relative;
       display: flex;
       align-items: center;
@@ -1954,7 +1954,72 @@
       const tabContent = document.getElementById('tab-content');
       
       const tabTemplates = {
-        'ui-kit': document.querySelector('.uikit-section').outerHTML,
+        'ui-kit': document.querySelector('.uikit-section')?.outerHTML || `
+          <div class="uikit-section">
+            <div class="uikit-block">
+              <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+                Цветовая палитра
+              </button>
+              <div class="accordion-panel" style="display:none;">
+                <div id="color-tokens-list"></div>
+              </div>
+            </div>
+            <div class="uikit-block">
+              <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+                Тени
+              </button>
+              <div class="accordion-panel" style="display:none;">
+                <div id="shadow-tokens-list"></div>
+              </div>
+            </div>
+            <div class="uikit-block">
+              <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+                Типографика
+              </button>
+              <div class="accordion-panel" style="display:none;">
+                <div id="typography-list"></div>
+              </div>
+            </div>
+            <div class="uikit-block">
+              <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+                Размеры
+              </button>
+              <div class="accordion-panel" style="display:none;">
+                <div id="size-list"></div>
+              </div>
+            </div>
+            <div class="uikit-block">
+              <button class="accordion-header" aria-expanded="false" onclick="toggleAccordion(this)">
+                Компоненты
+              </button>
+              <div class="accordion-panel" style="display:none;">
+                <div id="components-list">
+                  <div class="component-category">
+                    <h3>Логотипы</h3>
+                    <div class="logotypes-row">
+                      <div class="logotype-item">
+                        <img src="logos/logotype-ru-text.svg" alt="Яндекс B2B русский с текстом" class="logotype-full">
+                        <span class="logotype-caption">logotype-ru-text</span>
+                      </div>
+                      <div class="logotype-item">
+                        <img src="logos/logotype-ru-sign.svg" alt="Яндекс B2B русский знак" class="logotype-sign">
+                        <span class="logotype-caption">logotype-ru-sign</span>
+                      </div>
+                      <div class="logotype-item">
+                        <img src="logos/logotype-en-text.svg" alt="Яндекс B2B английский с текстом" class="logotype-full">
+                        <span class="logotype-caption">logotype-en-text</span>
+                      </div>
+                      <div class="logotype-item">
+                        <img src="logos/logotype-en-sign.svg" alt="Яндекс B2B английский знак" class="logotype-sign">
+                        <span class="logotype-caption">logotype-en-sign</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        `,
         'icons': `
           <div class="icons-section">
             <h2>Gravity UI Icons</h2>
@@ -2210,6 +2275,20 @@
       
       if (tabTemplates[tabKey]) {
         tabContent.innerHTML = tabTemplates[tabKey];
+        
+        // Если переключились на UI Kit, вызываем функции рендеринга
+        if (tabKey === 'ui-kit') {
+          // Небольшая задержка, чтобы DOM успел обновиться
+          setTimeout(() => {
+            renderColorTokens();
+            renderShadowTokens();
+            renderTypography();
+            renderSizes();
+          }, 100);
+        }
+      } else {
+        // Если шаблон не найден, показываем пустой контент
+        tabContent.innerHTML = '<div style="padding: 40px; text-align: center; color: var(--color-fade);">Контент для этого раздела пока не готов</div>';
       }
     }
 
