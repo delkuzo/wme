@@ -1123,94 +1123,7 @@
       margin-top: 8px;
     }
 
-    /* Стили для иконок */
-    .icons-section {
-      padding: 24px;
-    }
 
-    .icons-section h2 {
-      margin-bottom: 16px;
-      color: var(--color-foreground);
-    }
-
-    .icons-section p {
-      margin-bottom: 32px;
-      color: var(--color-hint);
-    }
-
-    .icons-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 16px;
-      margin-bottom: 48px;
-    }
-
-    .icon-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 16px;
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      background: var(--color-background);
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-
-    .icon-item:hover {
-      border-color: var(--color-primary);
-      background: rgba(248, 96, 74, 0.05);
-      transform: translateY(-2px);
-    }
-
-    .icon-item svg {
-      margin-bottom: 8px;
-      color: var(--color-foreground);
-    }
-
-    .icon-name {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--color-foreground);
-      text-align: center;
-      font-family: monospace;
-    }
-
-    .icon-usage {
-      background: var(--color-background-secondary);
-      border: 1px solid var(--color-border);
-      border-radius: 8px;
-      padding: 24px;
-    }
-
-    .icon-usage h3 {
-      margin-bottom: 16px;
-      color: var(--color-foreground);
-    }
-
-    .icon-usage p {
-      margin-bottom: 24px;
-      color: var(--color-hint);
-    }
-
-    .usage-example h4 {
-      margin-bottom: 12px;
-      color: var(--color-foreground);
-    }
-
-    .usage-example pre {
-      background: var(--color-background);
-      border: 1px solid var(--color-border);
-      border-radius: 4px;
-      padding: 16px;
-      overflow-x: auto;
-    }
-
-    .usage-example code {
-      font-family: monospace;
-      font-size: 14px;
-      color: var(--color-foreground);
-    }
   </style>
 </head>
 <body>
@@ -1229,7 +1142,7 @@
   </div>
   <div class="tabs-container" id="tabs">
     <button class="tab-button" type="button" aria-pressed="true" data-tab="ui-kit" onclick="toggleMainTab(this)">UI Kit</button>
-    <button class="tab-button" type="button" aria-pressed="false" data-tab="icons" onclick="toggleMainTab(this)">Иконки</button>
+    
     <button class="tab-button" type="button" aria-pressed="false" data-tab="experiments" onclick="toggleMainTab(this)">Эксперименты</button>
     <button class="tab-button" type="button" aria-pressed="false" data-tab="interfaces" onclick="toggleMainTab(this)">Интерфейсы</button>
     <button class="tab-button" type="button" aria-pressed="false" data-tab="docs" onclick="toggleMainTab(this)">Документация</button>
@@ -1492,57 +1405,7 @@
     // --- Глобальные переменные ---
     const tabTemplates = {
       'ui-kit': document.querySelector('.uikit-section')?.outerHTML || '',
-      'icons': `
-        <div class="icons-section">
-          <h2>Gravity UI Icons</h2>
-          <p>Библиотека иконок для использования в проекте. Все иконки доступны в формате SVG.</p>
-          
-          <div class="icons-grid">
-            <!-- Основные иконки -->
-            <div class="icon-item" onclick="copyIconCode(this)" data-icon="magnifier">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-                <path fill="currentColor" fill-rule="evenodd" d="M7.5 1.5a6 6 0 1 0 3.86 10.61l3.444 3.445a.75.75 0 0 0 1.06-1.06l-3.445-3.444A6 6 0 0 0 7.5 1.5m0 1.5a4.5 4.5 0 1 1 0 9 4.5 4.5 0 0 1 0-9" clip-rule="evenodd"/>
-              </svg>
-              <span class="icon-name">magnifier</span>
-            </div>
-            
-            <div class="icon-item" onclick="copyIconCode(this)" data-icon="gear">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-                <path fill="currentColor" fill-rule="evenodd" d="M7.199 2H8.8a.2.2 0 0 1 .2.2c0 1.808 1.958 2.939 3.524 2.034a.2.2 0 0 1 .271.073l.802 1.388a.2.2 0 0 1-.073.272c-1.566.904-1.566 3.164 0 4.069a.2.2 0 0 1 .073.271l-.802 1.388a.2.2 0 0 1-.271.073C10.958 10.863 9 11.993 9 13.8a.2.2 0 0 1-.199.2H7.2a.2.2 0 0 1-.2-.2c0-1.808-1.958-2.938-3.524-2.034a.2.2 0 0 1-.272-.073l-.8-1.388a.2.2 0 0 1 .072-.271c1.566-.905 1.566-3.165 0-4.07a.2.2 0 0 1-.073-.27l.801-1.389a.2.2 0 0 1 .272-.072C5.042 5.138 7 4.007 7 2.199c0-.11.089-.199.199-.199M5.5 2.2c0-.94.76-1.7 1.699-1.7H8.8c.94 0 1.7.76 1.7 1.7a.85.85 0 0 0 1.274.735 1.7 1.7 0 0 1 2.32.622l.802 1.388c.469.813.19 1.851-.622 2.32a.85.85 0 0 0 0 1.472 1.7 1.7 0 0 1 .622 2.32l-.802 1.388a1.7 1.7 0 0 1-2.32.622.85.85 0 0 0-1.274.735c0 .939-.76 1.7-1.699 1.7H7.2a1.7 1.7 0 0 1-1.699-1.7.85.85 0 0 0-1.274-.735 1.7 1.7 0 0 1-2.32-.622l-.802-1.388a1.7 1.7 0 0 1 .622-2.32.85.85 0 0 0 0-1.471 1.7 1.7 0 0 1-.622-2.32l.801-1.389a1.7 1.7 0 0 1 2.32-.622A.85.85 0 0 0 5.5 2.2m4 5.8a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0M11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0" clip-rule="evenodd"/>
-              </svg>
-              <span class="icon-name">gear</span>
-            </div>
-            
-            <div class="icon-item" onclick="copyIconCode(this)" data-icon="house">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-                <path fill="currentColor" fill-rule="evenodd" d="M12.5 12.618c.307-.275.5-.674.5-1.118V6.977a1.5 1.5 0 0 0-.585-1.189l-3.5-2.692a1.5 1.5 0 0 0-1.83 0l-3.5 2.692A1.5 1.5 0 0 0 3 6.978V11.5A1.496 1.496 0 0 0 4.493 13H5V9.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2V13h.507c.381-.002.73-.146.993-.382m2-1.118a3 3 0 0 1-3 3h-7a3 3 0 0 1-3-3V6.977A3 3 0 0 1 2.67 4.6l3.5-2.692a3 3 0 0 1 3.66 0l3.5 2.692a3 3 0 0 1 1.17 2.378zm-5-2A.5.5 0 0 0 9 9H7a.5.5 0 0 0-.5.5V13h3z" clip-rule="evenodd"/>
-              </svg>
-              <span class="icon-name">house</span>
-            </div>
-            
-            <div class="icon-item" onclick="copyIconCode(this)" data-icon="heart">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-                <path fill="currentColor" fill-rule="evenodd" d="M1.633 2.796c.762-.837 1.85-1.297 3.127-1.297 1.164 0 2.407.55 3.24 1.626.828-1.075 2.066-1.626 3.24-1.626 1.274 0 2.36.458 3.124 1.293.756.828 1.136 1.962 1.136 3.22 0 2.166-1.113 3.909-2.522 5.264-1.405 1.352-3.17 2.383-4.633 3.14a.75.75 0 0 1-.693-.002c-1.463-.765-3.228-1.788-4.633-3.133C1.61 9.93.5 8.193.5 6.013c0-1.255.378-2.389 1.133-3.217m1.109 1.01C2.287 4.306 2 5.053 2 6.013c0 1.624.816 2.996 2.057 4.184 1.146 1.098 2.6 1.985 3.945 2.705 1.335-.71 2.79-1.604 3.937-2.707C13.182 8.998 14 7.62 14 6.013c0-.963-.288-1.71-.744-2.21C12.808 3.314 12.14 3 11.24 3c-.976 0-2.093.628-2.527 1.95a.75.75 0 0 1-1.426 0C6.854 3.63 5.725 3 4.76 3c-.903 0-1.57.315-2.018.807" clip-rule="evenodd"/>
-              </svg>
-              <span class="icon-name">heart</span>
-            </div>
-            
-            <div class="icon-item" onclick="copyIconCode(this)" data-icon="star">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-                <path fill="currentColor" fill-rule="evenodd" d="m9.194 5 .351.873.94.064 3.197.217-2.46 2.055-.722.603.23.914.782 3.108-2.714-1.704L8 10.629l-.798.5-2.714 1.705.782-3.108.23-.914-.723-.603-2.46-2.055 3.198-.217.94-.064.35-.874L8 2.025zm-7.723-.292 3.943-.268L6.886.773C7.29-.231 8.71-.231 9.114.773l1.472 3.667 3.943.268c1.08.073 1.518 1.424.688 2.118L12.185 9.36l.964 3.832c.264 1.05-.886 1.884-1.802 1.31L8 12.4l-3.347 2.101c-.916.575-2.066-.26-1.802-1.309l.964-3.832L.783 6.826c-.83-.694-.391-2.045.688-2.118" clip-rule="evenodd"/>
-              </svg>
-              <span class="icon-name">star</span>
-            </div>
-            
-            <div class="icon-item" onclick="copyIconCode(this)" data-icon="person">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M8 8.5c3.85 0 7 2.5 7 4.5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2c0-2 3.15-4.5 7-4.5M8 10c-1.61 0-3.064.526-4.092 1.234C2.798 12.001 2.5 12.733 2.5 13a.5.5 0 0 0 .5.5h10a.5.5 0 0 0 .5-.5c0-.267-.297-1-1.408-1.766C11.064 10.526 9.609 10 8 10m0-9a3.5 3.5 0 1 1 0 7 3.5 3.5 0 0 1 0-7m0 1.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
-              </svg>
-              <span class="icon-name">person</span>
-            </div>
-          </div>
-        </div>
-      `,
+
       'experiments': `
         <div class="experiments-section">
           <h2>Эксперименты</h2>
@@ -2312,59 +2175,7 @@
       btn.setAttribute('aria-pressed', 'true');
     }
 
-    function copyIconCode(iconElement) {
-      const svg = iconElement.querySelector('svg');
-      const iconName = iconElement.getAttribute('data-icon');
-      
-      if (svg) {
-        const svgCode = svg.outerHTML;
-        
-        // Копируем в буфер обмена
-        navigator.clipboard.writeText(svgCode).then(() => {
-          // Показываем уведомление
-          showNotification(`Иконка "${iconName}" скопирована в буфер обмена!`);
-        }).catch(err => {
-          console.error('Ошибка копирования:', err);
-          showNotification('Ошибка копирования иконки');
-        });
-      }
-    }
 
-    function showNotification(message) {
-      // Создаем уведомление
-      const notification = document.createElement('div');
-      notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--color-primary);
-        color: white;
-        padding: 12px 16px;
-        border-radius: 8px;
-        font-family: 'YS Text', sans-serif;
-        font-size: 14px;
-        z-index: 1000;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-      `;
-      notification.textContent = message;
-      
-      document.body.appendChild(notification);
-      
-      // Показываем уведомление
-      setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-      }, 100);
-      
-      // Скрываем через 3 секунды
-      setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-          document.body.removeChild(notification);
-        }, 300);
-      }, 3000);
-    }
   </script>
 </body>
 </html> 
