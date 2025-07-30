@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Тестируем иконки в кнопках</title>
+  
+  <!-- Подключение базовых стилей -->
+  <link rel="stylesheet" href="../styles/design-tokens.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  
+  <style>
+    body {
+      font-family: 'YS Text', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      margin: 0;
+      padding: 40px;
+      background: var(--color-background);
+      color: var(--color-foreground);
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    h1 {
+      font-size: 32px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: var(--color-foreground);
+    }
+    
+    .demo-section {
+      margin-bottom: 60px;
+    }
+    
+    .demo-section h2 {
+      font-size: 24px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      color: var(--color-foreground);
+    }
+    
+    .content-area {
+      margin-bottom: 40px;
+    }
+    
+    /* Простая ссылка */
+    .simple-link {
+      color: var(--color-foreground);
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 500;
+      transition: text-decoration 0.2s ease;
+    }
+    
+    .simple-link:hover {
+      text-decoration: underline;
+    }
+    
+    /* Кнопка назад */
+    .back-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--color-foreground);
+      border: none;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: background-color 0.2s ease;
+    }
+    
+    .back-button:hover {
+      background: rgba(0, 0, 0, 0.05);
+    }
+    
+    .back-button svg {
+      width: 16px;
+      height: 16px;
+    }
+    
+    /* Темная тема */
+    @media (prefers-color-scheme: dark) {
+      .back-button:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Тестируем иконки в кнопках</h1>
+    
+    <div class="demo-section">
+      <h2>Простая ссылка</h2>
+      
+      <div class="content-area">
+        <a href="#" class="simple-link" id="test-link">Тестируем иконки в кнопках</a>
+      </div>
+      
+      <p>Это простая ссылка черным текстом, которая подчеркивается при наведении.</p>
+    </div>
+    
+    <!-- Кнопка назад -->
+    <button class="back-button" onclick="goBack()">
+      <svg viewBox="0 0 16 16" fill="currentColor">
+        <path d="M10 4L6 8l4 4"/>
+      </svg>
+      Назад
+    </button>
+  </div>
+
+  <script>
+    // Функция для возврата назад
+    function goBack() {
+      window.history.back();
+    }
+    
+    // Обработчик для простой ссылки
+    document.getElementById('test-link').addEventListener('click', function(e) {
+      e.preventDefault();
+      alert('Ссылка "Тестируем иконки в кнопках" была нажата!');
+    });
+  </script>
+</body>
+</html> 
