@@ -64,6 +64,7 @@
   --color-white: #FFFFFF;
   --color-black: #000000;
   --color-grey: #808080;
+  --logo-filter: none;
   /* Тени — светлая тема */
   --shadow-s: 0px 12px 24px 0px rgba(34, 34, 34, 0.3);
   --shadow-m: 0px 12px 24px 0px rgba(114, 110, 110, 0.24);
@@ -97,6 +98,7 @@
   --color-white: #FFFFFF;
   --color-black: #000000;
   --color-grey: #A0A0A0;
+  --logo-filter: invert(1) brightness(0) saturate(100%);
   /* Тени — тёмная тема */
   --shadow-s: 0px 8px 16px 0px rgba(11, 11, 11, 0.7);
   --shadow-m: 0px 12px 24px 0px rgba(0, 0, 0, 0.4);
